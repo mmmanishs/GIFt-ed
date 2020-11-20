@@ -13,17 +13,17 @@ extension NSMenuItem {
     static var markup: [NSMenuItem] {
         return [
             .recordSimulator,
+            .settings,
             .stopRecordingSimualtor,
             .dividerLine,
 //            .takeScreenshot,
 //            .dividerLine,
 //            .simulators,
+            .outputFolderTitle,
             .openOutputFolder,
             .dividerLine,
             .gifFromVideos,
             .dividerLine,
-            .dividerLine,
-            .settings,
             .dividerLine,
             .exit
         ]
@@ -33,7 +33,8 @@ extension NSMenuItem {
 extension NSMenuItem {
     static var selector = #selector(MainMenu.functionalityRouter(_:))
     static var recordSimulator: NSMenuItem {
-        let item = NSMenuItem(title: "Record Simulator", action: selector, keyEquivalent: "")
+        let item = NSMenuItem(title: "Capture Video Of Simulator", action: selector, keyEquivalent: "")
+        item.image = ._cameraReel
         item.identifier = .record
         item.toolTip = "This will record the video of your currently booted simulator"
         return item
@@ -61,14 +62,16 @@ extension NSMenuItem {
     }
 
     static var gifFromVideos: NSMenuItem {
-        let item = NSMenuItem(title: "🖼 Gif from Vidoes", action: selector, keyEquivalent: "")
+        let item = NSMenuItem(title: "Convert Vidoes to GIF", action: selector, keyEquivalent: "")
+        item.image = ._gif
         item.identifier = .giffromvidoes
         item.toolTip = "Make Gif from vidoes"
         return item
     }
 
     static var settings: NSMenuItem {
-        let item = NSMenuItem(title: "⚙️Settings", action: selector, keyEquivalent: "")
+        let item = NSMenuItem(title: "Settings (Record Simulator)", action: selector, keyEquivalent: "")
+        item.image = ._settingsFineTune
         item.identifier = .settings
         item.toolTip = "App settings. Define behaviour here"
         return item
@@ -76,11 +79,20 @@ extension NSMenuItem {
 
     static var openOutputFolder: NSMenuItem {
         let outputPath = UserPreferences.retriveFromDisk().outputFolderPath
-        let item = NSMenuItem(title: "📂 \(outputPath)", action: selector, keyEquivalent: "")
+        let item = NSMenuItem(title: "\(outputPath)", action: selector, keyEquivalent: "")
+        item.image = ._openFolder
         item.identifier = .openOutputFolder
         item.toolTip = "This is your output folder where your recordings will be saved. \nTip: Choose something other than your Desktop folder to reduce clutter."
         return item
     }
+
+    static var outputFolderTitle: NSMenuItem {
+        let item = NSMenuItem(title: "Output Folder", action: selector, keyEquivalent: "")
+        item.state = .off
+        item.isEnabled = false
+        return item
+    }
+
 
     static var exit: NSMenuItem {
         let item = NSMenuItem(title: "Quit", action: #selector(MainMenu.functionalityRouter(_:)), keyEquivalent: "")

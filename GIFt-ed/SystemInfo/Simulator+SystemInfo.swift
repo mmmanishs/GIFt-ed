@@ -10,7 +10,7 @@ import Foundation
 
 extension Simulator {
     static func getSystemInfo() -> Simulator {
-        let jsonString = "cd && xcrun simctl list --json".runAsCommand()
+        let jsonString = "cd && xcrun simctl list devices --json".runAsCommand()
         let jsonData = Data(jsonString.utf8)
         if let simulator = try? JSONDecoder().decode(Simulator.self, from: jsonData) {
             return simulator

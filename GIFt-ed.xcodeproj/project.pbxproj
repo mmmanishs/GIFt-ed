@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0645576A25677CA500FF9BEC /* AppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0645576925677CA500FF9BEC /* AppImages.swift */; };
 		0676ACFF2543750B00CA9A0E /* GIFt_edTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676ACFE2543750B00CA9A0E /* GIFt_edTests.swift */; };
 		0676AD0A2543750B00CA9A0E /* GIFt_edUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676AD092543750B00CA9A0E /* GIFt_edUITests.swift */; };
 		0676AD492543766D00CA9A0E /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676AD1F2543766D00CA9A0E /* UserPreferences.swift */; };
@@ -63,6 +64,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0645576925677CA500FF9BEC /* AppImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppImages.swift; sourceTree = "<group>"; };
 		0676ACE82543750A00CA9A0E /* GIFt-ed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GIFt-ed.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0676ACFA2543750B00CA9A0E /* GIFt-edTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GIFt-edTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0676ACFE2543750B00CA9A0E /* GIFt_edTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFt_edTests.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				0676AD2A2543766D00CA9A0E /* SystemInfo */,
 				0676AD2F2543766D00CA9A0E /* FeatureFlag.swift */,
 				0676AD302543766D00CA9A0E /* Images.xcassets */,
+				0645576925677CA500FF9BEC /* AppImages.swift */,
 				0676AD312543766D00CA9A0E /* GeneralSettingsViewController */,
 				0676AD332543766D00CA9A0E /* MainMenu */,
 				0676AD382543766D00CA9A0E /* AppDelegate.swift */,
@@ -270,6 +273,7 @@
 				0676ACE42543750A00CA9A0E /* Sources */,
 				0676ACE52543750A00CA9A0E /* Frameworks */,
 				0676ACE62543750A00CA9A0E /* Resources */,
+				0676AD742543846A00CA9A0E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -387,6 +391,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0676AD742543846A00CA9A0E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "if [ ${CONFIGURATION} == \"Release\" ]\nthen\n    cp ${TARGET_BUILD_DIR}/${TARGET_NAME} Applications/\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0676ACE42543750A00CA9A0E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -405,6 +430,7 @@
 				0676AD4A2543766D00CA9A0E /* StatusBarDisplayManager.swift in Sources */,
 				0676AD4C2543766D00CA9A0E /* UserMessagePopup.swift in Sources */,
 				0676AD5B2543766D00CA9A0E /* MenuFunctionalityInvoker.swift in Sources */,
+				0645576A25677CA500FF9BEC /* AppImages.swift in Sources */,
 				0676AD5C2543766D00CA9A0E /* MainMenuViewModel.swift in Sources */,
 				0676AD602543766D00CA9A0E /* SimulatorVideoRecordController.swift in Sources */,
 				0676AD5F2543766D00CA9A0E /* StandAloneVideoAndGifConverter.swift in Sources */,

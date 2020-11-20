@@ -916,13 +916,16 @@
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mNP-aU-QMU">
                                         <rect key="frame" x="18" y="7" width="394" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="truncatingHead" alignment="center" title="Drop file here" id="SIG-iF-7z0">
+                                        <textFieldCell key="cell" lineBreakMode="truncatingHead" alignment="center" title="Drop a movie file here (mp4, mov only)" id="SIG-iF-7z0">
                                             <font key="font" size="16" name="Futura-MediumItalic"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </textFieldCell>
                                     </textField>
                                 </subviews>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.borderWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </customView>
                             <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Vy-rU-N8b">
                                 <rect key="frame" x="94" y="161" width="129" height="19"/>

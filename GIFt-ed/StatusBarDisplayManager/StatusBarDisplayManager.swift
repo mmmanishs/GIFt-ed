@@ -8,20 +8,15 @@
 
 import Cocoa
 
-extension NSImage {
-    static let camcorder = NSImage(named: "camcorder")
-    static let phoneNotAvailable = NSImage(named: "phone-not-available")
-}
-
 enum Icons {
     enum MainAppIcon {
         /// if true shows text
         static let showImage = true
         static let mainIconTitle = "🎥"
-        static let mainIconImage = NSImage.camcorder
+        static let mainIconImage: NSImage = ._camcorder
     }
     enum NoBootedSimulator {
-        static let mainIconImage = NSImage.phoneNotAvailable
+        static let mainIconImage: NSImage = ._phoneNotAvailable
     }
     enum LoadingAnimation {
     static let timeDelay = 0.3
