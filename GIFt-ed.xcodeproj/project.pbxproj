@@ -41,8 +41,6 @@
 		0676AD692543766D00CA9A0E /* MainEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676AD472543766D00CA9A0E /* MainEventHandler.swift */; };
 		0676AD6A2543766D00CA9A0E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0676AD482543766D00CA9A0E /* Info.plist */; };
 		06C019E3256B753200AE6861 /* Bash+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C019E2256B753200AE6861 /* Bash+String.swift */; };
-		06C019ED256B755200AE6861 /* Simulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C019EB256B755200AE6861 /* Simulator.swift */; };
-		06C019EE256B755200AE6861 /* SystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C019EC256B755200AE6861 /* SystemInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,8 +101,6 @@
 		0676AD472543766D00CA9A0E /* MainEventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainEventHandler.swift; sourceTree = "<group>"; };
 		0676AD482543766D00CA9A0E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06C019E2256B753200AE6861 /* Bash+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bash+String.swift"; sourceTree = "<group>"; };
-		06C019EB256B755200AE6861 /* Simulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Simulator.swift; sourceTree = "<group>"; };
-		06C019EC256B755200AE6861 /* SystemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,7 +170,6 @@
 			isa = PBXGroup;
 			children = (
 				0676AD1F2543766D00CA9A0E /* UserPreferences.swift */,
-				06C019EA256B755200AE6861 /* SimulatorSystemInfo */,
 				0676AD202543766D00CA9A0E /* StatusBarDisplayManager */,
 				0676AD262543766D00CA9A0E /* Main.storyboard */,
 				0676AD282543766D00CA9A0E /* FilePathManager.swift */,
@@ -250,16 +245,6 @@
 			);
 			path = SupportPrograms;
 			sourceTree = "<group>";
-		};
-		06C019EA256B755200AE6861 /* SimulatorSystemInfo */ = {
-			isa = PBXGroup;
-			children = (
-				06C019EB256B755200AE6861 /* Simulator.swift */,
-				06C019EC256B755200AE6861 /* SystemInfo.swift */,
-			);
-			name = SimulatorSystemInfo;
-			path = ParsedXcrun/ParsedXcrun/SimulatorSystemInfo;
-			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -425,7 +410,6 @@
 				0676AD622543766D00CA9A0E /* OptimiizedSizedGif.swift in Sources */,
 				0676AD5E2543766D00CA9A0E /* main.swift in Sources */,
 				0676AD4A2543766D00CA9A0E /* StatusBarDisplayManager.swift in Sources */,
-				06C019ED256B755200AE6861 /* Simulator.swift in Sources */,
 				0676AD4C2543766D00CA9A0E /* UserMessagePopup.swift in Sources */,
 				0676AD5B2543766D00CA9A0E /* MenuFunctionalityInvoker.swift in Sources */,
 				0645576A25677CA500FF9BEC /* AppImages.swift in Sources */,
@@ -439,7 +423,6 @@
 				06C019E3256B753200AE6861 /* Bash+String.swift in Sources */,
 				0676AD582543766D00CA9A0E /* GeneralSettingsViewController.swift in Sources */,
 				0676AD662543766D00CA9A0E /* VideoAndGifManager.swift in Sources */,
-				06C019EE256B755200AE6861 /* SystemInfo.swift in Sources */,
 				0676AD562543766D00CA9A0E /* FeatureFlag.swift in Sources */,
 				0676AD592543766D00CA9A0E /* MenuItemDefinition.swift in Sources */,
 				0676AD4B2543766D00CA9A0E /* IconAnimator.swift in Sources */,
