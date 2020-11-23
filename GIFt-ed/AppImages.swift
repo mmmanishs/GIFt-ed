@@ -15,5 +15,6 @@ extension NSImage {
     static let _settingsFineTune = NSImage(named: "setting-fine-tune")!
     static let _openFolder = NSImage(named: "open-folder")!
     static let _gif = NSImage(named: "gif")!
+    static let _stopRecording = NSImage(named: "stop-recording")!
 }
 

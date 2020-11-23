@@ -13,8 +13,8 @@ extension NSMenuItem {
     static var markup: [NSMenuItem] {
         return [
             .recordSimulator,
-            .settings,
             .stopRecordingSimualtor,
+            .settings,
             .dividerLine,
 //            .takeScreenshot,
 //            .dividerLine,
@@ -43,6 +43,7 @@ extension NSMenuItem {
     static var stopRecordingSimualtor: NSMenuItem {
         let item = NSMenuItem(title: "Stop Recording", action: selector, keyEquivalent: "")
         item.identifier = .stopRecording
+        item.image = ._stopRecording
         item.isHidden = true
         item.toolTip = "This will stop recording the video of your currently booted simulator. The output will be saved in the defined output folder"
         return item
@@ -70,7 +71,7 @@ extension NSMenuItem {
     }
 
     static var settings: NSMenuItem {
-        let item = NSMenuItem(title: "Settings (Record Simulator)", action: selector, keyEquivalent: "")
+        let item = NSMenuItem(title: "Settings (Video Capture)", action: selector, keyEquivalent: "")
         item.image = ._settingsFineTune
         item.identifier = .settings
         item.toolTip = "App settings. Define behaviour here"
@@ -90,6 +91,7 @@ extension NSMenuItem {
         let item = NSMenuItem(title: "Output Folder", action: selector, keyEquivalent: "")
         item.state = .off
         item.isEnabled = false
+        item.identifier = .openOutputFolder
         return item
     }
 

@@ -39,7 +39,7 @@ class MenuFunctionalityInvoker {
     }
 
     func takeScreenshot() {
-        ScreenshotController().takeScreenShot()
+//        ScreenshotController().takeScreenShot()
     }
 
     func showStandAloneVideoToGifConverter() {

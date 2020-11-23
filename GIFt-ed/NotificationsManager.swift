@@ -12,7 +12,7 @@ class NotificationsManager: NSObject, NSUserNotificationCenterDelegate {
     func postStartingRecording(device: Simulator.Device, outputFolder: String) {
         let notification = NSUserNotification()
         notification.title = "Recording \(device.name)"
-        notification.subtitle = "\(device.uniqueIdentifier)"
+        notification.subtitle = "\(device.udid)"
         let identifier = .record_user_notification_identifier + Date.currenttimeStampAndDateString
         notification.identifier = identifier
         notification.userInfo = [.output_folder_path : outputFolder]

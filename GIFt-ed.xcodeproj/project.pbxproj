@@ -19,10 +19,6 @@
 		0676AD4F2543766D00CA9A0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0676AD262543766D00CA9A0E /* Main.storyboard */; };
 		0676AD502543766D00CA9A0E /* FilePathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676AD282543766D00CA9A0E /* FilePathManager.swift */; };
 		0676AD512543766D00CA9A0E /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676AD292543766D00CA9A0E /* NotificationsManager.swift */; };
-		0676AD522543766D00CA9A0E /* Simulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676AD2B2543766D00CA9A0E /* Simulator.swift */; };
-		0676AD532543766D00CA9A0E /* Device+Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676AD2C2543766D00CA9A0E /* Device+Comparable.swift */; };
-		0676AD542543766D00CA9A0E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676AD2D2543766D00CA9A0E /* Device.swift */; };
-		0676AD552543766D00CA9A0E /* Simulator+SystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676AD2E2543766D00CA9A0E /* Simulator+SystemInfo.swift */; };
 		0676AD562543766D00CA9A0E /* FeatureFlag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676AD2F2543766D00CA9A0E /* FeatureFlag.swift */; };
 		0676AD572543766D00CA9A0E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0676AD302543766D00CA9A0E /* Images.xcassets */; };
 		0676AD582543766D00CA9A0E /* GeneralSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676AD322543766D00CA9A0E /* GeneralSettingsViewController.swift */; };
@@ -44,6 +40,9 @@
 		0676AD682543766D00CA9A0E /* xcrun in Resources */ = {isa = PBXBuildFile; fileRef = 0676AD462543766D00CA9A0E /* xcrun */; };
 		0676AD692543766D00CA9A0E /* MainEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676AD472543766D00CA9A0E /* MainEventHandler.swift */; };
 		0676AD6A2543766D00CA9A0E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0676AD482543766D00CA9A0E /* Info.plist */; };
+		06C019E3256B753200AE6861 /* Bash+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C019E2256B753200AE6861 /* Bash+String.swift */; };
+		06C019ED256B755200AE6861 /* Simulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C019EB256B755200AE6861 /* Simulator.swift */; };
+		06C019EE256B755200AE6861 /* SystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C019EC256B755200AE6861 /* SystemInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,10 +80,6 @@
 		0676AD272543766D00CA9A0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0676AD282543766D00CA9A0E /* FilePathManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilePathManager.swift; sourceTree = "<group>"; };
 		0676AD292543766D00CA9A0E /* NotificationsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
-		0676AD2B2543766D00CA9A0E /* Simulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Simulator.swift; sourceTree = "<group>"; };
-		0676AD2C2543766D00CA9A0E /* Device+Comparable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Device+Comparable.swift"; sourceTree = "<group>"; };
-		0676AD2D2543766D00CA9A0E /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
-		0676AD2E2543766D00CA9A0E /* Simulator+SystemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Simulator+SystemInfo.swift"; sourceTree = "<group>"; };
 		0676AD2F2543766D00CA9A0E /* FeatureFlag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureFlag.swift; sourceTree = "<group>"; };
 		0676AD302543766D00CA9A0E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0676AD322543766D00CA9A0E /* GeneralSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralSettingsViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +102,9 @@
 		0676AD462543766D00CA9A0E /* xcrun */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = xcrun; sourceTree = "<group>"; };
 		0676AD472543766D00CA9A0E /* MainEventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainEventHandler.swift; sourceTree = "<group>"; };
 		0676AD482543766D00CA9A0E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		06C019E2256B753200AE6861 /* Bash+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bash+String.swift"; sourceTree = "<group>"; };
+		06C019EB256B755200AE6861 /* Simulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Simulator.swift; sourceTree = "<group>"; };
+		06C019EC256B755200AE6861 /* SystemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,23 +174,24 @@
 			isa = PBXGroup;
 			children = (
 				0676AD1F2543766D00CA9A0E /* UserPreferences.swift */,
+				06C019EA256B755200AE6861 /* SimulatorSystemInfo */,
 				0676AD202543766D00CA9A0E /* StatusBarDisplayManager */,
-				0676AD252543766D00CA9A0E /* MainPopover.swift */,
 				0676AD262543766D00CA9A0E /* Main.storyboard */,
 				0676AD282543766D00CA9A0E /* FilePathManager.swift */,
 				0676AD292543766D00CA9A0E /* NotificationsManager.swift */,
-				0676AD2A2543766D00CA9A0E /* SystemInfo */,
 				0676AD2F2543766D00CA9A0E /* FeatureFlag.swift */,
+				06C019E2256B753200AE6861 /* Bash+String.swift */,
 				0676AD302543766D00CA9A0E /* Images.xcassets */,
 				0645576925677CA500FF9BEC /* AppImages.swift */,
 				0676AD312543766D00CA9A0E /* GeneralSettingsViewController */,
 				0676AD332543766D00CA9A0E /* MainMenu */,
 				0676AD382543766D00CA9A0E /* AppDelegate.swift */,
-				0676AD392543766D00CA9A0E /* main.swift */,
 				0676AD3A2543766D00CA9A0E /* GIFt_ed.entitlements */,
 				0676AD3B2543766D00CA9A0E /* VideoAndGif */,
 				0676AD442543766D00CA9A0E /* SupportPrograms */,
+				0676AD252543766D00CA9A0E /* MainPopover.swift */,
 				0676AD472543766D00CA9A0E /* MainEventHandler.swift */,
+				0676AD392543766D00CA9A0E /* main.swift */,
 				0676AD482543766D00CA9A0E /* Info.plist */,
 			);
 			path = "GIFt-ed";
@@ -207,17 +206,6 @@
 				0676AD242543766D00CA9A0E /* UserMessagePopupViewController.swift */,
 			);
 			path = StatusBarDisplayManager;
-			sourceTree = "<group>";
-		};
-		0676AD2A2543766D00CA9A0E /* SystemInfo */ = {
-			isa = PBXGroup;
-			children = (
-				0676AD2B2543766D00CA9A0E /* Simulator.swift */,
-				0676AD2C2543766D00CA9A0E /* Device+Comparable.swift */,
-				0676AD2D2543766D00CA9A0E /* Device.swift */,
-				0676AD2E2543766D00CA9A0E /* Simulator+SystemInfo.swift */,
-			);
-			path = SystemInfo;
 			sourceTree = "<group>";
 		};
 		0676AD312543766D00CA9A0E /* GeneralSettingsViewController */ = {
@@ -262,6 +250,16 @@
 			);
 			path = SupportPrograms;
 			sourceTree = "<group>";
+		};
+		06C019EA256B755200AE6861 /* SimulatorSystemInfo */ = {
+			isa = PBXGroup;
+			children = (
+				06C019EB256B755200AE6861 /* Simulator.swift */,
+				06C019EC256B755200AE6861 /* SystemInfo.swift */,
+			);
+			name = SimulatorSystemInfo;
+			path = ParsedXcrun/ParsedXcrun/SimulatorSystemInfo;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -395,7 +393,7 @@
 		0676AD742543846A00CA9A0E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -406,9 +404,9 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ ${CONFIGURATION} == \"Release\" ]\nthen\n    cp ${TARGET_BUILD_DIR}/${TARGET_NAME} Applications/\"\nfi\n";
+			shellScript = "if [ ${CONFIGURATION} == \"Release\" ]\nthen\n    echo \"Installing to your apps folder\"\n    cp -Rf ${BUILT_PRODUCTS_DIR}/GIFt-ed.app /Applications/\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -417,7 +415,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0676AD542543766D00CA9A0E /* Device.swift in Sources */,
 				0676AD502543766D00CA9A0E /* FilePathManager.swift in Sources */,
 				0676AD632543766D00CA9A0E /* VideoToGifConverter.swift in Sources */,
 				0676AD5D2543766D00CA9A0E /* AppDelegate.swift in Sources */,
@@ -428,24 +425,24 @@
 				0676AD622543766D00CA9A0E /* OptimiizedSizedGif.swift in Sources */,
 				0676AD5E2543766D00CA9A0E /* main.swift in Sources */,
 				0676AD4A2543766D00CA9A0E /* StatusBarDisplayManager.swift in Sources */,
+				06C019ED256B755200AE6861 /* Simulator.swift in Sources */,
 				0676AD4C2543766D00CA9A0E /* UserMessagePopup.swift in Sources */,
 				0676AD5B2543766D00CA9A0E /* MenuFunctionalityInvoker.swift in Sources */,
 				0645576A25677CA500FF9BEC /* AppImages.swift in Sources */,
 				0676AD5C2543766D00CA9A0E /* MainMenuViewModel.swift in Sources */,
 				0676AD602543766D00CA9A0E /* SimulatorVideoRecordController.swift in Sources */,
 				0676AD5F2543766D00CA9A0E /* StandAloneVideoAndGifConverter.swift in Sources */,
-				0676AD522543766D00CA9A0E /* Simulator.swift in Sources */,
 				0676AD612543766D00CA9A0E /* ScreenshotController.swift in Sources */,
 				0676AD692543766D00CA9A0E /* MainEventHandler.swift in Sources */,
 				0676AD4D2543766D00CA9A0E /* UserMessagePopupViewController.swift in Sources */,
 				0676AD492543766D00CA9A0E /* UserPreferences.swift in Sources */,
-				0676AD552543766D00CA9A0E /* Simulator+SystemInfo.swift in Sources */,
+				06C019E3256B753200AE6861 /* Bash+String.swift in Sources */,
 				0676AD582543766D00CA9A0E /* GeneralSettingsViewController.swift in Sources */,
 				0676AD662543766D00CA9A0E /* VideoAndGifManager.swift in Sources */,
+				06C019EE256B755200AE6861 /* SystemInfo.swift in Sources */,
 				0676AD562543766D00CA9A0E /* FeatureFlag.swift in Sources */,
 				0676AD592543766D00CA9A0E /* MenuItemDefinition.swift in Sources */,
 				0676AD4B2543766D00CA9A0E /* IconAnimator.swift in Sources */,
-				0676AD532543766D00CA9A0E /* Device+Comparable.swift in Sources */,
 				0676AD652543766D00CA9A0E /* DropView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
