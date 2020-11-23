@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0645576A25677CA500FF9BEC /* AppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0645576925677CA500FF9BEC /* AppImages.swift */; };
+		06726A34256C53C1000ED1EA /* Simulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06726A32256C53C1000ED1EA /* Simulator.swift */; };
+		06726A35256C53C1000ED1EA /* SystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06726A33256C53C1000ED1EA /* SystemInfo.swift */; };
 		0676ACFF2543750B00CA9A0E /* GIFt_edTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676ACFE2543750B00CA9A0E /* GIFt_edTests.swift */; };
 		0676AD0A2543750B00CA9A0E /* GIFt_edUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676AD092543750B00CA9A0E /* GIFt_edUITests.swift */; };
 		0676AD492543766D00CA9A0E /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676AD1F2543766D00CA9A0E /* UserPreferences.swift */; };
@@ -62,6 +64,8 @@
 
 /* Begin PBXFileReference section */
 		0645576925677CA500FF9BEC /* AppImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppImages.swift; sourceTree = "<group>"; };
+		06726A32256C53C1000ED1EA /* Simulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Simulator.swift; sourceTree = "<group>"; };
+		06726A33256C53C1000ED1EA /* SystemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemInfo.swift; sourceTree = "<group>"; };
 		0676ACE82543750A00CA9A0E /* GIFt-ed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GIFt-ed.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0676ACFA2543750B00CA9A0E /* GIFt-edTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GIFt-edTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0676ACFE2543750B00CA9A0E /* GIFt_edTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFt_edTests.swift; sourceTree = "<group>"; };
@@ -128,6 +132,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06726A31256C53C1000ED1EA /* SimulatorSystemInfo */ = {
+			isa = PBXGroup;
+			children = (
+				06726A32256C53C1000ED1EA /* Simulator.swift */,
+				06726A33256C53C1000ED1EA /* SystemInfo.swift */,
+			);
+			name = SimulatorSystemInfo;
+			path = ParsedXcrun/ParsedXcrun/SimulatorSystemInfo;
+			sourceTree = SOURCE_ROOT;
+		};
 		0676ACDF2543750A00CA9A0E = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				0676AD1F2543766D00CA9A0E /* UserPreferences.swift */,
+				06726A31256C53C1000ED1EA /* SimulatorSystemInfo */,
 				0676AD202543766D00CA9A0E /* StatusBarDisplayManager */,
 				0676AD262543766D00CA9A0E /* Main.storyboard */,
 				0676AD282543766D00CA9A0E /* FilePathManager.swift */,
@@ -410,6 +425,7 @@
 				0676AD622543766D00CA9A0E /* OptimiizedSizedGif.swift in Sources */,
 				0676AD5E2543766D00CA9A0E /* main.swift in Sources */,
 				0676AD4A2543766D00CA9A0E /* StatusBarDisplayManager.swift in Sources */,
+				06726A34256C53C1000ED1EA /* Simulator.swift in Sources */,
 				0676AD4C2543766D00CA9A0E /* UserMessagePopup.swift in Sources */,
 				0676AD5B2543766D00CA9A0E /* MenuFunctionalityInvoker.swift in Sources */,
 				0645576A25677CA500FF9BEC /* AppImages.swift in Sources */,
@@ -423,6 +439,7 @@
 				06C019E3256B753200AE6861 /* Bash+String.swift in Sources */,
 				0676AD582543766D00CA9A0E /* GeneralSettingsViewController.swift in Sources */,
 				0676AD662543766D00CA9A0E /* VideoAndGifManager.swift in Sources */,
+				06726A35256C53C1000ED1EA /* SystemInfo.swift in Sources */,
 				0676AD562543766D00CA9A0E /* FeatureFlag.swift in Sources */,
 				0676AD592543766D00CA9A0E /* MenuItemDefinition.swift in Sources */,
 				0676AD4B2543766D00CA9A0E /* IconAnimator.swift in Sources */,
