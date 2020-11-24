@@ -16,5 +16,7 @@ extension NSImage {
     static let _openFolder = NSImage(named: "open-folder")!
     static let _gif = NSImage(named: "gif")!
     static let _stopRecording = NSImage(named: "stop-recording")!
+    static let _buildApps = NSImage(named: "build-apps")!
+    static let _iosSimulator = NSImage(named: "ios-simulator")!
 }
 

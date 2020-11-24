@@ -690,9 +690,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5aP-jq-WH9">
-                                <rect key="frame" x="18" y="250" width="272" height="18"/>
+                                <rect key="frame" x="18" y="250" width="266" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Automatically create giphy for recordings" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="3yV-eF-dwG">
+                                <buttonCell key="cell" type="check" title="Automatically create GIFs for recordings" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="3yV-eF-dwG">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -917,7 +917,7 @@
                                         <rect key="frame" x="18" y="7" width="394" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="truncatingHead" alignment="center" title="Drop a movie file here (mp4, mov only)" id="SIG-iF-7z0">
-                                            <font key="font" size="16" name="Futura-MediumItalic"/>
+                                            <font key="font" metaFont="systemHeavy" size="13"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </textFieldCell>
@@ -957,15 +957,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Giphy scale" id="3fC-p6-WhK">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xtQ-il-Mrz">
-                                <rect key="frame" x="156" y="234" width="138" height="19"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="🖼 Gif from Videos" id="Xkh-qy-UE7">
-                                    <font key="font" metaFont="systemMedium" size="15"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -1023,6 +1014,15 @@
                                     <action selector="buttonCloseClicked:" target="LI6-Po-rDY" id="2qc-4Q-hRp"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xtQ-il-Mrz">
+                                <rect key="frame" x="141" y="233" width="161" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Create GIF from Movie" id="Xkh-qy-UE7">
+                                    <font key="font" metaFont="systemMedium" size="15"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>

@@ -12,15 +12,11 @@ extension NSMenuItem {
     /// These options will be displayed when the app icon is clicked
     static var markup: [NSMenuItem] {
         return [
+            .simulatorTitle,
             .recordSimulator,
             .stopRecordingSimualtor,
-            .settings,
-            .dividerLine,
-//            .takeScreenshot,
-//            .dividerLine,
-//            .simulators,
-            .outputFolderTitle,
             .openOutputFolder,
+            .settings,
             .dividerLine,
             .gifFromVideos,
             .dividerLine,
@@ -32,8 +28,17 @@ extension NSMenuItem {
 
 extension NSMenuItem {
     static var selector = #selector(MainMenu.functionalityRouter(_:))
+    static var simulatorTitle: NSMenuItem {
+        let item = NSMenuItem(title: "Simulators", action: selector, keyEquivalent: "")
+        item.image = ._buildApps
+        item.indentationLevel = 0
+        item.toolTip = "Choose an option below"
+        return item
+    }
+
     static var recordSimulator: NSMenuItem {
-        let item = NSMenuItem(title: "Capture Video Of Simulator", action: selector, keyEquivalent: "")
+        let item = NSMenuItem(title: "Start Video Capture", action: selector, keyEquivalent: "")
+        item.indentationLevel = 3
         item.image = ._cameraReel
         item.identifier = .record
         item.toolTip = "This will record the video of your currently booted simulator"
@@ -41,24 +46,12 @@ extension NSMenuItem {
     }
 
     static var stopRecordingSimualtor: NSMenuItem {
-        let item = NSMenuItem(title: "Stop Recording", action: selector, keyEquivalent: "")
+        let item = NSMenuItem(title: "Stop Video Capture", action: selector, keyEquivalent: "")
+        item.indentationLevel = 3
         item.identifier = .stopRecording
         item.image = ._stopRecording
         item.isHidden = true
         item.toolTip = "This will stop recording the video of your currently booted simulator. The output will be saved in the defined output folder"
-        return item
-    }
-
-    static var takeScreenshot: NSMenuItem {
-        let item = NSMenuItem(title: "Take Screenshot", action: selector, keyEquivalent: "")
-        item.identifier = .screenshot
-        item.toolTip = "This will take a screenshot of your currently booted simulator. The output will be saved in the defined output folder"
-        return item
-    }
-
-    static var simulators: NSMenuItem {
-        let item = NSMenuItem(title: "Simulators", action: selector, keyEquivalent: "")
-        item.identifier = .simulators
         return item
     }
 
@@ -71,30 +64,23 @@ extension NSMenuItem {
     }
 
     static var settings: NSMenuItem {
-        let item = NSMenuItem(title: "Settings (Video Capture)", action: selector, keyEquivalent: "")
+        let item = NSMenuItem(title: "Settings..", action: selector, keyEquivalent: "")
+        item.indentationLevel = 3
         item.image = ._settingsFineTune
         item.identifier = .settings
-        item.toolTip = "App settings. Define behaviour here"
+        item.toolTip = "Settings specific to recording simulator videos."
         return item
     }
 
     static var openOutputFolder: NSMenuItem {
         let outputPath = UserPreferences.retriveFromDisk().outputFolderPath
-        let item = NSMenuItem(title: "\(outputPath)", action: selector, keyEquivalent: "")
+        let item = NSMenuItem(title: "(Output Folder) \(outputPath)", action: selector, keyEquivalent: "")
+        item.indentationLevel = 3
         item.image = ._openFolder
         item.identifier = .openOutputFolder
         item.toolTip = "This is your output folder where your recordings will be saved. \nTip: Choose something other than your Desktop folder to reduce clutter."
         return item
     }
-
-    static var outputFolderTitle: NSMenuItem {
-        let item = NSMenuItem(title: "Output Folder", action: selector, keyEquivalent: "")
-        item.state = .off
-        item.isEnabled = false
-        item.identifier = .openOutputFolder
-        return item
-    }
-
 
     static var exit: NSMenuItem {
         let item = NSMenuItem(title: "Quit", action: #selector(MainMenu.functionalityRouter(_:)), keyEquivalent: "")
