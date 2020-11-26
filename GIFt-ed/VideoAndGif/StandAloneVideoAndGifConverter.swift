@@ -58,7 +58,7 @@ class StandAloneVideoAndGifConverter: NSViewController {
             isGifCreated = false
             fileDropView.wantsLayer = true
             fileDropView.layer?.backgroundColor = .clear
-            fileDropView.setAcceptableFileExtensions(extensions: ["mov", "mp4"])
+            fileDropView.setAcceptableFileExtensions(fileType: .fileExtension(["mov", "mp4"]))
             fileDropView.fileDropppedHandler = { files in
                 self.labelDroppedFile.stringValue = files[0]
                 self.buttonCreate.isEnabled = true

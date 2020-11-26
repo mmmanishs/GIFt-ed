@@ -90,7 +90,6 @@ class GeneralSettingsViewController: NSViewController {
         self.userActionCompletion?(UserAction.popoverCurrentlyVisible)
         outputFolderTextField.stringValue = preferences.outputFolderPath
         outputFolderTextField.resignFirstResponder()
-        updateGiphyValueRangeSuggesstion()
         outputFolderTextField.delegate = self
     }
 
@@ -216,7 +215,6 @@ class GeneralSettingsViewController: NSViewController {
         preferences.giphyFps = slider.integerValue
         labelGiphyFps.stringValue = String(slider.integerValue)
         UserPreferences.saveToDisk(preferences)
-        updateGiphyValueRangeSuggesstion()
     }
 
     @IBAction func sliderGiphyScaleValueChanged(_ sender: Any) {
@@ -225,28 +223,6 @@ class GeneralSettingsViewController: NSViewController {
         preferences.giphyScale = slider.integerValue
         labelGiphyScale.stringValue = String(slider.integerValue)
         UserPreferences.saveToDisk(preferences)
-        updateGiphyValueRangeSuggesstion()
-    }
-
-    func updateGiphyValueRangeSuggesstion() {
-        var warning = ""
-        if preferences.giphyFps < 8 {
-            warning += GeneralSettingsViewController.lowFpsWarning
-            warning += " "
-        }
-        if preferences.giphyFps > 20 {
-            warning += GeneralSettingsViewController.highFpsWarning
-            warning += " "
-        }
-        if preferences.giphyScale < 200 {
-            warning += GeneralSettingsViewController.lowScaleWarning
-            warning += " "
-        }
-        if preferences.giphyScale > 700 {
-            warning += GeneralSettingsViewController.highScaleWarning
-            warning += " "
-        }
-        giphySettingsMessage.stringValue = warning
     }
 }
 

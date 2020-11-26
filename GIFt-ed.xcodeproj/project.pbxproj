@@ -43,6 +43,7 @@
 		0676AD692543766D00CA9A0E /* MainEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676AD472543766D00CA9A0E /* MainEventHandler.swift */; };
 		0676AD6A2543766D00CA9A0E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0676AD482543766D00CA9A0E /* Info.plist */; };
 		06C019E3256B753200AE6861 /* Bash+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C019E2256B753200AE6861 /* Bash+String.swift */; };
+		06F9FD96256F602500AA8D82 /* SimulatorSubMenuProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F9FD95256F602500AA8D82 /* SimulatorSubMenuProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,7 @@
 		0676AD472543766D00CA9A0E /* MainEventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainEventHandler.swift; sourceTree = "<group>"; };
 		0676AD482543766D00CA9A0E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06C019E2256B753200AE6861 /* Bash+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bash+String.swift"; sourceTree = "<group>"; };
+		06F9FD95256F602500AA8D82 /* SimulatorSubMenuProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorSubMenuProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				0676AD1F2543766D00CA9A0E /* UserPreferences.swift */,
+				06F9FD94256F5F6200AA8D82 /* SimulatorList */,
 				06726A31256C53C1000ED1EA /* SimulatorSystemInfo */,
 				0676AD202543766D00CA9A0E /* StatusBarDisplayManager */,
 				0676AD262543766D00CA9A0E /* Main.storyboard */,
@@ -259,6 +262,14 @@
 				0676AD462543766D00CA9A0E /* xcrun */,
 			);
 			path = SupportPrograms;
+			sourceTree = "<group>";
+		};
+		06F9FD94256F5F6200AA8D82 /* SimulatorList */ = {
+			isa = PBXGroup;
+			children = (
+				06F9FD95256F602500AA8D82 /* SimulatorSubMenuProvider.swift */,
+			);
+			path = SimulatorList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -434,6 +445,7 @@
 				0676AD5F2543766D00CA9A0E /* StandAloneVideoAndGifConverter.swift in Sources */,
 				0676AD612543766D00CA9A0E /* ScreenshotController.swift in Sources */,
 				0676AD692543766D00CA9A0E /* MainEventHandler.swift in Sources */,
+				06F9FD96256F602500AA8D82 /* SimulatorSubMenuProvider.swift in Sources */,
 				0676AD4D2543766D00CA9A0E /* UserMessagePopupViewController.swift in Sources */,
 				0676AD492543766D00CA9A0E /* UserPreferences.swift in Sources */,
 				06C019E3256B753200AE6861 /* Bash+String.swift in Sources */,

@@ -30,6 +30,7 @@ extension NSMenuItem {
     static var selector = #selector(MainMenu.functionalityRouter(_:))
     static var simulatorTitle: NSMenuItem {
         let item = NSMenuItem(title: "Simulators", action: selector, keyEquivalent: "")
+        item.submenu = SimulatorSubMenuProvider.simulatorMenus()
         item.image = ._buildApps
         item.indentationLevel = 0
         item.toolTip = "Choose an option below"
@@ -103,4 +104,8 @@ extension NSUserInterfaceItemIdentifier {
     static let simulators: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier("simulators")
     static let openOutputFolder: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier("openOutputFolder")
     static let exit: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier("exit")
+
+    static func simulatorIdentifier(identifier: String) -> NSUserInterfaceItemIdentifier {
+        return NSUserInterfaceItemIdentifier("simulators.device.\(identifier)")
+    }
 }

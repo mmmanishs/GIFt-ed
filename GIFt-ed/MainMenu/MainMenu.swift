@@ -29,10 +29,20 @@ class MainMenu: NSObject, MainMenuUpdation {
 
     private func getMenu() -> NSMenu {
         let menu = NSMenu()
-        MainMenuViewModel.shared.menuItems.forEach { $0.target = self }
+        recursivelySetTarget(menuItems: MainMenuViewModel.shared.menuItems)
         menu.items = MainMenuViewModel.shared.menuItems
         menu.delegate = self
         return menu
+    }
+
+    func recursivelySetTarget(menuItems :[NSMenuItem]) {
+        menuItems.forEach { item in
+            item.target = self
+            if item.hasSubmenu,
+               let subMenuItems = item.submenu?.items {
+                recursivelySetTarget(menuItems: subMenuItems)
+            }
+        }
     }
 
     @objc func updateMenu() {
@@ -57,8 +67,11 @@ class MainMenu: NSObject, MainMenuUpdation {
             menuFunctionalityInvoker.showStandAloneVideoToGifConverter()
         case .exit:
             objc_terminate()
-        default: break
-            /// Do nothing
+        default:
+            if identifier.rawValue.contains("simulators.device.") {
+                let udid = identifier.rawValue.replacingOccurrences(of: "simulators.device.", with: "")
+                SimulatorInvoker(udid: udid).open()
+            }
         }
     }
 }

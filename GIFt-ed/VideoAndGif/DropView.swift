@@ -1,21 +1,23 @@
 import Cocoa
 
 class DropView: NSView {
+    enum FileType {
+        case folder
+        case fileExtension([String])
+    }
 
     var filePath: String?
-    var expectedExt: [String] = []  //file extensions allowed for Drag&Drop (example: "jpg","png","docx", etc..)
+    var fileType: FileType = .fileExtension([])  //file extensions allowed for Drag&Drop (example: "jpg","png","docx", etc..)
     var fileDropppedHandler: (([String]) -> ())? /// Use this to get the dropped files
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-
         self.wantsLayer = true
-        self.layer?.backgroundColor = NSColor.gray.cgColor
-
+        self.layer?.backgroundColor = NSColor.clear.cgColor
         registerForDraggedTypes([NSPasteboard.PasteboardType.URL, NSPasteboard.PasteboardType.fileURL])
     }
 
-    func setAcceptableFileExtensions(extensions: [String]) {
-        self.expectedExt = extensions
+    func setAcceptableFileExtensions(fileType: FileType) {
+        self.fileType = fileType
     }
 
     override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
@@ -31,11 +33,15 @@ class DropView: NSView {
         guard let board = drag.draggingPasteboard.propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray,
               let path = board[0] as? String
         else { return false }
-
-        let suffix = URL(fileURLWithPath: path).pathExtension
-        for ext in self.expectedExt {
-            if ext.lowercased() == suffix {
-                return true
+        switch fileType {
+        case .folder:
+            break
+        case .fileExtension(let expectedExt):
+            let suffix = URL(fileURLWithPath: path).pathExtension
+            for ext in expectedExt {
+                if ext.lowercased() == suffix {
+                    return true
+                }
             }
         }
         return false
