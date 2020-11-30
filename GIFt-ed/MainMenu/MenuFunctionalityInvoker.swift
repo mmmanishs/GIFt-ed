@@ -48,14 +48,3 @@ class MenuFunctionalityInvoker {
 
 }
 
-class SimulatorInvoker {
-    let udid: String
-
-    init(udid: String) {
-        self.udid = udid
-    }
-
-    func open() {
-        _ = "open -a Simulator.app && xcrun simctl boot \(udid)".runAsCommand()
-    }
-}

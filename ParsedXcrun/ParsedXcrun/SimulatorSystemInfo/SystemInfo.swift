@@ -10,9 +10,21 @@ import Foundation
 
 /// When the SystemInfo is first initailzed the information it fetches the latest information, Subsequently call func refersh to fetch the latest data.
 struct SystemInfo {
+    enum AllowedTypes: String, CustomStringConvertible {
+        var description: String {
+            return self.rawValue
+        }
+
+        case iOS = "iOS"
+        case tvOS = "tvOS"
+        case watchOS = "watchOS"
+    }
     var simulator: Simulator?
-    
-    init() {
+
+    private var allowedTypes: [AllowedTypes]
+
+    init(allowedTypes: [AllowedTypes] = [.iOS, .tvOS, .watchOS]) {
+        self.allowedTypes = allowedTypes
         refresh()
     }
     
@@ -68,16 +80,31 @@ struct SystemInfo {
         let jsonData = Data(str.utf8)
         var formattedKeyValueDevices = [String: [Simulator.Device]]()
         if let extractedSimulator = try? JSONDecoder().decode(Simulator.self, from: jsonData) {
-            for (key, devices) in extractedSimulator.devices {
+            for (key, devices) in extractedSimulator.devices where iSRuntimeAllowed(key){
                 var updatedDevices = [Simulator.Device]()
                 for device in devices {
                     var d = device
                     d.runTime = key
                     updatedDevices.append(d)
                 }
-                formattedKeyValueDevices[key] = updatedDevices.sorted(by: >)
+                if !updatedDevices.isEmpty {
+                    formattedKeyValueDevices[key] = updatedDevices.sorted(by: >)
+                }
             }
             self.simulator = Simulator(devices: formattedKeyValueDevices)
         }
+    }
+
+    func iSRuntimeAllowed(_ runtime: String) -> Bool {
+        for allowedType in allowedTypes {
+            if runtime.contains(allowedType.description) { return true }
+        }
+        return false
+    }
+
+    func getDevice(for udid: String) -> Simulator.Device? {
+        return allDevices.filter {
+            $0.udid == udid
+        }.first
     }
 }

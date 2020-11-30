@@ -14,11 +14,7 @@ struct MainMenuViewModel {
 
     static func initailizeSingleton() {
         MainMenuViewModel.shared = MainMenuViewModel()
-        MainMenuViewModel.shared.menuItems = MainMenuViewModel.launchMenuItems()
-    }
-
-    private static func launchMenuItems() -> [NSMenuItem] {
-        return NSMenuItem.markup
+        MainMenuViewModel.shared.menuItems = NSMenuItem.markup
     }
 
     mutating func record(isEnabled: Bool) {
@@ -34,6 +30,13 @@ struct MainMenuViewModel {
             let outputPath = UserPreferences.retriveFromDisk().outputFolderPath
             newItem.title = "📂 \(outputPath)"
             newItem.toolTip = "Open \(outputPath)"
+        }
+    }
+
+    mutating func reloadSimulators() {
+        if let index = menuItems.firstIndex(where: { $0.identifier == .simulators } ) {
+            menuItems.remove(at: index)
+//            menuItems.insert(NSMenuItem.simulator, at: index)
         }
     }
 

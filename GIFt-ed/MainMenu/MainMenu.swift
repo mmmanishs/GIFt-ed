@@ -69,8 +69,10 @@ class MainMenu: NSObject, MainMenuUpdation {
             objc_terminate()
         default:
             if identifier.rawValue.contains("simulators.device.") {
-                let udid = identifier.rawValue.replacingOccurrences(of: "simulators.device.", with: "")
-                SimulatorInvoker(udid: udid).open()
+                let demarcatedIdentifier = identifier.rawValue.replacingOccurrences(of: "simulators.device.", with: "")
+                let udid = demarcatedIdentifier.components(separatedBy: "|")[0]
+                let actionIdentifier = demarcatedIdentifier.components(separatedBy: "|")[1]
+                DeviceWorker(udid: udid, action: DeviceWorker.Action(actionIdentifier: actionIdentifier)).execute()
             }
         }
     }
@@ -78,7 +80,6 @@ class MainMenu: NSObject, MainMenuUpdation {
 extension MainMenu: NSMenuDelegate {
     func menuWillOpen(_ menu: NSMenu) {
         MainPopover.shared.dismissPopover()
-//        MainMenuViewModel.shared.record(isEnabled: Simulator.getSystemInfo().isAnyBootedSimulatorPresent)
     }
 
     func menuDidClose(_ menu: NSMenu) {

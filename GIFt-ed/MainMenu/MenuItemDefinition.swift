@@ -12,7 +12,7 @@ extension NSMenuItem {
     /// These options will be displayed when the app icon is clicked
     static var markup: [NSMenuItem] {
         return [
-            .simulatorTitle,
+            .simulator,
             .recordSimulator,
             .stopRecordingSimualtor,
             .openOutputFolder,
@@ -28,11 +28,12 @@ extension NSMenuItem {
 
 extension NSMenuItem {
     static var selector = #selector(MainMenu.functionalityRouter(_:))
-    static var simulatorTitle: NSMenuItem {
+    static var simulator: NSMenuItem {
         let item = NSMenuItem(title: "Simulators", action: selector, keyEquivalent: "")
-        item.submenu = SimulatorSubMenuProvider.simulatorMenus()
+        item.submenu = SimulatorSubMenuProvider().simulatorMenu
         item.image = ._buildApps
         item.indentationLevel = 0
+        item.identifier = .simulators
         item.toolTip = "Choose an option below"
         return item
     }

@@ -42,6 +42,7 @@
 		0676AD682543766D00CA9A0E /* xcrun in Resources */ = {isa = PBXBuildFile; fileRef = 0676AD462543766D00CA9A0E /* xcrun */; };
 		0676AD692543766D00CA9A0E /* MainEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676AD472543766D00CA9A0E /* MainEventHandler.swift */; };
 		0676AD6A2543766D00CA9A0E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0676AD482543766D00CA9A0E /* Info.plist */; };
+		06AB12B825730D41002759D9 /* DeviceWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AB12B725730D41002759D9 /* DeviceWorker.swift */; };
 		06C019E3256B753200AE6861 /* Bash+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C019E2256B753200AE6861 /* Bash+String.swift */; };
 		06F9FD96256F602500AA8D82 /* SimulatorSubMenuProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F9FD95256F602500AA8D82 /* SimulatorSubMenuProvider.swift */; };
 /* End PBXBuildFile section */
@@ -105,6 +106,7 @@
 		0676AD462543766D00CA9A0E /* xcrun */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = xcrun; sourceTree = "<group>"; };
 		0676AD472543766D00CA9A0E /* MainEventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainEventHandler.swift; sourceTree = "<group>"; };
 		0676AD482543766D00CA9A0E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		06AB12B725730D41002759D9 /* DeviceWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceWorker.swift; sourceTree = "<group>"; };
 		06C019E2256B753200AE6861 /* Bash+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bash+String.swift"; sourceTree = "<group>"; };
 		06F9FD95256F602500AA8D82 /* SimulatorSubMenuProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorSubMenuProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -268,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				06F9FD95256F602500AA8D82 /* SimulatorSubMenuProvider.swift */,
+				06AB12B725730D41002759D9 /* DeviceWorker.swift */,
 			);
 			path = SimulatorList;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				0676AD4C2543766D00CA9A0E /* UserMessagePopup.swift in Sources */,
 				0676AD5B2543766D00CA9A0E /* MenuFunctionalityInvoker.swift in Sources */,
 				0645576A25677CA500FF9BEC /* AppImages.swift in Sources */,
+				06AB12B825730D41002759D9 /* DeviceWorker.swift in Sources */,
 				0676AD5C2543766D00CA9A0E /* MainMenuViewModel.swift in Sources */,
 				0676AD602543766D00CA9A0E /* SimulatorVideoRecordController.swift in Sources */,
 				0676AD5F2543766D00CA9A0E /* StandAloneVideoAndGifConverter.swift in Sources */,
