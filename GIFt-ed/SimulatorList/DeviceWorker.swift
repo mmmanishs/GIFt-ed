@@ -9,7 +9,7 @@ import Foundation
 
 class DeviceWorker {
     enum Action: String {
-        case boot, deviceData, copyUdid, erase, unknown
+        case boot, deviceData, copyUdid, erase, toggleLightDarkMode, unknown
         init(actionIdentifier: String) {
             switch actionIdentifier {
             case "boot":
@@ -20,6 +20,8 @@ class DeviceWorker {
                 self = .copyUdid
             case "erase":
                 self = .erase
+            case "toggleLightDarkMode":
+                self = .toggleLightDarkMode
             default:
                 self = .unknown
             }
@@ -27,6 +29,7 @@ class DeviceWorker {
     }
     let udid: String
     let action: Action
+    
     init(udid: String, action: Action) {
         self.udid = udid
         self.action = action
@@ -42,8 +45,19 @@ class DeviceWorker {
             copyUdid()
         case .erase:
             erase()
+        case .toggleLightDarkMode:
+            toggleLightDarkMode()
         default:
             break
+        }
+    }
+
+    func toggleLightDarkMode() {
+        let mode = "xcrun simctl ui \(udid) appearance".runAsCommand()
+        if mode == "light\n" {
+            _ = "xcrun simctl ui \(udid) appearance dark".runAsCommand()
+        } else if mode == "dark\n" {
+            _ = "xcrun simctl ui \(udid) appearance light".runAsCommand()
         }
     }
 

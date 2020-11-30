@@ -85,4 +85,7 @@ extension MainMenu: NSMenuDelegate {
     func menuDidClose(_ menu: NSMenu) {
 
     }
+
+    func menuNeedsUpdate(_ menu: NSMenu) {
+    }
 }

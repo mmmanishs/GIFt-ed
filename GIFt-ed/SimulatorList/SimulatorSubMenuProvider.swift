@@ -37,6 +37,7 @@ class SimulatorSubMenuProvider {
         let menu = NSMenu(title: "")
         menu.items = [
             device.bootMenuItem,
+            device.toggleLightDarkMode,
             device.openDeviceDataItem,
             device.copyUdid,
             device.erase,
@@ -77,5 +78,9 @@ fileprivate extension Simulator.Device {
         bootItem.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.erase.rawValue)")
         return bootItem
     }
-
+    var toggleLightDarkMode: NSMenuItem {
+        let bootItem = NSMenuItem(title: "Toggle Light/Dark Mode", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
+        bootItem.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.toggleLightDarkMode.rawValue)")
+        return bootItem
+    }
 }
