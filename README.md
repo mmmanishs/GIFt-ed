@@ -13,7 +13,7 @@ Download and build the project using the Install_GIFted_In_Applications scheme.
 
 The app will appear in your taskbar after you launch it from Applications.
 
-<img width="1410" alt="Screen Shot 2020-12-04 at 15 29 30" src="https://user-images.githubusercontent.com/7418471/101211734-a3949880-3645-11eb-9c5f-b67b6db0a2ee.png">
+<img width="1410" alt="Screen Shot 2020-12-04 at 15 29 30" src="https://user-images.githubusercontent.com/7418471/101222861-b369a800-3658-11eb-9eaa-6f78d645dd3f.png">
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
