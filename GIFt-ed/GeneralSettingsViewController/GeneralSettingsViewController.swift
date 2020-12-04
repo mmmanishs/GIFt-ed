@@ -158,7 +158,7 @@ class GeneralSettingsViewController: NSViewController {
         if FileManager.default.fileExists(atPath: cleanPath, isDirectory: &isDir) {
             preferences.outputFolderPath = cleanPath
             UserPreferences.saveToDisk(preferences)
-            MainMenuViewModel.shared.updateOutputPath()
+//            MainMenuViewModel.shared.updateOutputPath()
             showPathIsSavedMessage()
             self.userActionCompletion?(UserAction.outputFolderPathUpdated)
         } else {
@@ -167,7 +167,7 @@ class GeneralSettingsViewController: NSViewController {
                 try FileManager.default.createDirectory(atPath: cleanPath, withIntermediateDirectories: true, attributes: nil)
                 preferences.outputFolderPath = cleanPath
                 UserPreferences.saveToDisk(preferences)
-                MainMenuViewModel.shared.updateOutputPath()
+//                MainMenuViewModel.shared.updateOutputPath()
                 showPathIsCreatedMessage()
                 self.userActionCompletion?(UserAction.outputFolderPathUpdated)
             } catch {

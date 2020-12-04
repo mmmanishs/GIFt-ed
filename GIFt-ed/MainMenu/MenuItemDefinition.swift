@@ -10,23 +10,38 @@ import AppKit
 
 extension NSMenuItem {
     /// These options will be displayed when the app icon is clicked
-    static var markup: [NSMenuItem] {
-        return [
-            .simulator,
-            .recordSimulator,
-            .stopRecordingSimualtor,
-            .openOutputFolder,
-            .settings,
-            .dividerLine,
-            .gifFromVideos,
-            .dividerLine,
-            .dividerLine,
-            .exit
-        ]
+    static func menuItems(from menuDescriptor: MenuDescriptor) -> [NSMenuItem] {
+        var menuMarkup = [NSMenuItem]()
+        for item in menuDescriptor.items where item.isEnabled {
+            switch item.element.key {
+            case "cache-recently-accessed-devices":
+                let deviceID = item.element.params
+                if let item = SimulatorSubMenuProvider.menuItem(for: deviceID) {
+                    menuMarkup.append(item)
+                }
+            default:
+                if let descriptorItem = NSMenuItem.menuItemDictionary[item.element.key] {
+                    menuMarkup.append(descriptorItem)
+                }
+            }
+        }
+        return menuMarkup
     }
 }
 
 extension NSMenuItem {
+    static var menuItemDictionary: [String: NSMenuItem] {
+        return [
+            "list-of-simulators": .simulator,
+            "start-video-cature": .recordSimulator,
+            "stop-video-cature": .stopRecordingSimualtor,
+            "open-output-folder": .openOutputFolder,
+            "settings": .settings,
+            "convert-gif-to-video": .gifFromVideos,
+            "divider": .dividerLine,
+            "quit": .exit,
+        ]
+    }
     static var selector = #selector(MainMenu.functionalityRouter(_:))
     static var simulator: NSMenuItem {
         let item = NSMenuItem(title: "Simulators", action: selector, keyEquivalent: "")
@@ -37,6 +52,7 @@ extension NSMenuItem {
         item.toolTip = "Choose an option below"
         return item
     }
+    
 
     static var recordSimulator: NSMenuItem {
         let item = NSMenuItem(title: "Start Video Capture", action: selector, keyEquivalent: "")
@@ -52,7 +68,6 @@ extension NSMenuItem {
         item.indentationLevel = 3
         item.identifier = .stopRecording
         item.image = ._stopRecording
-        item.isHidden = true
         item.toolTip = "This will stop recording the video of your currently booted simulator. The output will be saved in the defined output folder"
         return item
     }

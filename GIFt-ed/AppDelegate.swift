@@ -19,32 +19,54 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        /// Uncomment below to reset app state.
+        MenuDescriptor.load(overridePersistedState: false).persistToDisk()
+
         /// Startup code
         AppDelegate.statusItem = NSStatusBar.system.statusItem(withLength: -1)
         StatusBarDisplayManager.initailizeSingleton(statusDisplayButton: statusDisplayButton)
         UserPreferences.retriveFromDisk().outputFolderPath.tryToCreateFolderIfItDoesNotAlreadyExist()
+        cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
 
         /// Start displaying app icon
         StatusBarDisplayManager.shared.displayAppIcon()
 
 
         mainEventHandler = MainEventHandler()
-
+        AppDelegate.statusItem.menu = NSMenu()
+        AppDelegate.statusItem.menu?.delegate = mainMenu
         if FeatureFlag.isMainMenuEnabled {
-            mainMenu.start { menu in
-                AppDelegate.statusItem.menu = menu
+            mainMenu.start { menuItems in
+                AppDelegate.statusItem.menu?.items = menuItems
             }
         }
         if let button = AppDelegate.statusItem.button {
             button.action = #selector(self.userAction(sender:))
             button.sendAction(on: [.leftMouseUp, .rightMouseUp, .mouseEntered, .directTouch, .mouseExited, .pressure, .beginGesture])
         }
+//        testItOut()
     }
 
     @objc func userAction(sender: NSStatusItem) {
         let event = NSApp.currentEvent!
         mainEventHandler?.respondTo(event: event.type)
     }
+
+//    func testItOut() {
+//        var menuDescriptor = MenuDescriptor.load(overridePersistedState: true)
+//        menuDescriptor.persistToDisk()
+//        print("recording: \(menuDescriptor.getItem(for: .startVideoCature)?.isEnabled)")
+//        print("stop recording: \(menuDescriptor.getItem(for: .stopVideoCature)?.isEnabled)")
+//
+//        var item = menuDescriptor.getItem(for: .stopVideoCature)
+//        item?.isEnabled = true
+//        menuDescriptor.update(item: item!)
+//        menuDescriptor.persistToDisk()
+//        menuDescriptor = MenuDescriptor.load(overridePersistedState: false)
+//        print("recording: \(menuDescriptor.getItem(for: .startVideoCature)?.isEnabled)")
+//        print("stop recording: \(menuDescriptor.getItem(for: .stopVideoCature)?.isEnabled)")
+//
+//    }
 }
 
 

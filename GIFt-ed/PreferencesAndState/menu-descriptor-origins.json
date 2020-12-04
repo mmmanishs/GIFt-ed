@@ -1,0 +1,85 @@
+{
+    "items": [
+        {
+            "element": {
+                "key": "cache-recently-accessed-devices",
+                "params": "xx"
+            },
+            "isEnabled": true
+        },
+        {
+            "element": {
+                "key": "cache-recently-accessed-devices",
+                "params": "xx"
+            },
+            "isEnabled": true
+        },
+        {
+            "element": {
+                "key": "cache-recently-accessed-devices",
+                "params": "xx"
+            },
+            "isEnabled": true
+        },
+        {
+            "element": {
+                "key": "list-of-simulators",
+                "params": ""
+            },
+            "isEnabled": true
+        },
+        {
+            "element": {
+                "key": "start-video-cature",
+                "params": ""
+            },
+            "isEnabled": true
+        },
+        {
+            "element": {
+                "key": "stop-video-cature",
+                "params": ""
+            },
+            "isEnabled": false
+        },
+        {
+            "element": {
+                "key": "open-output-folder",
+                "params": ""
+            },
+            "isEnabled": true
+        },
+        {
+            "element": {
+                "key": "video-Capture-Settings",
+                "params": ""
+            },
+            "isEnabled": true
+        },
+        {
+            "element": {
+                "key": "divider",
+                "params": ""
+            },
+            "isEnabled": true
+        },{
+            "element": {
+                "key": "convert-gif-to-video",
+                "params": ""
+            },
+            "isEnabled": true
+        },{
+            "element": {
+                "key": "divider",
+                "params": ""
+            },
+            "isEnabled": true
+        },{
+            "element": {
+                "key": "quit",
+                "params": ""
+            },
+            "isEnabled": true
+        }
+    ]
+}

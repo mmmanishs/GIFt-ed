@@ -47,6 +47,20 @@ struct Simulator: Codable {
     }
 }
 
+extension Simulator.Device {
+    enum Appearence: String {
+        case light = "light\n",
+             dark = "dark\n",
+             unknown
+    }
+
+    func fetchAppearence(completion: @escaping (Appearence) ->()) {
+        DispatchQueue.global().async {
+            completion(Appearence(rawValue: "xcrun simctl ui \(udid) appearance".runAsCommand()) ?? .unknown)
+        }
+    }
+}
+
 extension Simulator.Device: Comparable {
     public static func < (lhs: Self, rhs: Self) -> Bool {
         return !(lhs.family.rawValue < rhs.family.rawValue)

@@ -14,15 +14,8 @@ struct MainMenuViewModel {
 
     static func initailizeSingleton() {
         MainMenuViewModel.shared = MainMenuViewModel()
-        MainMenuViewModel.shared.menuItems = NSMenuItem.markup
     }
 
-    mutating func record(isEnabled: Bool) {
-        if let index = menuItems.firstIndex(where: { $0.identifier == .record } ) {
-            let newItem = menuItems[index]
-            newItem.isEnabled = isEnabled
-        }
-    }
 
     mutating func updateOutputPath() {
         if let index = menuItems.firstIndex(where: { $0.identifier == .openOutputFolder } ) {
@@ -33,36 +26,41 @@ struct MainMenuViewModel {
         }
     }
 
-    mutating func reloadSimulators() {
-        if let index = menuItems.firstIndex(where: { $0.identifier == .simulators } ) {
-            menuItems.remove(at: index)
-//            menuItems.insert(NSMenuItem.simulator, at: index)
-        }
-    }
-
     mutating func update(for state: VideoAndGifManager.RecorderState) {
         switch state {
         case .couldNotPreviouslyRecord, .readyToRecord, .stopped:
-            setRecord(isHidden: false)
-            setStopRecording(isHidden: true)
+            setStartRecordingVisible()
         case .recording:
-            setRecord(isHidden: true)
-            setStopRecording(isHidden: false)
+            setStartStopVisible()
         }
     }
 
-    private mutating func setRecord(isHidden: Bool) {
-        if let index = menuItems.firstIndex(where: { $0.identifier == .record } ) {
-            let newItem = menuItems[index]
-            newItem.isHidden = isHidden
-        }
+    private mutating func setStartRecordingVisible() {
+        var menuDescriptor = MenuDescriptor.load()
+
+        guard var recordItem = menuDescriptor.getFirstItem(for: .startVideoCature) else { return }
+        recordItem.isEnabled = true
+        _ = menuDescriptor.update(item: recordItem)
+
+        guard var stopRecord = menuDescriptor.getFirstItem(for: .stopVideoCature) else { return }
+        stopRecord.isEnabled = false
+        _ = menuDescriptor.update(item: stopRecord)
+
+        menuDescriptor.persistToDisk()
     }
 
-    private mutating func setStopRecording(isHidden: Bool) {
-        if let index = menuItems.firstIndex(where: { $0.identifier == .stopRecording } ) {
-            let newItem = menuItems[index]
-            newItem.isHidden = isHidden
-        }
+    private mutating func setStartStopVisible() {
+        var menuDescriptor = MenuDescriptor.load()
+
+        guard var recordItem = menuDescriptor.getFirstItem(for: .startVideoCature) else { return }
+        recordItem.isEnabled = false
+        _ = menuDescriptor.update(item: recordItem)
+
+        guard var stopRecord = menuDescriptor.getFirstItem(for: .stopVideoCature) else { return }
+        stopRecord.isEnabled = true
+        _ = menuDescriptor.update(item: stopRecord)
+
+        menuDescriptor.persistToDisk()
     }
 
 }

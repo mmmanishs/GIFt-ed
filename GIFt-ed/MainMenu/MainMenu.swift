@@ -8,31 +8,28 @@
 
 import AppKit
 
-protocol MainMenuUpdation: class {
-    func updateMenu()
-}
-
 extension NSNotification.Name {
     static let updateMainMenu: NSNotification.Name =  NSNotification.Name(rawValue: "updateMainMenu")
 }
-class MainMenu: NSObject, MainMenuUpdation {
-    let menuFunctionalityInvoker = MenuFunctionalityInvoker()
-    var updateHandler: ((NSMenu) -> ())?
+var cachedSystemInfo: SystemInfo?
 
-    func start(updateHandler: @escaping (NSMenu) -> ()) {
-        self.updateHandler = updateHandler
-        menuFunctionalityInvoker.delegate = self
-        MainMenuViewModel.initailizeSingleton()
-        updateHandler(getMenu())
-        NotificationCenter.default.addObserver(self, selector: #selector(updateMenu), name: .updateMainMenu, object: nil)
+class MainMenu: NSObject {
+    private let videoAndGifManager: VideoAndGifManager
+    private let mainEventHandler: MainEventHandler?
+    
+    override init() {
+        videoAndGifManager = VideoAndGifManager()
+        mainEventHandler = MainEventHandler()
+        videoAndGifManager.eventNotifierHandler = { event in
+            MainMenuViewModel.shared.update(for: event)
+        }
+        super.init()
     }
-
-    private func getMenu() -> NSMenu {
-        let menu = NSMenu()
-        recursivelySetTarget(menuItems: MainMenuViewModel.shared.menuItems)
-        menu.items = MainMenuViewModel.shared.menuItems
-        menu.delegate = self
-        return menu
+    
+    func start(updateHandler: ([NSMenuItem]) -> ()) {
+        MainMenuViewModel.initailizeSingleton()
+        updateViewMenuViewModel()
+        updateHandler(MainMenuViewModel.shared.menuItems)
     }
 
     func recursivelySetTarget(menuItems :[NSMenuItem]) {
@@ -45,8 +42,11 @@ class MainMenu: NSObject, MainMenuUpdation {
         }
     }
 
-    @objc func updateMenu() {
-        updateHandler?(getMenu())
+    func updateViewMenuViewModel() {
+        let menuDescriptor = MenuDescriptor.load()
+        print(menuDescriptor.description)
+        MainMenuViewModel.shared.menuItems = NSMenuItem.menuItems(from: menuDescriptor)
+        recursivelySetTarget(menuItems: MainMenuViewModel.shared.menuItems)
     }
 
     @objc func functionalityRouter(_ sender: Any?) {
@@ -54,17 +54,17 @@ class MainMenu: NSObject, MainMenuUpdation {
         guard let identifier = menuItem.identifier else { return }
         switch identifier {
         case .record:
-            menuFunctionalityInvoker.startRecording()
+            videoAndGifManager.respondToClickEvent()
         case .stopRecording:
-            menuFunctionalityInvoker.stopRecording()
+            videoAndGifManager.respondToClickEvent()
         case .settings:
-            menuFunctionalityInvoker.showSettings()
+            mainEventHandler?.showPopover(sender: nil)
         case .openOutputFolder:
-            menuFunctionalityInvoker.openOutputFolder()
+            UserPreferences.retriveFromDisk().outputFolderPath.openFolder()
         case .screenshot:
-            menuFunctionalityInvoker.takeScreenshot()
+            break
         case .giffromvidoes:
-            menuFunctionalityInvoker.showStandAloneVideoToGifConverter()
+            MainPopover.shared.showInPopover(viewController: StandAloneVideoAndGifConverter.viewController, behavior: .semitransient)
         case .exit:
             objc_terminate()
         default:
@@ -72,9 +72,39 @@ class MainMenu: NSObject, MainMenuUpdation {
                 let demarcatedIdentifier = identifier.rawValue.replacingOccurrences(of: "simulators.device.", with: "")
                 let udid = demarcatedIdentifier.components(separatedBy: "|")[0]
                 let actionIdentifier = demarcatedIdentifier.components(separatedBy: "|")[1]
-                DeviceWorker(udid: udid, action: DeviceWorker.Action(actionIdentifier: actionIdentifier)).execute()
+                DeviceWorker(udid: udid, action: DeviceWorker.Action(rawValue: actionIdentifier) ?? .unknown).execute()
+                if DeviceWorker.Action(rawValue: actionIdentifier) == .boot {
+                    MainMenu.saveToRecentlyAccessedDevice(udid: udid)
+                }
             }
         }
+    }
+
+    static func saveToRecentlyAccessedDevice(udid: String) {
+        var menuDescriptor = MenuDescriptor.load()
+        // Get all the matching items
+        menuDescriptor.printAllKeys()
+        var items = MenuDescriptor.load().items
+
+        let newItem = MenuDescriptor.Item(element: MenuDescriptor.Item.Element(key: "cache-recently-accessed-devices",
+                                                                             params: udid),
+                                        isEnabled: true)
+
+        if items.contains(where: {$0 == newItem}) {
+            return
+        }
+        if let lastIndex = items.lastIndex(where: { $0.element.approvedKey == .cacheFrequentlyAccessedDevices }) {
+            items.remove(at: lastIndex)
+        }
+
+        if let firstIndex = items.firstIndex(where: { $0.element.approvedKey == .cacheFrequentlyAccessedDevices }) {
+            items.insert(newItem, at: firstIndex)
+        }
+
+        menuDescriptor.items = items
+        menuDescriptor.persistToDisk()
+        menuDescriptor.printAllKeys()
+
     }
 }
 extension MainMenu: NSMenuDelegate {
@@ -82,10 +112,10 @@ extension MainMenu: NSMenuDelegate {
         MainPopover.shared.dismissPopover()
     }
 
-    func menuDidClose(_ menu: NSMenu) {
-
-    }
-
     func menuNeedsUpdate(_ menu: NSMenu) {
+        cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
+        cachedSystemInfo?.bootedDevices.map{$0.udid}.forEach(MainMenu.saveToRecentlyAccessedDevice(udid:))
+        updateViewMenuViewModel()
+        menu.items = MainMenuViewModel.shared.menuItems
     }
 }
