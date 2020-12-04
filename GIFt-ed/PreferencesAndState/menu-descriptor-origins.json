@@ -3,21 +3,21 @@
         {
             "element": {
                 "key": "cache-recently-accessed-devices",
-                "params": "xx"
+                "params": ""
             },
             "isEnabled": true
         },
         {
             "element": {
                 "key": "cache-recently-accessed-devices",
-                "params": "xx"
+                "params": ""
             },
             "isEnabled": true
         },
         {
             "element": {
                 "key": "cache-recently-accessed-devices",
-                "params": "xx"
+                "params": ""
             },
             "isEnabled": true
         },
@@ -51,7 +51,7 @@
         },
         {
             "element": {
-                "key": "video-Capture-Settings",
+                "key": "video-capture-settings",
                 "params": ""
             },
             "isEnabled": true

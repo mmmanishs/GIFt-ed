@@ -51,10 +51,10 @@ class SimulatorSubMenuProvider {
     static func menuItem(for device: Simulator.Device) -> NSMenuItem {
         let item: NSMenuItem
         if device.state == .booted {
-            item = NSMenuItem(title: device.name, action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
-            item.attributedTitle = device.name.boldAttributedString(size: 14)
+            item = NSMenuItem(title: device.nameAndRuntime, action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
+            item.attributedTitle = device.nameAndRuntime.boldAttributedString(size: 14)
         } else {
-            item = NSMenuItem(title: device.name, action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
+            item = NSMenuItem(title: device.nameAndRuntime, action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
         }
         item.identifier = .simulatorIdentifier(identifier: "\(device.udid)|\(DeviceWorker.Action.boot.rawValue)")
         item.submenu = getMenu(for: device)
@@ -65,73 +65,84 @@ class SimulatorSubMenuProvider {
         let menu = NSMenu(title: "")
         if device.state == .shutdown {
             menu.addItem(device.bootMenuItem)
-        } else if device.state == .booted {
-            menu.addItem(device.shutDownMenuItem)
         }
         menu.addItem(device.toggleLightDarkMode)
-        menu.addItem(device.openDeviceDataItem)
+        if device.state == .booted {
+            menu.addItem(device.shutDownMenuItem)
+        }
+        menu.addItem(.dividerLine)
         menu.addItem(device.copyUdid)
+        menu.addItem(.dividerLine)
+        menu.addItem(device.openDeviceDataItem)
+        menu.addItem(.dividerLine)
+        menu.addItem(device.resetKeyChain)
         menu.addItem(device.erase)
-
+        menu.addItem(.dividerLine)
+        menu.addItem(device.deleteDevice)
         return menu
-    }
-
-    static func functionalityResolver(identifier: String) {
-        let cleanedIdentifier = identifier.replacingOccurrences(of: "simulators.device.", with: "")
-        let identifierBreakups = cleanedIdentifier.components(separatedBy: "|")
-        let udid = identifierBreakups[0]
-        let actionIdentifier = identifierBreakups[1]
-        DeviceWorker(udid: udid, action: DeviceWorker.Action(rawValue: actionIdentifier) ?? .unknown).execute()
     }
 }
 
 fileprivate extension Simulator.Device {
     var bootMenuItem: NSMenuItem {
-        let bootItem = NSMenuItem(title: "Boot", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
-        bootItem.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.boot.rawValue)")
-        return bootItem
+        let item = NSMenuItem(title: "Boot", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
+        item.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.boot.rawValue)")
+        return item
     }
 
     var shutDownMenuItem: NSMenuItem {
-        let bootItem = NSMenuItem(title: "ShutDown", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
-        bootItem.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.shutdown.rawValue)")
-        return bootItem
+        let item = NSMenuItem(title: "ShutDown", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
+        item.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.shutdown.rawValue)")
+        return item
     }
 
     var openDeviceDataItem: NSMenuItem {
-        let bootItem = NSMenuItem(title: "📂 Device Data", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
-        bootItem.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.deviceData.rawValue)")
-        return bootItem
+        let item = NSMenuItem(title: "📂 Device Data", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
+        item.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.deviceData.rawValue)")
+        return item
     }
 
     var copyUdid: NSMenuItem {
-        let bootItem = NSMenuItem(title: "(copy) \(udid)", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
-        bootItem.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.copyUdid.rawValue)")
-        return bootItem
+        let item = NSMenuItem(title: "(copy) \(udid)", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
+        item.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.copyUdid.rawValue)")
+        return item
+    }
+
+    var resetKeyChain: NSMenuItem {
+        let item = NSMenuItem(title: "Reset Keychain", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
+        item.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.resetKeychain.rawValue)")
+        return item
     }
 
     var erase: NSMenuItem {
-        let bootItem = NSMenuItem(title: "Erase Device Data", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
-        bootItem.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.erase.rawValue)")
-        return bootItem
+        let item = NSMenuItem(title: "Erase Device Data", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
+        item.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.erase.rawValue)")
+        return item
     }
 
     var turnOnLightMode: NSMenuItem {
-        let bootItem = NSMenuItem(title: "Light Mode", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
-        bootItem.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.turnOnLightMode.rawValue)")
-        return bootItem
+        let item = NSMenuItem(title: "Light Mode", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
+        item.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.turnOnLightMode.rawValue)")
+        return item
     }
 
     var turnOnDarkMode: NSMenuItem {
-        let bootItem = NSMenuItem(title: "Dark Mode", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
-        bootItem.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.turnOnDarkMode.rawValue)")
-        return bootItem
+        let item = NSMenuItem(title: "Dark Mode", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
+        item.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.turnOnDarkMode.rawValue)")
+        return item
     }
 
     var toggleLightDarkMode: NSMenuItem {
-        let bootItem = NSMenuItem(title: "Toggle Light/Dark Mode", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
-        bootItem.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.toggleLightDarkMode.rawValue)")
-        return bootItem
+        let item = NSMenuItem(title: "Toggle Light/Dark Mode", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
+        item.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.toggleLightDarkMode.rawValue)")
+        return item
+    }
+
+    var deleteDevice: NSMenuItem {
+        let item = NSMenuItem(title: "Delete (confirmation required)", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
+        item.attributedTitle = "Delete (confirmation required)".attributedString(color: .red)
+        item.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.delete.rawValue)")
+        return item
     }
 }
 
@@ -140,4 +151,10 @@ extension String {
         let attributedString = NSAttributedString(string: self, attributes: [NSAttributedString.Key.font : NSFont.boldSystemFont(ofSize: size)])
         return attributedString
     }
+
+    func attributedString(color: NSColor)-> NSAttributedString {
+        let attributedString = NSAttributedString(string: self, attributes: [NSAttributedString.Key.foregroundColor : color])
+        return attributedString
+    }
+
 }

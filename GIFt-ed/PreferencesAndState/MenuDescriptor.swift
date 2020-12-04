@@ -33,7 +33,7 @@ struct MenuDescriptor: Codable {
                 case simulators = "list-of-simulators"
                 case stopVideoCature = "stop-video-cature"
                 case startVideoCature = "start-video-cature"
-                case videoCaptureSettings = "video-Capture-Settings"
+                case videoCaptureSettings = "video-capture-settings"
                 case quit = "quit"
                 case unknown
             }
@@ -44,12 +44,6 @@ struct MenuDescriptor: Codable {
         items.forEach {
             print($0.element.key)
         }
-    }
-}
-
-extension MenuDescriptor: CustomStringConvertible {
-    var description: String {
-        return "recording: \(getFirstItem(for: .startVideoCature)?.isEnabled), stop recording: \(getFirstItem(for: .stopVideoCature)?.isEnabled)"
     }
 }
 

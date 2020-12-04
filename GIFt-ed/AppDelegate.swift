@@ -20,7 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         /// Uncomment below to reset app state.
-        MenuDescriptor.load(overridePersistedState: false).persistToDisk()
+        MenuDescriptor.load(overridePersistedState: true).persistToDisk()
 
         /// Startup code
         AppDelegate.statusItem = NSStatusBar.system.statusItem(withLength: -1)

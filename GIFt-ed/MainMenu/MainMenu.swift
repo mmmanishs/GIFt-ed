@@ -44,7 +44,6 @@ class MainMenu: NSObject {
 
     func updateViewMenuViewModel() {
         let menuDescriptor = MenuDescriptor.load()
-        print(menuDescriptor.description)
         MainMenuViewModel.shared.menuItems = NSMenuItem.menuItems(from: menuDescriptor)
         recursivelySetTarget(menuItems: MainMenuViewModel.shared.menuItems)
     }
@@ -72,7 +71,16 @@ class MainMenu: NSObject {
                 let demarcatedIdentifier = identifier.rawValue.replacingOccurrences(of: "simulators.device.", with: "")
                 let udid = demarcatedIdentifier.components(separatedBy: "|")[0]
                 let actionIdentifier = demarcatedIdentifier.components(separatedBy: "|")[1]
-                DeviceWorker(udid: udid, action: DeviceWorker.Action(rawValue: actionIdentifier) ?? .unknown).execute()
+                let action  = DeviceWorker.Action(rawValue: actionIdentifier)
+                if action == .delete {
+                    if let device = cachedSystemInfo?.getDevice(for: udid) {
+                        MainPopover.shared.showInPopover(viewController: ConfirmDeletionOfDeviceViewController.viewController(for: device), behavior: .transient)
+                    }
+                } else {
+                    DispatchQueue.global().async {
+                        DeviceWorker(udid: udid, action: DeviceWorker.Action(rawValue: actionIdentifier) ?? .unknown).execute()
+                    }
+                }
                 if DeviceWorker.Action(rawValue: actionIdentifier) == .boot {
                     MainMenu.saveToRecentlyAccessedDevice(udid: udid)
                 }
@@ -83,7 +91,6 @@ class MainMenu: NSObject {
     static func saveToRecentlyAccessedDevice(udid: String) {
         var menuDescriptor = MenuDescriptor.load()
         // Get all the matching items
-        menuDescriptor.printAllKeys()
         var items = MenuDescriptor.load().items
 
         let newItem = MenuDescriptor.Item(element: MenuDescriptor.Item.Element(key: "cache-recently-accessed-devices",
@@ -103,8 +110,6 @@ class MainMenu: NSObject {
 
         menuDescriptor.items = items
         menuDescriptor.persistToDisk()
-        menuDescriptor.printAllKeys()
-
     }
 }
 extension MainMenu: NSMenuDelegate {

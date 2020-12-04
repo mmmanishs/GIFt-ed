@@ -36,7 +36,7 @@ extension NSMenuItem {
             "start-video-cature": .recordSimulator,
             "stop-video-cature": .stopRecordingSimualtor,
             "open-output-folder": .openOutputFolder,
-            "settings": .settings,
+            "video-capture-settings": .settings,
             "convert-gif-to-video": .gifFromVideos,
             "divider": .dividerLine,
             "quit": .exit,

@@ -43,6 +43,8 @@
 		0676AD6A2543766D00CA9A0E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0676AD482543766D00CA9A0E /* Info.plist */; };
 		06AB12B825730D41002759D9 /* DeviceWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AB12B725730D41002759D9 /* DeviceWorker.swift */; };
 		06C019E3256B753200AE6861 /* Bash+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C019E2256B753200AE6861 /* Bash+String.swift */; };
+		06CE4F32257AE609009E2B4A /* ConfirmDeletionOfDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CE4F30257AE609009E2B4A /* ConfirmDeletionOfDeviceViewController.swift */; };
+		06CE4F33257AE609009E2B4A /* ConfirmDeletionOfDeviceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06CE4F31257AE609009E2B4A /* ConfirmDeletionOfDeviceViewController.xib */; };
 		06CE777E257714E3006F3511 /* MenuDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CE777D257714E3006F3511 /* MenuDescriptor.swift */; };
 		06CE778325771529006F3511 /* menu-descriptor-origins.json in Resources */ = {isa = PBXBuildFile; fileRef = 06CE778225771529006F3511 /* menu-descriptor-origins.json */; };
 		06F9FD96256F602500AA8D82 /* SimulatorSubMenuProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F9FD95256F602500AA8D82 /* SimulatorSubMenuProvider.swift */; };
@@ -108,6 +110,8 @@
 		0676AD482543766D00CA9A0E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06AB12B725730D41002759D9 /* DeviceWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceWorker.swift; sourceTree = "<group>"; };
 		06C019E2256B753200AE6861 /* Bash+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bash+String.swift"; sourceTree = "<group>"; };
+		06CE4F30257AE609009E2B4A /* ConfirmDeletionOfDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDeletionOfDeviceViewController.swift; sourceTree = "<group>"; };
+		06CE4F31257AE609009E2B4A /* ConfirmDeletionOfDeviceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmDeletionOfDeviceViewController.xib; sourceTree = "<group>"; };
 		06CE777D257714E3006F3511 /* MenuDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDescriptor.swift; sourceTree = "<group>"; };
 		06CE778225771529006F3511 /* menu-descriptor-origins.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "menu-descriptor-origins.json"; sourceTree = "<group>"; };
 		06F9FD95256F602500AA8D82 /* SimulatorSubMenuProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorSubMenuProvider.swift; sourceTree = "<group>"; };
@@ -200,6 +204,7 @@
 				06C019E2256B753200AE6861 /* Bash+String.swift */,
 				0676AD302543766D00CA9A0E /* Images.xcassets */,
 				0645576925677CA500FF9BEC /* AppImages.swift */,
+				06CE4F27257AE5C2009E2B4A /* SimulatorActionsRelatedViewControllers */,
 				0676AD312543766D00CA9A0E /* GeneralSettingsViewController */,
 				0676AD332543766D00CA9A0E /* MainMenu */,
 				0676AD3A2543766D00CA9A0E /* GIFt_ed.entitlements */,
@@ -265,6 +270,15 @@
 				0676AD462543766D00CA9A0E /* xcrun */,
 			);
 			path = SupportPrograms;
+			sourceTree = "<group>";
+		};
+		06CE4F27257AE5C2009E2B4A /* SimulatorActionsRelatedViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				06CE4F30257AE609009E2B4A /* ConfirmDeletionOfDeviceViewController.swift */,
+				06CE4F31257AE609009E2B4A /* ConfirmDeletionOfDeviceViewController.xib */,
+			);
+			path = SimulatorActionsRelatedViewControllers;
 			sourceTree = "<group>";
 		};
 		06CE778A25771A5A006F3511 /* PreferencesAndState */ = {
@@ -393,6 +407,7 @@
 				0676AD4F2543766D00CA9A0E /* Main.storyboard in Resources */,
 				0676AD682543766D00CA9A0E /* xcrun in Resources */,
 				06CE778325771529006F3511 /* menu-descriptor-origins.json in Resources */,
+				06CE4F33257AE609009E2B4A /* ConfirmDeletionOfDeviceViewController.xib in Resources */,
 				0676AD672543766D00CA9A0E /* ffmpeg in Resources */,
 				0676AD6A2543766D00CA9A0E /* Info.plist in Resources */,
 				0676AD572543766D00CA9A0E /* Images.xcassets in Resources */,
@@ -453,6 +468,7 @@
 				0676AD5E2543766D00CA9A0E /* main.swift in Sources */,
 				0676AD4A2543766D00CA9A0E /* StatusBarDisplayManager.swift in Sources */,
 				06726A34256C53C1000ED1EA /* Simulator.swift in Sources */,
+				06CE4F32257AE609009E2B4A /* ConfirmDeletionOfDeviceViewController.swift in Sources */,
 				0676AD4C2543766D00CA9A0E /* UserMessagePopup.swift in Sources */,
 				0645576A25677CA500FF9BEC /* AppImages.swift in Sources */,
 				06AB12B825730D41002759D9 /* DeviceWorker.swift in Sources */,

@@ -24,8 +24,12 @@ struct Simulator: Codable {
             name.replacingOccurrences(of: " ", with: "_")
         }
 
+        var nameAndRuntime: String {
+            return "\(name) (\(runTimePretty))"
+        }
+
         var nameAndRuntimeNoSpaces: String {
-            return "\(nameNoSpaces)_\(runTimePrettyNoSpaces))"
+            return "\(nameNoSpaces)_\(runTimePrettyNoSpaces)"
         }
         /// Extra added properties
         var runTime: String! = ""
@@ -41,8 +45,10 @@ struct Simulator: Codable {
 
         enum State: String, Codable {
             case booted = "Booted"
+            case booting = "Booting"
             case creating = "Creating"
             case shutdown = "Shutdown"
+            case shutingDown = "Shutting Down"
         }
     }
 }
