@@ -118,7 +118,9 @@ extension MainMenu: NSMenuDelegate {
     }
 
     func menuNeedsUpdate(_ menu: NSMenu) {
-        cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
+        DispatchQueue.global().async {
+            cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
+        }
         cachedSystemInfo?.bootedDevices.map{$0.udid}.forEach(MainMenu.saveToRecentlyAccessedDevice(udid:))
         updateViewMenuViewModel()
         menu.items = MainMenuViewModel.shared.menuItems

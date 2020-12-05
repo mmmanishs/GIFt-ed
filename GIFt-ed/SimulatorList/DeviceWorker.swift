@@ -9,7 +9,7 @@ import Foundation
 
 class DeviceWorker {
     enum Action: String {
-        case boot, shutdown, deviceData, copyUdid, resetKeychain, erase, toggleLightDarkMode, turnOnLightMode, turnOnDarkMode, delete, unknown
+        case boot, shutdown, restart, deviceData, copyUdid, resetKeychain, erase, toggleLightDarkMode, turnOnLightMode, turnOnDarkMode, delete, unknown
     }
     let udid: String
     let action: Action
@@ -25,6 +25,8 @@ class DeviceWorker {
             self.boot()
         case .shutdown:
             self.shutdown()
+        case .restart:
+            self.restart()
         case .deviceData:
             self.openDeviceDataFolder()
         case .copyUdid:
@@ -47,7 +49,7 @@ class DeviceWorker {
     }
 
     private func toggleLightDarkMode() {
-        guard let device = SystemInfo(allowedTypes: [.iOS]).getDevice(for: udid) else {
+        guard let device = cachedSystemInfo?.getDevice(for: udid) else {
             return
         }
         device.fetchAppearence { appearence in
@@ -64,31 +66,29 @@ class DeviceWorker {
     }
 
     private func turnOnDarkMode() {
-        DispatchQueue.global().async {
-            _ = "xcrun simctl ui \(self.udid) appearance dark".runAsCommand()
-        }
+        _ = "xcrun simctl ui \(self.udid) appearance dark".runAsCommand()
     }
 
     private func boot() {
-        DispatchQueue.global().async {
-            _ = "open -a Simulator.app && xcrun simctl boot \(self.udid)".runAsCommand()
-        }
+        _ = "open -a Simulator.app && xcrun simctl boot \(udid)".runAsCommand()
     }
 
     private func resetKeychain() {
-        DispatchQueue.global().async {
-            _ = "xcrun simctl keychain \(self.udid) reset".runAsCommand()
-        }
+        _ = "xcrun simctl keychain \(udid) reset".runAsCommand()
     }
 
     private func shutdown() {
-        DispatchQueue.global().async {
-            _ = "xcrun simctl shutdown \(self.udid)".runAsCommand()
+        _ = "xcrun simctl shutdown \(udid)".runAsCommand()
+    }
+
+    private func restart() {
+        _ = "xcrun simctl shutdown \(udid)".runAsCommand { _ in
+            _ = "xcrun simctl boot \(self.udid)".runAsCommand()
         }
     }
 
     private func openDeviceDataFolder() {
-        guard let device = SystemInfo(allowedTypes: [.iOS]).getDevice(for: self.udid) else {
+        guard let device = cachedSystemInfo?.getDevice(for: self.udid) else {
             return
         }
         _ = "open \(device.dataPath)".runAsCommand()
@@ -103,7 +103,7 @@ class DeviceWorker {
     }
 
     private func erase() {
-        guard let device = SystemInfo(allowedTypes: [.iOS]).getDevice(for: self.udid) else {
+        guard let device = cachedSystemInfo?.getDevice(for: self.udid) else {
             return
         }
         let shouldOpen = device.state == .booted

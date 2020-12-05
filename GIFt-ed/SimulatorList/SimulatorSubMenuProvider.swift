@@ -69,6 +69,7 @@ class SimulatorSubMenuProvider {
         menu.addItem(device.toggleLightDarkMode)
         if device.state == .booted {
             menu.addItem(device.shutDownMenuItem)
+            menu.addItem(device.restartMenuItem)
         }
         menu.addItem(.dividerLine)
         menu.addItem(device.copyUdid)
@@ -93,6 +94,12 @@ fileprivate extension Simulator.Device {
     var shutDownMenuItem: NSMenuItem {
         let item = NSMenuItem(title: "ShutDown", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
         item.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.shutdown.rawValue)")
+        return item
+    }
+
+    var restartMenuItem: NSMenuItem {
+        let item = NSMenuItem(title: "Restart", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
+        item.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.restart.rawValue)")
         return item
     }
 
