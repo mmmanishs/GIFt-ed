@@ -78,7 +78,9 @@ class MainMenu: NSObject {
                     }
                 } else {
                     DispatchQueue.global().async {
-                        DeviceWorker(udid: udid, action: DeviceWorker.Action(rawValue: actionIdentifier) ?? .unknown).execute()
+                        DeviceWorker(udid: udid, action: DeviceWorker.Action(rawValue: actionIdentifier) ?? .unknown).execute() {_ in
+                            cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
+                        }
                     }
                 }
                 if DeviceWorker.Action(rawValue: actionIdentifier) == .boot {

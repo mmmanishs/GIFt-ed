@@ -11,98 +11,118 @@ class DeviceWorker {
     enum Action: String {
         case boot, shutdown, restart, deviceData, copyUdid, resetKeychain, erase, toggleLightDarkMode, turnOnLightMode, turnOnDarkMode, delete, unknown
     }
-    let udid: String
-    let action: Action
+    private let udid: String
+    private let action: Action
+    private var completionHandler: ((String)->())? = nil
     
     init(udid: String, action: Action) {
         self.udid = udid
         self.action = action
     }
 
-    func execute() {
+    func execute(completionHandler: ((String)->())? = nil) {
+        self.completionHandler = completionHandler
         switch self.action {
         case .boot:
-            self.boot()
+            self.boot(completionHandler: completionHandler)
         case .shutdown:
-            self.shutdown()
+            self.shutdown(completionHandler: completionHandler)
         case .restart:
-            self.restart()
+            self.restart(completionHandler: completionHandler)
         case .deviceData:
-            self.openDeviceDataFolder()
+            self.openDeviceDataFolder(completionHandler: completionHandler)
         case .copyUdid:
-            self.copyUdid()
+            self.copyUdid(completionHandler: completionHandler)
         case .erase:
-            self.erase()
+            self.erase(completionHandler: completionHandler)
         case .resetKeychain:
-            self.resetKeychain()
+            self.resetKeychain(completionHandler: completionHandler)
         case .turnOnLightMode:
-            self.turnOnLightMode()
+            self.turnOnLightMode(completionHandler: completionHandler)
         case .turnOnDarkMode:
-            self.turnOnDarkMode()
+            self.turnOnDarkMode(completionHandler: completionHandler)
         case .toggleLightDarkMode:
-            self.toggleLightDarkMode()
+            self.toggleLightDarkMode(completionHandler: completionHandler)
         case .delete:
-            self.delete()
+            self.delete(completionHandler: completionHandler)
         default:
             break
         }
     }
 
-    private func toggleLightDarkMode() {
+    private func toggleLightDarkMode(completionHandler: ((String)->())? = nil) {
         guard let device = cachedSystemInfo?.getDevice(for: udid) else {
             return
         }
         device.fetchAppearence { appearence in
             if appearence == .light {
-                self.turnOnDarkMode()
+                self.turnOnDarkMode(completionHandler: completionHandler)
             } else if appearence == .dark {
-                self.turnOnLightMode()
+                self.turnOnLightMode(completionHandler: completionHandler)
             }
         }
     }
 
-    private func turnOnLightMode() {
-        _ = "xcrun simctl ui \(self.udid) appearance light".runAsCommand()
-    }
-
-    private func turnOnDarkMode() {
-        _ = "xcrun simctl ui \(self.udid) appearance dark".runAsCommand()
-    }
-
-    private func boot() {
-        _ = "open -a Simulator.app && xcrun simctl boot \(udid)".runAsCommand()
-    }
-
-    private func resetKeychain() {
-        _ = "xcrun simctl keychain \(udid) reset".runAsCommand()
-    }
-
-    private func shutdown() {
-        _ = "xcrun simctl shutdown \(udid)".runAsCommand()
-    }
-
-    private func restart() {
-        _ = "xcrun simctl shutdown \(udid)".runAsCommand { _ in
-            _ = "xcrun simctl boot \(self.udid)".runAsCommand()
+    private func turnOnLightMode(completionHandler: ((String)->())? = nil) {
+        _ = "xcrun simctl ui \(self.udid) appearance light".runAsCommand {_ in
+            completionHandler?(self.udid)
         }
     }
 
-    private func openDeviceDataFolder() {
+    private func turnOnDarkMode(completionHandler: ((String)->())? = nil) {
+        _ = "xcrun simctl ui \(self.udid) appearance dark".runAsCommand {_ in
+            completionHandler?(self.udid)
+        }
+    }
+
+    private func boot(completionHandler: ((String)->())? = nil) {
+        _ = "open -a Simulator.app && xcrun simctl boot \(udid)".runAsCommand {_ in
+            completionHandler?(self.udid)
+        }
+    }
+
+    private func resetKeychain(completionHandler: ((String)->())? = nil) {
+        _ = "xcrun simctl keychain \(udid) reset".runAsCommand {_ in
+            completionHandler?(self.udid)
+        }
+    }
+
+    private func shutdown(completionHandler: ((String)->())? = nil) {
+        _ = "xcrun simctl shutdown \(udid)".runAsCommand {_ in
+            completionHandler?(self.udid)
+        }
+    }
+
+    private func restart(completionHandler: ((String)->())? = nil) {
+        _ = "xcrun simctl shutdown \(udid)".runAsCommand { _ in
+            _ = "xcrun simctl boot \(self.udid)".runAsCommand {_ in
+                completionHandler?(self.udid)
+            }
+        }
+    }
+
+    private func openDeviceDataFolder(completionHandler: ((String)->())? = nil) {
         guard let device = cachedSystemInfo?.getDevice(for: self.udid) else {
             return
         }
-        _ = "open \(device.dataPath)".runAsCommand()
+        _ = "open \(device.dataPath)".runAsCommand {_ in
+            completionHandler?(self.udid)
+        }
     }
 
-    private func copyUdid() {
-        _ = "echo \(self.udid) | pbcopy".runAsCommand()
+    private func copyUdid(completionHandler: ((String)->())? = nil) {
+        _ = "echo \(self.udid) | pbcopy".runAsCommand {_ in
+            completionHandler?(self.udid)
+        }
     }
 
-    private func delete() {
-        _ = "xcrun simctl delete \(self.udid)".runAsCommand()
+    private func delete(completionHandler: ((String)->())? = nil) {
+        _ = "xcrun simctl delete \(self.udid)".runAsCommand {_ in
+            completionHandler?(self.udid)
+        }
     }
 
-    private func erase() {
+    private func erase(completionHandler: ((String)->())? = nil) {
         guard let device = cachedSystemInfo?.getDevice(for: self.udid) else {
             return
         }
@@ -110,7 +130,7 @@ class DeviceWorker {
         _ = "xcrun simctl shutdown \(self.udid)".runAsCommand { process in
             _ = "xcrun simctl erase \(self.udid)".runAsCommand{ process in
                 if shouldOpen {
-                    self.boot()
+                    self.boot(completionHandler: completionHandler)
                 }
             }
         }

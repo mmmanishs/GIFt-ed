@@ -29,7 +29,7 @@ class SimulatorSubMenuProvider {
             }
             let subMenu = NSMenu(title: "")
             subMenu.items = nugget.value.map { device in
-                return SimulatorSubMenuProvider.menuItem(for: device)
+                return SimulatorSubMenuProvider.menuItemShortName(for: device)
             }
             menuItem.submenu = subMenu
             return menuItem
@@ -46,6 +46,19 @@ class SimulatorSubMenuProvider {
     static func menuItem(for deviceID: String) -> NSMenuItem? {
         guard let device = cachedSystemInfo?.getDevice(for: deviceID) else { return nil }
         return SimulatorSubMenuProvider.menuItem(for: device)
+    }
+
+    static func menuItemShortName(for device: Simulator.Device) -> NSMenuItem {
+        let item: NSMenuItem
+        if device.state == .booted {
+            item = NSMenuItem(title: device.name, action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
+            item.attributedTitle = device.name.boldAttributedString(size: 14)
+        } else {
+            item = NSMenuItem(title: device.name, action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
+        }
+        item.identifier = .simulatorIdentifier(identifier: "\(device.udid)|\(DeviceWorker.Action.boot.rawValue)")
+        item.submenu = getMenu(for: device)
+        return item
     }
 
     static func menuItem(for device: Simulator.Device) -> NSMenuItem {
