@@ -18,8 +18,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return AppDelegate.statusItem?.button ?? NSStatusBarButton()
     }
 
+    func checkAndPerformAppUpdateActions() {
+        let newAppVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        if let oldAppversion = UserDefaults.standard.object(forKey: "appversion") as? String {
+            if newAppVersion != oldAppversion {
+                MenuDescriptor.load(overridePersistedState: true).persistToDisk()
+            }
+        } else {
+            MenuDescriptor.load(overridePersistedState: true).persistToDisk()
+        }
+        UserDefaults.standard.set(newAppVersion, forKey: "appversion")
+    }
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        print(ProcessInfo().environment)
+        checkAndPerformAppUpdateActions()
         if ProcessInfo().environment.keys.contains("shouldOverideLocalMenuCache") {
             let shouldOverideLocalMenuCache = ProcessInfo().environment["shouldOverideLocalMenuCache"] == "true"
             MenuDescriptor.load(overridePersistedState: shouldOverideLocalMenuCache).persistToDisk()
