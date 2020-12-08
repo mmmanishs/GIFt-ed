@@ -47,13 +47,15 @@ class VideoAndGifManager {
     }
 
     private func startRecordSession() {
-        guard let bootedDevice = SystemInfo(allowedTypes: [.iOS]).topMostBootedDevices else {
+        cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
+        guard let bootedDevice = cachedSystemInfo?.topMostBootedDevice else {
             StatusBarDisplayManager.shared.temporarilyDisplayCannotRecord()
             UserMessagePopup.shared.show(message: "No booted simulator found. Please open a simulator to enable recording")
             currentOutputFilePath = nil
             recorderState = .couldNotPreviouslyRecord
             return
         }
+        UserMessagePopup.shared.show(message: "\(bootedDevice.nameAndRuntime) <...Recording...>")
         let videoPath = FilePathManager().outputSavePath(for: bootedDevice)
         currentOutputFilePath = videoPath
         self.videoPath = videoPath

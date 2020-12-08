@@ -30,7 +30,7 @@ extension UserPreferences {
                                            giphyScale: 400,
                                            giphyFpsFromVideos: 15,
                                            giphyScaleFromVideos: 400,
-                                           outputFolderPath: DiskPath.desktop)
+                                           outputFolderPath: "\(DiskPath.desktop)/SimRecordings")
 
     static func saveToDisk(_ userPreferences: UserPreferences) {
         let encoder = JSONEncoder()
@@ -42,6 +42,7 @@ extension UserPreferences {
     }
 
     static func retriveFromDisk() -> UserPreferences {
+        return UserPreferences.default
         let defaults = UserDefaults.standard
         if let preferencesData = defaults.object(forKey: "preferences") as? Data {
             let decoder = JSONDecoder()

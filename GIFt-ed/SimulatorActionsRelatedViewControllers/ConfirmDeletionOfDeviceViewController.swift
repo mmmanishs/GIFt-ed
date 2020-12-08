@@ -36,14 +36,14 @@ class ConfirmDeletionOfDeviceViewController: NSViewController, NSTextFieldDelega
 
     func controlTextDidChange(_ obj: Notification) {
         guard let textField = obj.object as? NSTextField else { return }
-          if textField.stringValue == "confirm" {
-            DispatchQueue.global().async {
-                DeviceWorker(udid: self.device.udid, action: .delete).execute() {_ in 
+        if textField.stringValue == "confirm" {
+            DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) {
+                DeviceWorker(udid: self.device.udid, action: .delete).execute() {_ in
                     cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
                 }
             }
             headerLabel.stringValue = "Deleted"
             confirmTextField.isHidden = true
-          }
-      }
+        }
+    }
 }

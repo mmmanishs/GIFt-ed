@@ -77,7 +77,7 @@ class MainMenu: NSObject {
                         MainPopover.shared.showInPopover(viewController: ConfirmDeletionOfDeviceViewController.viewController(for: device), behavior: .transient)
                     }
                 } else {
-                    DispatchQueue.global().async {
+                    DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) {
                         DeviceWorker(udid: udid, action: DeviceWorker.Action(rawValue: actionIdentifier) ?? .unknown).execute() {_ in
                             cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
                         }

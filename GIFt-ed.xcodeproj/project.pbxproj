@@ -208,6 +208,7 @@
 				0676AD312543766D00CA9A0E /* GeneralSettingsViewController */,
 				0676AD332543766D00CA9A0E /* MainMenu */,
 				0676AD3A2543766D00CA9A0E /* GIFt_ed.entitlements */,
+				06CE4F3A257F1B53009E2B4A /* StandAloneVideoRecorder */,
 				0676AD3B2543766D00CA9A0E /* VideoAndGif */,
 				0676AD442543766D00CA9A0E /* SupportPrograms */,
 				0676AD252543766D00CA9A0E /* MainPopover.swift */,
@@ -251,7 +252,6 @@
 		0676AD3B2543766D00CA9A0E /* VideoAndGif */ = {
 			isa = PBXGroup;
 			children = (
-				0676AD3C2543766D00CA9A0E /* StandAloneVideoAndGifConverter.swift */,
 				0676AD3D2543766D00CA9A0E /* SimulatorVideoRecordController.swift */,
 				0676AD3E2543766D00CA9A0E /* ScreenshotController.swift */,
 				0676AD3F2543766D00CA9A0E /* OptimiizedSizedGif.swift */,
@@ -279,6 +279,22 @@
 				06CE4F31257AE609009E2B4A /* ConfirmDeletionOfDeviceViewController.xib */,
 			);
 			path = SimulatorActionsRelatedViewControllers;
+			sourceTree = "<group>";
+		};
+		06CE4F3A257F1B53009E2B4A /* StandAloneVideoRecorder */ = {
+			isa = PBXGroup;
+			children = (
+				0676AD3C2543766D00CA9A0E /* StandAloneVideoAndGifConverter.swift */,
+			);
+			path = StandAloneVideoRecorder;
+			sourceTree = "<group>";
+		};
+		06CE4F3E257F1F3F009E2B4A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				06CE4F3F257F1F3F009E2B4A /* UserNotifications.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		06CE778A25771A5A006F3511 /* PreferencesAndState */ = {

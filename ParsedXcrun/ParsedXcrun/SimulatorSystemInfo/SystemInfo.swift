@@ -60,7 +60,7 @@ struct SystemInfo {
         return simulator.devices.map {$0.value}.reduce([], +).filter {$0.isAvailable}.filter { $0.state == .booted }
     }
 
-    var topMostBootedDevices: Simulator.Device? {
+    var topMostBootedDevice: Simulator.Device? {
         return simulator?.devices.map {$0.value}.reduce([], +).filter {$0.isAvailable}.filter { $0.state == .booted }.first
     }
     
