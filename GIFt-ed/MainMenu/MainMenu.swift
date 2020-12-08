@@ -64,6 +64,8 @@ class MainMenu: NSObject {
             break
         case .giffromvidoes:
             MainPopover.shared.showInPopover(viewController: StandAloneVideoAndGifConverter.viewController, behavior: .semitransient)
+        case .credits:
+            MainPopover.shared.showInPopover(viewController: CreditsViewController.viewController, behavior: .semitransient)
         case .exit:
             objc_terminate()
         default:

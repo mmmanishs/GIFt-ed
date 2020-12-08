@@ -39,6 +39,7 @@ extension NSMenuItem {
             "video-capture-settings": .settings,
             "convert-gif-to-video": .gifFromVideos,
             "divider": .dividerLine,
+            "credits": .credits,
             "quit": .exit,
         ]
     }
@@ -106,6 +107,12 @@ extension NSMenuItem {
         return item
     }
 
+    static var credits: NSMenuItem {
+        let item = NSMenuItem(title: "Credits", action: #selector(MainMenu.functionalityRouter(_:)), keyEquivalent: "")
+        item.identifier = .credits
+        return item
+    }
+
     static var dividerLine: NSMenuItem {
         return NSMenuItem.separator()
     }
@@ -120,6 +127,7 @@ extension NSUserInterfaceItemIdentifier {
     static let simulators: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier("simulators")
     static let openOutputFolder: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier("openOutputFolder")
     static let exit: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier("exit")
+    static let credits: NSUserInterfaceItemIdentifier = NSUserInterfaceItemIdentifier("credits")
 
     static func simulatorIdentifier(identifier: String) -> NSUserInterfaceItemIdentifier {
         return NSUserInterfaceItemIdentifier("simulators.device.\(identifier)")

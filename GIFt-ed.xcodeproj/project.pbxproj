@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0645576A25677CA500FF9BEC /* AppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0645576925677CA500FF9BEC /* AppImages.swift */; };
+		065E745F25800AB900E5C9D6 /* CreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E745D25800AB900E5C9D6 /* CreditsViewController.swift */; };
+		065E746025800AB900E5C9D6 /* CreditsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 065E745E25800AB900E5C9D6 /* CreditsViewController.xib */; };
 		06726A34256C53C1000ED1EA /* Simulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06726A32256C53C1000ED1EA /* Simulator.swift */; };
 		06726A35256C53C1000ED1EA /* SystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06726A33256C53C1000ED1EA /* SystemInfo.swift */; };
 		0676ACFF2543750B00CA9A0E /* GIFt_edTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676ACFE2543750B00CA9A0E /* GIFt_edTests.swift */; };
@@ -69,6 +71,8 @@
 
 /* Begin PBXFileReference section */
 		0645576925677CA500FF9BEC /* AppImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppImages.swift; sourceTree = "<group>"; };
+		065E745D25800AB900E5C9D6 /* CreditsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
+		065E745E25800AB900E5C9D6 /* CreditsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreditsViewController.xib; sourceTree = "<group>"; };
 		06726A32256C53C1000ED1EA /* Simulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Simulator.swift; sourceTree = "<group>"; };
 		06726A33256C53C1000ED1EA /* SystemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemInfo.swift; sourceTree = "<group>"; };
 		0676ACE82543750A00CA9A0E /* GIFt-ed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GIFt-ed.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +146,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		065E745C25800A9D00E5C9D6 /* Credits */ = {
+			isa = PBXGroup;
+			children = (
+				065E745D25800AB900E5C9D6 /* CreditsViewController.swift */,
+				065E745E25800AB900E5C9D6 /* CreditsViewController.xib */,
+			);
+			path = Credits;
+			sourceTree = "<group>";
+		};
 		06726A31256C53C1000ED1EA /* SimulatorSystemInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +221,7 @@
 				0676AD312543766D00CA9A0E /* GeneralSettingsViewController */,
 				0676AD332543766D00CA9A0E /* MainMenu */,
 				0676AD3A2543766D00CA9A0E /* GIFt_ed.entitlements */,
+				065E745C25800A9D00E5C9D6 /* Credits */,
 				06CE4F3A257F1B53009E2B4A /* StandAloneVideoRecorder */,
 				0676AD3B2543766D00CA9A0E /* VideoAndGif */,
 				0676AD442543766D00CA9A0E /* SupportPrograms */,
@@ -287,14 +301,6 @@
 				0676AD3C2543766D00CA9A0E /* StandAloneVideoAndGifConverter.swift */,
 			);
 			path = StandAloneVideoRecorder;
-			sourceTree = "<group>";
-		};
-		06CE4F3E257F1F3F009E2B4A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				06CE4F3F257F1F3F009E2B4A /* UserNotifications.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		06CE778A25771A5A006F3511 /* PreferencesAndState */ = {
@@ -427,6 +433,7 @@
 				0676AD672543766D00CA9A0E /* ffmpeg in Resources */,
 				0676AD6A2543766D00CA9A0E /* Info.plist in Resources */,
 				0676AD572543766D00CA9A0E /* Images.xcassets in Resources */,
+				065E746025800AB900E5C9D6 /* CreditsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,6 +504,7 @@
 				0676AD4D2543766D00CA9A0E /* UserMessagePopupViewController.swift in Sources */,
 				0676AD492543766D00CA9A0E /* UserPreferences.swift in Sources */,
 				06C019E3256B753200AE6861 /* Bash+String.swift in Sources */,
+				065E745F25800AB900E5C9D6 /* CreditsViewController.swift in Sources */,
 				0676AD582543766D00CA9A0E /* GeneralSettingsViewController.swift in Sources */,
 				0676AD662543766D00CA9A0E /* VideoAndGifManager.swift in Sources */,
 				06726A35256C53C1000ED1EA /* SystemInfo.swift in Sources */,

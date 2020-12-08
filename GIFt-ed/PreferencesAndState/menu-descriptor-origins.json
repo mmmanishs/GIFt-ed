@@ -76,6 +76,19 @@
             "isEnabled": true
         },{
             "element": {
+                "key": "credits",
+                "params": ""
+            },
+            "isEnabled": true
+        },{
+            "element": {
+                "key": "divider",
+                "params": ""
+            },
+            "isEnabled": true
+        },
+        {
+            "element": {
                 "key": "quit",
                 "params": ""
             },
