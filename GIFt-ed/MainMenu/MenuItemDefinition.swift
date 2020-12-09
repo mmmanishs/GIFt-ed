@@ -56,11 +56,11 @@ extension NSMenuItem {
     
 
     static var recordSimulator: NSMenuItem {
-        let item = NSMenuItem(title: "Start Video Capture", action: selector, keyEquivalent: "")
+        let item = NSMenuItem(title: "Start Video Capture of a booted device", action: selector, keyEquivalent: "")
         item.indentationLevel = 3
         item.image = ._cameraReel
         item.identifier = .record
-        item.toolTip = "This will record the video of your currently booted simulator"
+        item.toolTip = "This will record the video of your currently booted simulator. Have only once device open while recording. If multiple devices are present it will choose a random one."
         return item
     }
 
@@ -82,7 +82,7 @@ extension NSMenuItem {
     }
 
     static var settings: NSMenuItem {
-        let item = NSMenuItem(title: "Settings..", action: selector, keyEquivalent: "")
+        let item = NSMenuItem(title: "Settings for the device video capture..", action: selector, keyEquivalent: "")
         item.indentationLevel = 3
         item.image = ._settingsFineTune
         item.identifier = .settings
