@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06913FD125806B55004ECBD0 /* SandboxInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06913FD025806B55004ECBD0 /* SandboxInspector.swift */; };
 		06B6061C25682A9300217F12 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B6061B25682A9300217F12 /* main.swift */; };
 		06B6062425682B1C00217F12 /* Simulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B6062325682B1C00217F12 /* Simulator.swift */; };
 		06B6062825682BDD00217F12 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B6062725682BDD00217F12 /* StringExtension.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		06913FD025806B55004ECBD0 /* SandboxInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SandboxInspector.swift; sourceTree = "<group>"; };
 		06B6061825682A9300217F12 /* ParsedXcrun */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ParsedXcrun; sourceTree = BUILT_PRODUCTS_DIR; };
 		06B6061B25682A9300217F12 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		06B6062325682B1C00217F12 /* Simulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulator.swift; sourceTree = "<group>"; };
@@ -45,6 +47,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06913FCF25806B22004ECBD0 /* SandboxInspector */ = {
+			isa = PBXGroup;
+			children = (
+				06913FD025806B55004ECBD0 /* SandboxInspector.swift */,
+			);
+			path = SandboxInspector;
+			sourceTree = "<group>";
+		};
 		06B6060F25682A9300217F12 = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				06B6061B25682A9300217F12 /* main.swift */,
+				06913FCF25806B22004ECBD0 /* SandboxInspector */,
 				06C06DDF2569D86500D55CA3 /* SimulatorSystemInfo */,
 				06B6062725682BDD00217F12 /* StringExtension.swift */,
 				06B6062625682B4200217F12 /* Input.json */,
@@ -138,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06913FD125806B55004ECBD0 /* SandboxInspector.swift in Sources */,
 				06C06DDD2569D84000D55CA3 /* SystemInfo.swift in Sources */,
 				06B6062425682B1C00217F12 /* Simulator.swift in Sources */,
 				06B6061C25682A9300217F12 /* main.swift in Sources */,

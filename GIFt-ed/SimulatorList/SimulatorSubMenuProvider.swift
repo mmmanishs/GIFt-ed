@@ -88,6 +88,7 @@ class SimulatorSubMenuProvider {
         menu.addItem(device.copyUdid)
         menu.addItem(.dividerLine)
         menu.addItem(device.openDeviceDataItem)
+        menu.addItem(device.appSandboxRootFolder)
         menu.addItem(.dividerLine)
         menu.addItem(device.resetKeyChain)
         menu.addItem(device.erase)
@@ -157,6 +158,13 @@ fileprivate extension Simulator.Device {
         item.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.toggleLightDarkMode.rawValue)")
         return item
     }
+
+    var appSandboxRootFolder: NSMenuItem {
+        let item = NSMenuItem(title: "📂 Apps Sandbox", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
+        item.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.appSandboxRootFolder.rawValue)")
+        return item
+    }
+
 
     var deleteDevice: NSMenuItem {
         let item = NSMenuItem(title: "Delete (confirmation required)", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")

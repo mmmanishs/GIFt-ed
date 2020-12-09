@@ -9,7 +9,7 @@ import Foundation
 
 class DeviceWorker {
     enum Action: String {
-        case boot, shutdown, restart, deviceData, copyUdid, resetKeychain, erase, toggleLightDarkMode, turnOnLightMode, turnOnDarkMode, delete, unknown
+        case boot, shutdown, restart, deviceData, copyUdid, resetKeychain, erase, toggleLightDarkMode, appSandboxRootFolder, turnOnLightMode, turnOnDarkMode, delete, unknown
     }
     private let udid: String
     private let action: Action
@@ -22,32 +22,41 @@ class DeviceWorker {
 
     func execute(completionHandler: ((String)->())? = nil) {
         self.completionHandler = completionHandler
-        switch self.action {
+        switch action {
         case .boot:
-            self.boot(completionHandler: completionHandler)
+            boot(completionHandler: completionHandler)
         case .shutdown:
-            self.shutdown(completionHandler: completionHandler)
+            shutdown(completionHandler: completionHandler)
         case .restart:
-            self.restart(completionHandler: completionHandler)
+            restart(completionHandler: completionHandler)
         case .deviceData:
-            self.openDeviceDataFolder(completionHandler: completionHandler)
+            openDeviceDataFolder(completionHandler: completionHandler)
         case .copyUdid:
-            self.copyUdid(completionHandler: completionHandler)
+            copyUdid(completionHandler: completionHandler)
         case .erase:
-            self.erase(completionHandler: completionHandler)
+            erase(completionHandler: completionHandler)
         case .resetKeychain:
-            self.resetKeychain(completionHandler: completionHandler)
+            resetKeychain(completionHandler: completionHandler)
         case .turnOnLightMode:
-            self.turnOnLightMode(completionHandler: completionHandler)
+            turnOnLightMode(completionHandler: completionHandler)
         case .turnOnDarkMode:
-            self.turnOnDarkMode(completionHandler: completionHandler)
+            turnOnDarkMode(completionHandler: completionHandler)
         case .toggleLightDarkMode:
-            self.toggleLightDarkMode(completionHandler: completionHandler)
+            toggleLightDarkMode(completionHandler: completionHandler)
+        case .appSandboxRootFolder:
+            openAppSandboxRootFolder()
         case .delete:
-            self.delete(completionHandler: completionHandler)
+            delete(completionHandler: completionHandler)
         default:
             break
         }
+    }
+
+    private func openAppSandboxRootFolder() {
+        guard let device = cachedSystemInfo?.getDevice(for: udid) else {
+            return
+        }
+        device.appsSandboxRootPath.openFolder()
     }
 
     private func toggleLightDarkMode(completionHandler: ((String)->())? = nil) {

@@ -26,3 +26,17 @@ extension String {
         }
     }
 }
+
+extension String {
+    func openFolder() {
+        DispatchQueue.global().async {
+            _ = "open \(self)".runAsCommand()
+        }
+    }
+
+    var foldersAtPath: [String]? {
+        guard let paths = try? FileManager.default.contentsOfDirectory(atPath: self) else { return nil}
+        return paths.map { aContent in (self as NSString).appendingPathComponent(aContent)}
+    }
+}
+

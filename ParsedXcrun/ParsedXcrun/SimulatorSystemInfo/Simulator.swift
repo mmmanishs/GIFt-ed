@@ -43,6 +43,10 @@ struct Simulator: Codable {
             return Family(name)
         }
 
+        var appsSandboxRootPath: String {
+            return "\(dataPath)/Containers/Bundle/Application/"
+        }
+
         enum State: String, Codable {
             case booted = "Booted"
             case booting = "Booting"

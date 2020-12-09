@@ -12,8 +12,20 @@ func main() {
 
     let systemInfo = SystemInfo()
 
-    print("\(systemInfo.isAnyBootedSimulatorPresent)")
+    let rootPath = systemInfo.topMostBootedDevice!.appsSandboxRootPath
+    print(rootPath)
+    rootPath.openFolder()
+
+    print(rootPath.foldersAtPath)
+
+    dispatchMain()
 }
 
 
 main()
+
+
+struct SandboxApp {
+    let rootPath: String
+    let name: String
+}
