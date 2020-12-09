@@ -22,10 +22,10 @@ struct UserPreferences: Codable {
 
 extension UserPreferences {
     /// Default User Preference.
-    static var `default` = UserPreferences(automaticallyCreateGiphyForRecording: false,
-                                           sendNotificationsForEvents: false,
-                                           organizeOutputByDate: false,
-                                           openOutputFolderAfterJobCompletion: false,
+    static var `default` = UserPreferences(automaticallyCreateGiphyForRecording: true,
+                                           sendNotificationsForEvents: true,
+                                           organizeOutputByDate: true,
+                                           openOutputFolderAfterJobCompletion: true,
                                            giphyFps: 15,
                                            giphyScale: 400,
                                            giphyFpsFromVideos: 15,
@@ -42,7 +42,6 @@ extension UserPreferences {
     }
 
     static func retriveFromDisk() -> UserPreferences {
-        return UserPreferences.default
         let defaults = UserDefaults.standard
         if let preferencesData = defaults.object(forKey: "preferences") as? Data {
             let decoder = JSONDecoder()

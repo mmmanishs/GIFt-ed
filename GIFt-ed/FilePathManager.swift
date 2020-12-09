@@ -20,18 +20,22 @@ class FilePathManager {
     /// Handle error if folder does not exists
     func outputSavePath(for simulator: Simulator.Device) -> String {
         let d = simulator
+        let outputDirectory = outputSaveFolderPath(for: simulator)
+        let filename = "\(d.name) [\(Date.currenttimeStampAndDateString)]"
+        let path = "\(outputDirectory)/\(filename).mov"
+
+        let pathMinusSpaces = path.replacingOccurrences(of: " ", with: "_")
+        return pathMinusSpaces
+    }
+
+    func outputSaveFolderPath(for simulator: Simulator.Device) -> String {
         var outputDirectory = ""
         if preferences.organizeOutputByDate {
             outputDirectory = createFolderByTodaysDateIfItDoesNotExists(at: preferences.outputFolderPath) ?? preferences.outputFolderPath
         } else {
             outputDirectory = preferences.outputFolderPath
         }
-
-        let filename = "\(d.name) [\(Date.currenttimeStampAndDateString)]"
-        let path = "\(outputDirectory)/\(filename).mov"
-
-        let pathMinusSpaces = path.replacingOccurrences(of: " ", with: "_")
-        return pathMinusSpaces
+        return outputDirectory
     }
 
     private func createFolderByTodaysDateIfItDoesNotExists(at outputPath: String) -> String? {

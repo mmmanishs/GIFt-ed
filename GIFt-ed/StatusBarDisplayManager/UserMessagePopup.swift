@@ -22,5 +22,8 @@ class UserMessagePopup {
         vc.message = message
         viewController = vc
         MainPopover.shared.showInPopover(viewController: vc)
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            MainPopover.shared.dismissPopover()
+        }
     }
 }

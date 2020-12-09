@@ -12,7 +12,8 @@ class VideoAndGifManager {
     enum RecorderState {
         case readyToRecord, recording, couldNotPreviouslyRecord, stopped
     }
-    
+
+    private var deviceBeingRecorded: Simulator.Device?
     private var simulatorVideoRecordController = SimulatorVideoRecordController()
     private var videoToGifConverter: VideoToGifConverter?
     private let notificationsManager = NotificationsManager()
@@ -55,6 +56,7 @@ class VideoAndGifManager {
             recorderState = .couldNotPreviouslyRecord
             return
         }
+        deviceBeingRecorded = bootedDevice
         UserMessagePopup.shared.show(message: "\(bootedDevice.nameAndRuntime) <...Recording...>")
         let videoPath = FilePathManager().outputSavePath(for: bootedDevice)
         currentOutputFilePath = videoPath
@@ -86,8 +88,9 @@ class VideoAndGifManager {
             shouldPostNotification {
             notificationsManager.postFinishedRecord(outputPath: cpath, outputFolder: preferences.outputFolderPath)
         }
-        if preferences.openOutputFolderAfterJobCompletion {
-            preferences.outputFolderPath.openFolder()
+        if preferences.openOutputFolderAfterJobCompletion,
+           let device = deviceBeingRecorded {
+            FilePathManager().outputSaveFolderPath(for: device).openFolder()
         }
         recorderState = .stopped
     }
