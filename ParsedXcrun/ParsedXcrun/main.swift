@@ -15,7 +15,9 @@ func main() {
     let rootPath = systemInfo.topMostBootedDevice!.appsSandboxRootPath
 
 
-    print(SandboxInspector(rootPath: rootPath).inspect().count)
+    let apps = SandboxInspector(rootPath: rootPath).inspect()
+
+    print(apps[0].bundleIdentifier)
 
     dispatchMain()
 }
@@ -26,5 +28,7 @@ main()
 
 struct SandboxApp {
     let rootPath: String
+    let bundleIdentifier: String
     let name: String
+    let iconPath: String?
 }
