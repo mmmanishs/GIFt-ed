@@ -76,7 +76,16 @@ class DeviceWorker {
     }
 
     func openURL(urlString: String) {
-        _ = "xcrun simctl openurl \(udid) \(urlString)".runAsCommand()
+        guard let device = cachedSystemInfo?.getDevice(for: udid) else {
+            return
+        }
+        if device.state != .booted {
+            boot { _ in
+                _ = "xcrun simctl openurl \(self.udid) \(urlString)".runAsCommand()
+            }
+        } else {
+            _ = "xcrun simctl openurl \(udid) \(urlString)".runAsCommand()
+        }
     }
 
     private func toggleLightDarkMode(completionHandler: ((String)->())? = nil) {
