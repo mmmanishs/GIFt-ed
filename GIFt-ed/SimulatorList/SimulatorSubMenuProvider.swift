@@ -76,6 +76,7 @@ class SimulatorSubMenuProvider {
 
     static func getMenu(for device: Simulator.Device) -> NSMenu {
         let menu = NSMenu(title: "")
+        menu.addItem(device.openURLWindow)
         if device.state == .shutdown {
             menu.addItem(device.bootMenuItem)
         }
@@ -165,6 +166,11 @@ fileprivate extension Simulator.Device {
         return item
     }
 
+    var openURLWindow: NSMenuItem {
+        let item = NSMenuItem(title: "Open URL", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")
+        item.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.openURL.rawValue)")
+        return item
+    }
 
     var deleteDevice: NSMenuItem {
         let item = NSMenuItem(title: "Delete (confirmation required)", action: SimulatorSubMenuProvider.selector, keyEquivalent: "")

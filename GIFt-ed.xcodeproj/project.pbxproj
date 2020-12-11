@@ -49,6 +49,8 @@
 		06CE4F33257AE609009E2B4A /* ConfirmDeletionOfDeviceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06CE4F31257AE609009E2B4A /* ConfirmDeletionOfDeviceViewController.xib */; };
 		06CE777E257714E3006F3511 /* MenuDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CE777D257714E3006F3511 /* MenuDescriptor.swift */; };
 		06CE778325771529006F3511 /* menu-descriptor-origins.json in Resources */ = {isa = PBXBuildFile; fileRef = 06CE778225771529006F3511 /* menu-descriptor-origins.json */; };
+		06ED61B82583CB7C004B9DD0 /* OpenURLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06ED61B62583CB7C004B9DD0 /* OpenURLViewController.swift */; };
+		06ED61B92583CB7C004B9DD0 /* OpenURLViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06ED61B72583CB7C004B9DD0 /* OpenURLViewController.xib */; };
 		06F9FD96256F602500AA8D82 /* SimulatorSubMenuProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F9FD95256F602500AA8D82 /* SimulatorSubMenuProvider.swift */; };
 /* End PBXBuildFile section */
 
@@ -118,6 +120,8 @@
 		06CE4F31257AE609009E2B4A /* ConfirmDeletionOfDeviceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmDeletionOfDeviceViewController.xib; sourceTree = "<group>"; };
 		06CE777D257714E3006F3511 /* MenuDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDescriptor.swift; sourceTree = "<group>"; };
 		06CE778225771529006F3511 /* menu-descriptor-origins.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "menu-descriptor-origins.json"; sourceTree = "<group>"; };
+		06ED61B62583CB7C004B9DD0 /* OpenURLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenURLViewController.swift; sourceTree = "<group>"; };
+		06ED61B72583CB7C004B9DD0 /* OpenURLViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenURLViewController.xib; sourceTree = "<group>"; };
 		06F9FD95256F602500AA8D82 /* SimulatorSubMenuProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorSubMenuProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -291,6 +295,8 @@
 			children = (
 				06CE4F30257AE609009E2B4A /* ConfirmDeletionOfDeviceViewController.swift */,
 				06CE4F31257AE609009E2B4A /* ConfirmDeletionOfDeviceViewController.xib */,
+				06ED61B62583CB7C004B9DD0 /* OpenURLViewController.swift */,
+				06ED61B72583CB7C004B9DD0 /* OpenURLViewController.xib */,
 			);
 			path = SimulatorActionsRelatedViewControllers;
 			sourceTree = "<group>";
@@ -428,6 +434,7 @@
 			files = (
 				0676AD4F2543766D00CA9A0E /* Main.storyboard in Resources */,
 				0676AD682543766D00CA9A0E /* xcrun in Resources */,
+				06ED61B92583CB7C004B9DD0 /* OpenURLViewController.xib in Resources */,
 				06CE778325771529006F3511 /* menu-descriptor-origins.json in Resources */,
 				06CE4F33257AE609009E2B4A /* ConfirmDeletionOfDeviceViewController.xib in Resources */,
 				0676AD672543766D00CA9A0E /* ffmpeg in Resources */,
@@ -499,6 +506,7 @@
 				0676AD602543766D00CA9A0E /* SimulatorVideoRecordController.swift in Sources */,
 				0676AD5F2543766D00CA9A0E /* StandAloneVideoAndGifConverter.swift in Sources */,
 				0676AD612543766D00CA9A0E /* ScreenshotController.swift in Sources */,
+				06ED61B82583CB7C004B9DD0 /* OpenURLViewController.swift in Sources */,
 				0676AD692543766D00CA9A0E /* MainEventHandler.swift in Sources */,
 				06F9FD96256F602500AA8D82 /* SimulatorSubMenuProvider.swift in Sources */,
 				0676AD4D2543766D00CA9A0E /* UserMessagePopupViewController.swift in Sources */,

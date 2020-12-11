@@ -74,11 +74,16 @@ class MainMenu: NSObject {
                 let udid = demarcatedIdentifier.components(separatedBy: "|")[0]
                 let actionIdentifier = demarcatedIdentifier.components(separatedBy: "|")[1]
                 let action  = DeviceWorker.Action(rawValue: actionIdentifier)
-                if action == .delete {
+                switch action {
+                case .delete:
                     if let device = cachedSystemInfo?.getDevice(for: udid) {
                         MainPopover.shared.showInPopover(viewController: ConfirmDeletionOfDeviceViewController.viewController(for: device), behavior: .transient)
                     }
-                } else {
+                case .openURL:
+                    if let device = cachedSystemInfo?.getDevice(for: udid) {
+                        OpenURLViewController.display(for: device)
+                    }
+                default:
                     DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) {
                         DeviceWorker(udid: udid, action: DeviceWorker.Action(rawValue: actionIdentifier) ?? .unknown).execute() {_ in
                             cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
@@ -98,8 +103,8 @@ class MainMenu: NSObject {
         var items = MenuDescriptor.load().items
 
         let newItem = MenuDescriptor.Item(element: MenuDescriptor.Item.Element(key: "cache-recently-accessed-devices",
-                                                                             params: udid),
-                                        isEnabled: true)
+                                                                               params: udid),
+                                          isEnabled: true)
 
         if items.contains(where: {$0 == newItem}) {
             return

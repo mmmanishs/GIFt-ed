@@ -9,7 +9,20 @@ import Foundation
 
 class DeviceWorker {
     enum Action: String {
-        case boot, shutdown, restart, deviceData, copyUdid, resetKeychain, erase, toggleLightDarkMode, appSandboxRootFolder, turnOnLightMode, turnOnDarkMode, delete, unknown
+        case boot,
+             shutdown,
+             restart,
+             deviceData,
+             copyUdid,
+             resetKeychain,
+             erase,
+             toggleLightDarkMode,
+             openURL,
+             appSandboxRootFolder,
+             turnOnLightMode,
+             turnOnDarkMode,
+             delete,
+             unknown
     }
     private let udid: String
     private let action: Action
@@ -45,6 +58,9 @@ class DeviceWorker {
             toggleLightDarkMode(completionHandler: completionHandler)
         case .appSandboxRootFolder:
             openAppSandboxRootFolder()
+        case .openURL:
+            /// Directly call the method. This will not work as string enums cannot have associted values and we need that for passing url
+            break
         case .delete:
             delete(completionHandler: completionHandler)
         default:
@@ -57,6 +73,10 @@ class DeviceWorker {
             return
         }
         device.appsSandboxRootPath.openFolder()
+    }
+
+    func openURL(urlString: String) {
+        _ = "xcrun simctl openurl \(udid) \(urlString)".runAsCommand()
     }
 
     private func toggleLightDarkMode(completionHandler: ((String)->())? = nil) {

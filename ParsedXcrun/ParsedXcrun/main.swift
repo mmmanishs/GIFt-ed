@@ -13,10 +13,9 @@ func main() {
     let systemInfo = SystemInfo()
 
     let rootPath = systemInfo.topMostBootedDevice!.appsSandboxRootPath
-    print(rootPath)
-    rootPath.openFolder()
 
-    print(rootPath.foldersAtPath)
+
+    print(SandboxInspector(rootPath: rootPath).inspect().count)
 
     dispatchMain()
 }
