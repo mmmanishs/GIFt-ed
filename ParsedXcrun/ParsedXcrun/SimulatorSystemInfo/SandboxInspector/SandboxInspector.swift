@@ -8,7 +8,6 @@
 import Foundation
 
 class SandboxInspector {
-    static var cachedInstalledAppsInfo = [String : [SandboxApp]]()
     let rootPath: String
 
     init(rootPath: String) {
@@ -34,7 +33,6 @@ class SandboxInspector {
                 }
             }
         }
-        SandboxInspector.cachedInstalledAppsInfo[rootPath] = sandboxApps
         return sandboxApps
     }
 
