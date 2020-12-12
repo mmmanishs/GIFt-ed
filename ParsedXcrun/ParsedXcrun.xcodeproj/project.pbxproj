@@ -75,7 +75,6 @@
 			isa = PBXGroup;
 			children = (
 				06B6061B25682A9300217F12 /* main.swift */,
-				06913FCF25806B22004ECBD0 /* SandboxInspector */,
 				06C06DDF2569D86500D55CA3 /* SimulatorSystemInfo */,
 				06B6062725682BDD00217F12 /* StringExtension.swift */,
 				06B6062625682B4200217F12 /* Input.json */,
@@ -86,6 +85,7 @@
 		06C06DDF2569D86500D55CA3 /* SimulatorSystemInfo */ = {
 			isa = PBXGroup;
 			children = (
+				06913FCF25806B22004ECBD0 /* SandboxInspector */,
 				06C06DDC2569D84000D55CA3 /* SystemInfo.swift */,
 				06B6062325682B1C00217F12 /* Simulator.swift */,
 			);

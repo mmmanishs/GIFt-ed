@@ -11,7 +11,7 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
     var mainEventHandler: MainEventHandler?
     var videoAndGifManager = VideoAndGifManager()
-    var mainMenu = MainMenu()
+    var mainMenuManager = MainMenuManager()
     static var statusItem: NSStatusItem!
 
     private var statusDisplayButton: NSStatusBarButton {
@@ -51,9 +51,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         mainEventHandler = MainEventHandler()
         AppDelegate.statusItem.menu = NSMenu()
-        AppDelegate.statusItem.menu?.delegate = mainMenu
+        AppDelegate.statusItem.menu?.delegate = mainMenuManager
         if FeatureFlag.isMainMenuEnabled {
-            mainMenu.start { menuItems in
+            mainMenuManager.start { menuItems in
                 AppDelegate.statusItem.menu?.items = menuItems
             }
         }

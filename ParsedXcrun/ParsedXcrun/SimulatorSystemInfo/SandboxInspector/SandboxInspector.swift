@@ -8,6 +8,7 @@
 import Foundation
 
 class SandboxInspector {
+    static var cachedInstalledAppsInfo = [String : [SandboxApp]]()
     let rootPath: String
 
     init(rootPath: String) {
@@ -33,6 +34,7 @@ class SandboxInspector {
                 }
             }
         }
+        SandboxInspector.cachedInstalledAppsInfo[rootPath] = sandboxApps
         return sandboxApps
     }
 
@@ -109,6 +111,12 @@ extension String {
 
 }
 
+struct SandboxApp: Codable, Equatable {
+    let rootPath: String
+    let bundleIdentifier: String
+    let name: String
+    let iconPath: String?
+}
 
 func undefined<T>()-> T {
     return assertionFailure("Please define") as! T

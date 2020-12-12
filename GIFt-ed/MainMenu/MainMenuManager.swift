@@ -13,23 +13,25 @@ extension NSNotification.Name {
 }
 var cachedSystemInfo: SystemInfo?
 
-class MainMenu: NSObject {
+class MainMenuManager: NSObject {
     private let videoAndGifManager: VideoAndGifManager
     private let mainEventHandler: MainEventHandler?
-    
+    private var mainMenuViewModel: MainMenuViewModel
+    private let mainMenuProvider: MainMenuProvider
     override init() {
         videoAndGifManager = VideoAndGifManager()
         mainEventHandler = MainEventHandler()
-        videoAndGifManager.eventNotifierHandler = { event in
-            MainMenuViewModel.shared.update(for: event)
-        }
+        mainMenuViewModel = MainMenuViewModel()
+        mainMenuProvider = MainMenuProvider()
         super.init()
     }
     
     func start(updateHandler: ([NSMenuItem]) -> ()) {
-        MainMenuViewModel.initailizeSingleton()
         updateViewMenuViewModel()
-        updateHandler(MainMenuViewModel.shared.menuItems)
+        updateHandler(mainMenuViewModel.menuItems)
+        videoAndGifManager.eventNotifierHandler = { [self] event in
+            self.mainMenuViewModel.update(for: event)
+        }
     }
 
     func recursivelySetTarget(menuItems :[NSMenuItem]) {
@@ -43,9 +45,8 @@ class MainMenu: NSObject {
     }
 
     func updateViewMenuViewModel() {
-        let menuDescriptor = MenuDescriptor.load()
-        MainMenuViewModel.shared.menuItems = NSMenuItem.menuItems(from: menuDescriptor)
-        recursivelySetTarget(menuItems: MainMenuViewModel.shared.menuItems)
+        mainMenuViewModel.menuItems = mainMenuProvider.fetchMenuItems()
+        recursivelySetTarget(menuItems: mainMenuViewModel.menuItems)
     }
 
     @objc func functionalityRouter(_ sender: Any?) {
@@ -91,7 +92,7 @@ class MainMenu: NSObject {
                     }
                 }
                 if DeviceWorker.Action(rawValue: actionIdentifier) == .boot {
-                    MainMenu.saveToRecentlyAccessedDevice(udid: udid)
+                    MainMenuManager.saveToRecentlyAccessedDevice(udid: udid)
                 }
             }
         }
@@ -121,7 +122,7 @@ class MainMenu: NSObject {
         menuDescriptor.persistToDisk()
     }
 }
-extension MainMenu: NSMenuDelegate {
+extension MainMenuManager: NSMenuDelegate {
     func menuWillOpen(_ menu: NSMenu) {
         MainPopover.shared.dismissPopover()
     }
@@ -130,8 +131,8 @@ extension MainMenu: NSMenuDelegate {
         DispatchQueue.global().async {
             cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
         }
-        cachedSystemInfo?.bootedDevices.map{$0.udid}.forEach(MainMenu.saveToRecentlyAccessedDevice(udid:))
+        cachedSystemInfo?.bootedDevices.map{$0.udid}.forEach(MainMenuManager.saveToRecentlyAccessedDevice(udid:))
         updateViewMenuViewModel()
-        menu.items = MainMenuViewModel.shared.menuItems
+        menu.items = mainMenuViewModel.menuItems
     }
 }

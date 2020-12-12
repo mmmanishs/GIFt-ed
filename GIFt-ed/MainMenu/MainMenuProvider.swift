@@ -8,54 +8,53 @@
 
 import AppKit
 
-extension NSMenuItem {
-    /// These options will be displayed when the app icon is clicked
-    static func menuItems(from menuDescriptor: MenuDescriptor) -> [NSMenuItem] {
+class MainMenuProvider {
+    let simulatorMenuProvider = SimulatorMenuProvider()
+    var selector = #selector(MainMenuManager.functionalityRouter(_:))
+    var menuItemDictionary: [String: NSMenuItem] {
+        return [
+            "list-of-simulators": simulator,
+            "start-video-cature": recordSimulator,
+            "stop-video-cature": stopRecordingSimualtor,
+            "open-output-folder": openOutputFolder,
+            "video-capture-settings": settings,
+            "convert-gif-to-video": gifFromVideos,
+            "divider": NSMenuItem.dividerLine,
+            "credits": credits,
+            "quit": exit,
+        ]
+    }
+
+    func fetchMenuItems() -> [NSMenuItem] {
+        let menuDescriptor = MenuDescriptor.load()
         var menuMarkup = [NSMenuItem]()
         for item in menuDescriptor.items where item.isEnabled {
             switch item.element.key {
             case "cache-recently-accessed-devices":
                 let deviceID = item.element.params
-                if let item = SimulatorSubMenuProvider.menuItem(for: deviceID) {
+                if let item = simulatorMenuProvider.menuItem(for: deviceID) {
                     menuMarkup.append(item)
                 }
             default:
-                if let descriptorItem = NSMenuItem.menuItemDictionary[item.element.key] {
+                if let descriptorItem = menuItemDictionary[item.element.key] {
                     menuMarkup.append(descriptorItem)
                 }
             }
         }
         return menuMarkup
     }
-}
 
-extension NSMenuItem {
-    static var menuItemDictionary: [String: NSMenuItem] {
-        return [
-            "list-of-simulators": .simulator,
-            "start-video-cature": .recordSimulator,
-            "stop-video-cature": .stopRecordingSimualtor,
-            "open-output-folder": .openOutputFolder,
-            "video-capture-settings": .settings,
-            "convert-gif-to-video": .gifFromVideos,
-            "divider": .dividerLine,
-            "credits": .credits,
-            "quit": .exit,
-        ]
-    }
-    static var selector = #selector(MainMenu.functionalityRouter(_:))
-    static var simulator: NSMenuItem {
+    var simulator: NSMenuItem {
         let item = NSMenuItem(title: "Simulators", action: selector, keyEquivalent: "")
-        item.submenu = SimulatorSubMenuProvider().simulatorMenu
+        item.submenu = SimulatorMenuProvider().simulatorMenu
         item.image = ._buildApps
         item.indentationLevel = 0
         item.identifier = .simulators
         item.toolTip = "Choose an option below"
         return item
     }
-    
 
-    static var recordSimulator: NSMenuItem {
+    var recordSimulator: NSMenuItem {
         let item = NSMenuItem(title: "Start Video Capture of a booted device", action: selector, keyEquivalent: "")
         item.indentationLevel = 3
         item.image = ._cameraReel
@@ -64,7 +63,7 @@ extension NSMenuItem {
         return item
     }
 
-    static var stopRecordingSimualtor: NSMenuItem {
+    var stopRecordingSimualtor: NSMenuItem {
         let item = NSMenuItem(title: "Stop Video Capture", action: selector, keyEquivalent: "")
         item.indentationLevel = 3
         item.identifier = .stopRecording
@@ -73,7 +72,7 @@ extension NSMenuItem {
         return item
     }
 
-    static var gifFromVideos: NSMenuItem {
+    var gifFromVideos: NSMenuItem {
         let item = NSMenuItem(title: "Convert Vidoes to GIF", action: selector, keyEquivalent: "")
         item.image = ._gif
         item.identifier = .giffromvidoes
@@ -81,7 +80,7 @@ extension NSMenuItem {
         return item
     }
 
-    static var settings: NSMenuItem {
+    var settings: NSMenuItem {
         let item = NSMenuItem(title: "Settings for the device video capture..", action: selector, keyEquivalent: "")
         item.indentationLevel = 3
         item.image = ._settingsFineTune
@@ -90,7 +89,7 @@ extension NSMenuItem {
         return item
     }
 
-    static var openOutputFolder: NSMenuItem {
+    var openOutputFolder: NSMenuItem {
         let outputPath = UserPreferences.retriveFromDisk().outputFolderPath
         let item = NSMenuItem(title: "(Output Folder) \(outputPath)", action: selector, keyEquivalent: "")
         item.indentationLevel = 3
@@ -100,19 +99,21 @@ extension NSMenuItem {
         return item
     }
 
-    static var exit: NSMenuItem {
-        let item = NSMenuItem(title: "Quit", action: #selector(MainMenu.functionalityRouter(_:)), keyEquivalent: "")
+    var exit: NSMenuItem {
+        let item = NSMenuItem(title: "Quit", action: #selector(MainMenuManager.functionalityRouter(_:)), keyEquivalent: "")
         item.identifier = .exit
         item.toolTip = "Thanks for using this app."
         return item
     }
 
-    static var credits: NSMenuItem {
-        let item = NSMenuItem(title: "Credits", action: #selector(MainMenu.functionalityRouter(_:)), keyEquivalent: "")
+    var credits: NSMenuItem {
+        let item = NSMenuItem(title: "Credits", action: #selector(MainMenuManager.functionalityRouter(_:)), keyEquivalent: "")
         item.identifier = .credits
         return item
     }
+}
 
+extension NSMenuItem {
     static var dividerLine: NSMenuItem {
         return NSMenuItem.separator()
     }

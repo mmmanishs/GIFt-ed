@@ -26,9 +26,3 @@ func main() {
 main()
 
 
-struct SandboxApp {
-    let rootPath: String
-    let bundleIdentifier: String
-    let name: String
-    let iconPath: String?
-}

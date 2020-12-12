@@ -9,14 +9,7 @@
 import AppKit
 
 struct MainMenuViewModel {
-    static var shared: MainMenuViewModel!
-    var menuItems: [NSMenuItem]!
-
-    static func initailizeSingleton() {
-        MainMenuViewModel.shared = MainMenuViewModel()
-    }
-
-
+    var menuItems: [NSMenuItem] = []
     mutating func updateOutputPath() {
         if let index = menuItems.firstIndex(where: { $0.identifier == .openOutputFolder } ) {
             let newItem = menuItems[index]

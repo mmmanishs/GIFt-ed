@@ -27,7 +27,7 @@ struct SystemInfo {
         self.allowedTypes = allowedTypes
         refresh()
     }
-    
+
     var runtimes: [String] {
         guard let simulator = simulator else {
             return []
