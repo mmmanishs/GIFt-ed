@@ -94,6 +94,9 @@ class MainMenuManager: NSObject {
                 if DeviceWorker.Action(rawValue: actionIdentifier) == .boot {
                     MainMenuManager.saveToRecentlyAccessedDevice(udid: udid)
                 }
+            } else if identifier.rawValue.contains("installed-apps"),
+                      let deviceAppIdentiferParser = DeviceAppIdentiferParser(identifier.rawValue) {
+                DeviceAppWorker(deviceAppIdentiferParser).execute()
             }
         }
     }

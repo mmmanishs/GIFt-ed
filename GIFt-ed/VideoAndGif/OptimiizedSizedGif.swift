@@ -25,7 +25,7 @@ class OptimiizedSizedGif {
         switch peg {
         case .fps(let f):
             optimizeForConstantFps(for: f)
-        case .scale(let s): break
+        case .scale(let _): break
 //            optimizeScale(for: s)
         }
     }

@@ -101,7 +101,9 @@ class SimulatorMenuProvider {
         menu.addItem(optionsProvider.openDeviceDataItem)
         menu.addItem(optionsProvider.appSandboxRootFolder)
         menu.addItem(NSMenuItem.dividerLine)
-        menu.addItem(optionsProvider.resetKeyChain)
+        if device.state == .booted {
+            menu.addItem(optionsProvider.resetKeyChain)
+        }
         menu.addItem(optionsProvider.erase)
         menu.addItem(NSMenuItem.dividerLine)
         menu.addItem(optionsProvider.deleteDevice)

@@ -44,7 +44,7 @@ class SandboxInspector {
               let bundleIdentifier = dict["CFBundleIdentifier"] as? String else {
             return nil
         }
-        return SandboxApp(rootPath: rootPath, bundleIdentifier: bundleIdentifier, name: name, iconPath: nil)
+        return SandboxApp(rootPath: rootPath, plistPath: plist, bundleIdentifier: bundleIdentifier, name: name, iconPath: nil)
     }
 }
 
@@ -113,6 +113,7 @@ extension String {
 
 struct SandboxApp: Codable, Equatable {
     let rootPath: String
+    let plistPath: String
     let bundleIdentifier: String
     let name: String
     let iconPath: String?
