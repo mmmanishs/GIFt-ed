@@ -82,10 +82,12 @@ class SimulatorMenuProvider {
         var appMenuProvider: AppMenuProvider
         if let provider = appMenuProviderBag[device.udid] {
             appMenuProvider = provider
+            /// During first load this will take the most time.
             appMenuProvider.update()
         } else {
+            /// using from cache if already loaded.
             appMenuProvider = AppMenuProvider(device, selector: selector)
-            appMenuProvider.update()
+            appMenuProviderBag[device.udid] = appMenuProvider
         }
         defer {
             DispatchQueue.global().async {
