@@ -8,6 +8,7 @@
 import AppKit
 
 class SimulatorMenuProvider {
+    var appMenuProviderBag = [String : AppMenuProvider]()
     var selector = #selector(MainMenuManager.functionalityRouter(_:))
     var simulatorMenu: NSMenu {
         let menu = NSMenu(title: "Simulators")
@@ -79,13 +80,13 @@ class SimulatorMenuProvider {
         simulatorMenuOptionsProvider = optionsProvider
         let menu = NSMenu(title: "")
         var appMenuProvider: AppMenuProvider
-        if let provider = AppInMemoryCaches.appMenuProviderBag[device.udid] {
+        if let provider = appMenuProviderBag[device.udid] {
             appMenuProvider = provider
             /// During first load this will take the most time.
         } else {
             /// using from cache if already loaded.
             appMenuProvider = AppMenuProvider(device, selector: selector)
-            AppInMemoryCaches.appMenuProviderBag[device.udid] = appMenuProvider
+            appMenuProviderBag[device.udid] = appMenuProvider
             appMenuProvider.update()
         }
         defer {

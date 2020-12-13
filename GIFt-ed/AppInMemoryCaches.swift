@@ -9,5 +9,4 @@ import Foundation
 
 enum AppInMemoryCaches {
     static var cachedSystemInfo: SystemInfo?
-    static var appMenuProviderBag = [String : AppMenuProvider]()
 }

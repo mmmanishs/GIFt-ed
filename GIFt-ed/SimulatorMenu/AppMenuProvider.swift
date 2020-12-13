@@ -24,7 +24,7 @@ class AppMenuProvider {
         TimeExecution.start(description: "Starting installed apps \(self.device.appsSandboxRootPath)")
         let menu = NSMenu(title: "")
         menuItem.submenu = menu
-        let appItems = SandboxInspector(rootPath: self.device.appsSandboxRootPath).inspect().map {self.getAppMenuItem(for: $0)}
+        let appItems = SandboxInspector(rootPath: self.device.appsSandboxRootPath).inspect().map { self.getAppMenuItem(for: $0) }
         if appItems.isEmpty {
             menu.items = [.menuItem(with: "no installed apps", color: .lightGray)]
         } else {
@@ -40,7 +40,6 @@ class AppMenuProvider {
         let menu = NSMenu(title: "options")
         menuItem.submenu = menu
         let optionsProvider =  AppMenuOptionsProvider(sandboxApp: sandboxApp, device: device, selector: selector)
-
         menu.items = [
             optionsProvider.launchApp,
             optionsProvider.openPlist,
@@ -48,11 +47,6 @@ class AppMenuProvider {
             optionsProvider.deleteItem
         ]
         return menuItem
-    }
-
-    func getAppOptionsMenuItem() -> [NSMenuItem] {
-
-        return undefined()
     }
 }
 

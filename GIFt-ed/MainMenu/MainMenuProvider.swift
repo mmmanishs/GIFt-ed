@@ -9,6 +9,7 @@
 import AppKit
 
 class MainMenuProvider {
+    let simulatorMainMenuShortcutProvider = SimulatorMenuProvider()
     let simulatorMenuProvider = SimulatorMenuProvider()
     var selector = #selector(MainMenuManager.functionalityRouter(_:))
     var menuItemDictionary: [String: NSMenuItem] {
@@ -32,7 +33,7 @@ class MainMenuProvider {
             switch item.element.key {
             case "cache-recently-accessed-devices":
                 let deviceID = item.element.params
-                if let item = simulatorMenuProvider.menuItem(for: deviceID) {
+                if let item = simulatorMainMenuShortcutProvider.menuItem(for: deviceID) {
                     menuMarkup.append(item)
                 }
             default:
@@ -46,7 +47,7 @@ class MainMenuProvider {
 
     var simulator: NSMenuItem {
         let item = NSMenuItem(title: "Simulators", action: selector, keyEquivalent: "")
-        item.submenu = SimulatorMenuProvider().simulatorMenu
+        item.submenu = simulatorMenuProvider.simulatorMenu
         item.image = ._buildApps
         item.indentationLevel = 0
         item.identifier = .simulators
