@@ -10,7 +10,7 @@ import AppKit
 class AppMenuProvider {
     private let device: Simulator.Device
     private var selector: Selector
-
+    static var cumulativeTimeForScanningAppSandbox = 0.0
     init(_ device: Simulator.Device, selector: Selector) {
         self.device = device
         self.selector = selector
@@ -19,20 +19,16 @@ class AppMenuProvider {
     var installedApps: NSMenuItem {
         let menuItem = NSMenuItem(title: "Installed Apps", action: selector, keyEquivalent: "")
         menuItem.identifier = .simulatorIdentifier(identifier: "installed-apps")
-
+        TimeExecution.start(description: "Starting installed apps \(self.device.appsSandboxRootPath)")
         let menu = NSMenu(title: "")
         menuItem.submenu = menu
-        menu.items = [.menuItem(with: "loading...", color: .lightGray)]
-
-        DispatchQueue.global().async {
-            let appItems = SandboxInspector(rootPath: self.device.appsSandboxRootPath).inspect().map {self.getAppMenuItem(for: $0)}
-            if appItems.isEmpty {
-                menu.items = [.menuItem(with: "no installed apps", color: .lightGray)]
-            } else {
-                menu.items = appItems
-            }
+        let appItems = SandboxInspector(rootPath: self.device.appsSandboxRootPath).inspect().map {self.getAppMenuItem(for: $0)}
+        if appItems.isEmpty {
+            menu.items = [.menuItem(with: "no installed apps", color: .lightGray)]
+        } else {
+            menu.items = appItems
         }
-
+        AppMenuProvider.cumulativeTimeForScanningAppSandbox += TimeExecution.stop(description: "Stopping installed apps\(self.device.appsSandboxRootPath)")
         return menuItem
     }
 
@@ -44,6 +40,7 @@ class AppMenuProvider {
         let optionsProvider =  AppMenuOptionsProvider(sandboxApp: sandboxApp, device: device, selector: selector)
 
         menu.items = [
+            optionsProvider.launchApp,
             optionsProvider.openPlist,
             optionsProvider.openSandbox,
             optionsProvider.deleteItem
@@ -83,6 +80,13 @@ class AppMenuOptionsProvider {
         let item = NSMenuItem.menuItem(with: "Open sandbox", color: .black)
         item.action = selector
         item.identifier = NSUserInterfaceItemIdentifier(rawValue: "installed-apps|\(appInfo)|\(DeviceAppWorker.Action.openSandBox.rawValue)")
+        return item
+    }
+
+    var launchApp: NSMenuItem {
+        let item = NSMenuItem.menuItem(with: "Launch", color: .black)
+        item.action = selector
+        item.identifier = NSUserInterfaceItemIdentifier(rawValue: "installed-apps|\(appInfo)|\(DeviceAppWorker.Action.launch.rawValue)")
         return item
     }
 

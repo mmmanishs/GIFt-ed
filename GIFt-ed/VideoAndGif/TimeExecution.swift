@@ -19,11 +19,10 @@ class TimeExecution {
 
     static func start(description: String) {
         startTime = CFAbsoluteTimeGetCurrent()
-        print("Starting to time: \(description)")
     }
 
-    static func stop(description: String) {
+    static func stop(description: String) -> Double {
         let elapsedTime = CFAbsoluteTimeGetCurrent() - startTime
-        print("Stopping timer(\(description)): \(elapsedTime)")
+        return elapsedTime
     }
 }

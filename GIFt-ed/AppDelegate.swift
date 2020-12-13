@@ -61,7 +61,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             button.action = #selector(self.userAction(sender:))
             button.sendAction(on: [.leftMouseUp, .rightMouseUp, .mouseEntered, .directTouch, .mouseExited, .pressure, .beginGesture])
         }
-        //        testItOut()
+        DispatchQueue.global().async {
+            print("cumulativeTimeForScanningAppSandbox: \(AppMenuProvider.cumulativeTimeForScanningAppSandbox)")
+        }
     }
 
     @objc func userAction(sender: NSStatusItem) {

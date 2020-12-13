@@ -13,6 +13,7 @@ class DeviceAppWorker {
         case delete
         case sendPushNotification
         case locationPermissions
+        case launch
         case openSandBox
         case openInfoPlist
         case unknown
@@ -42,13 +43,26 @@ class DeviceAppWorker {
             openSandbox()
         case .sendPushNotification:
             sendPushNotification()
+        case .launch:
+            launchApp()
         default:
             break
         }
     }
 
     private func deleteApp() {
-        _ = "simctl uninstall \(udid) \(bundleIdentifier)".runAsCommand()
+        _ = "xcrun simctl uninstall \(udid) \(bundleIdentifier)".runAsCommand()
+    }
+
+    private func launchApp() {
+        let device = cachedSystemInfo?.getDevice(for: udid)
+        if device?.state != .booted {
+            DeviceWorker(udid: udid, action: .boot).execute {_ in
+                _ = "xcrun simctl launch \(self.udid) \(self.bundleIdentifier)".runAsCommand()
+            }
+        } else {
+            _ = "xcrun simctl launch \(udid) \(bundleIdentifier)".runAsCommand()
+        }
     }
 
     private func openInfoPlist() {
