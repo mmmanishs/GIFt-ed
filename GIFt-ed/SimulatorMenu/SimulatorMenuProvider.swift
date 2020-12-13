@@ -78,14 +78,23 @@ class SimulatorMenuProvider {
     func getMenu(for device: Simulator.Device) -> NSMenu {
         let optionsProvider = SimulatorMenuOptionsProvider(device.udid, selector: selector)
         simulatorMenuOptionsProvider = optionsProvider
+        let menu = NSMenu(title: "")
         var appMenuProvider: AppMenuProvider
         if let provider = appMenuProviderBag[device.udid] {
             appMenuProvider = provider
+            appMenuProvider.update()
         } else {
             appMenuProvider = AppMenuProvider(device, selector: selector)
+            appMenuProvider.update()
         }
-        let menu = NSMenu(title: "")
-        menu.addItem(appMenuProvider.installedApps)
+        defer {
+            DispatchQueue.global().async {
+                appMenuProvider.update()
+            }
+        }
+        if let installedApps = appMenuProvider.installedApps {
+            menu.addItem(installedApps)
+        }
         menu.addItem(optionsProvider.openURLWindow)
         if device.state == .shutdown {
             menu.addItem(optionsProvider.bootMenuItem)

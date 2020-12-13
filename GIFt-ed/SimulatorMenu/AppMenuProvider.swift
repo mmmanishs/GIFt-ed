@@ -11,12 +11,14 @@ class AppMenuProvider {
     private let device: Simulator.Device
     private var selector: Selector
     static var cumulativeTimeForScanningAppSandbox = 0.0
+    var installedApps: NSMenuItem?
+
     init(_ device: Simulator.Device, selector: Selector) {
         self.device = device
         self.selector = selector
     }
 
-    var installedApps: NSMenuItem {
+    func update() {
         let menuItem = NSMenuItem(title: "Installed Apps", action: selector, keyEquivalent: "")
         menuItem.identifier = .simulatorIdentifier(identifier: "installed-apps")
         TimeExecution.start(description: "Starting installed apps \(self.device.appsSandboxRootPath)")
@@ -29,7 +31,7 @@ class AppMenuProvider {
             menu.items = appItems
         }
         AppMenuProvider.cumulativeTimeForScanningAppSandbox += TimeExecution.stop(description: "Stopping installed apps\(self.device.appsSandboxRootPath)")
-        return menuItem
+        installedApps = menuItem
     }
 
     func getAppMenuItem(for sandboxApp: SandboxApp) -> NSMenuItem {
