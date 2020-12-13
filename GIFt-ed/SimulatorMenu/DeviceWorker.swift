@@ -69,14 +69,14 @@ class DeviceWorker {
     }
 
     private func openAppSandboxRootFolder() {
-        guard let device = cachedSystemInfo?.getDevice(for: udid) else {
+        guard let device = AppInMemoryCaches.cachedSystemInfo?.getDevice(for: udid) else {
             return
         }
         device.appsSandboxRootPath.openFolder()
     }
 
     func openURL(urlString: String) {
-        guard let device = cachedSystemInfo?.getDevice(for: udid) else {
+        guard let device = AppInMemoryCaches.cachedSystemInfo?.getDevice(for: udid) else {
             return
         }
         if device.state != .booted {
@@ -89,7 +89,7 @@ class DeviceWorker {
     }
 
     private func toggleLightDarkMode(completionHandler: ((String)->())? = nil) {
-        guard let device = cachedSystemInfo?.getDevice(for: udid) else {
+        guard let device = AppInMemoryCaches.cachedSystemInfo?.getDevice(for: udid) else {
             return
         }
         device.fetchAppearence { appearence in
@@ -140,7 +140,7 @@ class DeviceWorker {
     }
 
     private func openDeviceDataFolder(completionHandler: ((String)->())? = nil) {
-        guard let device = cachedSystemInfo?.getDevice(for: self.udid) else {
+        guard let device = AppInMemoryCaches.cachedSystemInfo?.getDevice(for: self.udid) else {
             return
         }
         _ = "open \(device.dataPath)".runAsCommand {_ in
@@ -161,7 +161,7 @@ class DeviceWorker {
     }
 
     private func erase(completionHandler: ((String)->())? = nil) {
-        guard let device = cachedSystemInfo?.getDevice(for: self.udid) else {
+        guard let device = AppInMemoryCaches.cachedSystemInfo?.getDevice(for: self.udid) else {
             return
         }
         let shouldOpen = device.state == .booted

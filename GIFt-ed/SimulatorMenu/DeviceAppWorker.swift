@@ -55,7 +55,7 @@ class DeviceAppWorker {
     }
 
     private func launchApp() {
-        let device = cachedSystemInfo?.getDevice(for: udid)
+        let device = AppInMemoryCaches.cachedSystemInfo?.getDevice(for: udid)
         if device?.state != .booted {
             DeviceWorker(udid: udid, action: .boot).execute {_ in
                 _ = "xcrun simctl launch \(self.udid) \(self.bundleIdentifier)".runAsCommand()

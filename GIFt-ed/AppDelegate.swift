@@ -43,7 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         AppDelegate.statusItem = NSStatusBar.system.statusItem(withLength: -1)
         StatusBarDisplayManager.initailizeSingleton(statusDisplayButton: statusDisplayButton)
         UserPreferences.retriveFromDisk().outputFolderPath.tryToCreateFolderIfItDoesNotAlreadyExist()
-        cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
+        AppInMemoryCaches.cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
 
         /// Start displaying app icon
         StatusBarDisplayManager.shared.displayAppIcon()

@@ -55,6 +55,7 @@
 		06ED61D025843FCD004B9DD0 /* AppMenuProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06ED61CF25843FCD004B9DD0 /* AppMenuProvider.swift */; };
 		06ED61DE25844D7A004B9DD0 /* SimulatorMenuOptionsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06ED61DD25844D7A004B9DD0 /* SimulatorMenuOptionsProvider.swift */; };
 		06ED61E6258476E3004B9DD0 /* DeviceAppWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06ED61E5258476E3004B9DD0 /* DeviceAppWorker.swift */; };
+		06ED61EB2585F19C004B9DD0 /* AppInMemoryCaches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06ED61EA2585F19C004B9DD0 /* AppInMemoryCaches.swift */; };
 		06F9FD96256F602500AA8D82 /* SimulatorMenuProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F9FD95256F602500AA8D82 /* SimulatorMenuProvider.swift */; };
 /* End PBXBuildFile section */
 
@@ -130,6 +131,7 @@
 		06ED61CF25843FCD004B9DD0 /* AppMenuProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMenuProvider.swift; sourceTree = "<group>"; };
 		06ED61DD25844D7A004B9DD0 /* SimulatorMenuOptionsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorMenuOptionsProvider.swift; sourceTree = "<group>"; };
 		06ED61E5258476E3004B9DD0 /* DeviceAppWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAppWorker.swift; sourceTree = "<group>"; };
+		06ED61EA2585F19C004B9DD0 /* AppInMemoryCaches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInMemoryCaches.swift; sourceTree = "<group>"; };
 		06F9FD95256F602500AA8D82 /* SimulatorMenuProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorMenuProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -230,6 +232,7 @@
 				0676AD252543766D00CA9A0E /* MainPopover.swift */,
 				0676AD472543766D00CA9A0E /* MainEventHandler.swift */,
 				0676AD382543766D00CA9A0E /* AppDelegate.swift */,
+				06ED61EA2585F19C004B9DD0 /* AppInMemoryCaches.swift */,
 				0676AD392543766D00CA9A0E /* main.swift */,
 				0676AD482543766D00CA9A0E /* Info.plist */,
 			);
@@ -537,6 +540,7 @@
 				0676AD492543766D00CA9A0E /* UserPreferences.swift in Sources */,
 				06C019E3256B753200AE6861 /* Bash+String.swift in Sources */,
 				065E745F25800AB900E5C9D6 /* CreditsViewController.swift in Sources */,
+				06ED61EB2585F19C004B9DD0 /* AppInMemoryCaches.swift in Sources */,
 				0676AD582543766D00CA9A0E /* GeneralSettingsViewController.swift in Sources */,
 				0676AD662543766D00CA9A0E /* VideoAndGifManager.swift in Sources */,
 				06ED61C725843F43004B9DD0 /* SandboxInspector.swift in Sources */,

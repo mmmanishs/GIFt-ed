@@ -11,7 +11,6 @@ import AppKit
 extension NSNotification.Name {
     static let updateMainMenu: NSNotification.Name =  NSNotification.Name(rawValue: "updateMainMenu")
 }
-var cachedSystemInfo: SystemInfo?
 
 class MainMenuManager: NSObject {
     private let videoAndGifManager: VideoAndGifManager
@@ -77,17 +76,17 @@ class MainMenuManager: NSObject {
                 let action  = DeviceWorker.Action(rawValue: actionIdentifier)
                 switch action {
                 case .delete:
-                    if let device = cachedSystemInfo?.getDevice(for: udid) {
+                    if let device = AppInMemoryCaches.cachedSystemInfo?.getDevice(for: udid) {
                         MainPopover.shared.showInPopover(viewController: ConfirmDeletionOfDeviceViewController.viewController(for: device), behavior: .transient)
                     }
                 case .openURL:
-                    if let device = cachedSystemInfo?.getDevice(for: udid) {
+                    if let device = AppInMemoryCaches.cachedSystemInfo?.getDevice(for: udid) {
                         OpenURLViewController.display(for: device)
                     }
                 default:
                     DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) {
                         DeviceWorker(udid: udid, action: DeviceWorker.Action(rawValue: actionIdentifier) ?? .unknown).execute() {_ in
-                            cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
+                            AppInMemoryCaches.cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
                         }
                     }
                 }
@@ -132,9 +131,9 @@ extension MainMenuManager: NSMenuDelegate {
 
     func menuNeedsUpdate(_ menu: NSMenu) {
         DispatchQueue.global().async {
-            cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
+            AppInMemoryCaches.cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
         }
-        cachedSystemInfo?.bootedDevices.map{$0.udid}.forEach(MainMenuManager.saveToRecentlyAccessedDevice(udid:))
+        AppInMemoryCaches.cachedSystemInfo?.bootedDevices.map{$0.udid}.forEach(MainMenuManager.saveToRecentlyAccessedDevice(udid:))
         updateViewMenuViewModel()
         menu.items = mainMenuViewModel.menuItems
     }

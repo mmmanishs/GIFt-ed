@@ -39,7 +39,7 @@ class ConfirmDeletionOfDeviceViewController: NSViewController, NSTextFieldDelega
         if textField.stringValue == "confirm" {
             DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) {
                 DeviceWorker(udid: self.device.udid, action: .delete).execute() {_ in
-                    cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
+                    AppInMemoryCaches.cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
                 }
             }
             headerLabel.stringValue = "Deleted"

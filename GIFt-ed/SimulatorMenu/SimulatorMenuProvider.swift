@@ -9,7 +9,6 @@ import AppKit
 
 class SimulatorMenuProvider {
     var selector = #selector(MainMenuManager.functionalityRouter(_:))
-    var appMenuProviderBag = [String : AppMenuProvider]()
     var simulatorMenu: NSMenu {
         let menu = NSMenu(title: "Simulators")
         menu.items = simulatorMenuItems
@@ -17,7 +16,7 @@ class SimulatorMenuProvider {
     }
     private var simulatorMenuOptionsProvider: SimulatorMenuOptionsProvider?
     private var simulatorMenuItems: [NSMenuItem] {
-        guard let runtimeAndDevics = cachedSystemInfo?.simulator?.devices else {
+        guard let runtimeAndDevics = AppInMemoryCaches.cachedSystemInfo?.simulator?.devices else {
             return []
         }
         return runtimeAndDevics.map { nugget in
@@ -45,7 +44,7 @@ class SimulatorMenuProvider {
     }
 
     func menuItem(for deviceID: String) -> NSMenuItem? {
-        guard let device = cachedSystemInfo?.getDevice(for: deviceID) else { return nil }
+        guard let device = AppInMemoryCaches.cachedSystemInfo?.getDevice(for: deviceID) else { return nil }
         return menuItem(for: device)
     }
 
@@ -80,13 +79,13 @@ class SimulatorMenuProvider {
         simulatorMenuOptionsProvider = optionsProvider
         let menu = NSMenu(title: "")
         var appMenuProvider: AppMenuProvider
-        if let provider = appMenuProviderBag[device.udid] {
+        if let provider = AppInMemoryCaches.appMenuProviderBag[device.udid] {
             appMenuProvider = provider
             /// During first load this will take the most time.
         } else {
             /// using from cache if already loaded.
             appMenuProvider = AppMenuProvider(device, selector: selector)
-            appMenuProviderBag[device.udid] = appMenuProvider
+            AppInMemoryCaches.appMenuProviderBag[device.udid] = appMenuProvider
             appMenuProvider.update()
         }
         defer {
