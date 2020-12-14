@@ -90,7 +90,6 @@ extension MenuDescriptor {
         do {
             let encoded = try JSONEncoder().encode(self)
             UserDefaults.standard.setValue(encoded, forKey: "menu-descriptor")
-            "/Users/manishsingh/Desktop/user-pref.log".write(data: encoded)
         } catch let e {
             print(e)
         }
