@@ -70,7 +70,7 @@ class DeviceAppWorker {
     }
 
     private func openSandbox() {
-        _ = "open \(deviceAppIdentiferParser.sandboxAppRootPath)".runAsCommand()
+        print("open \(deviceAppIdentiferParser.sandboxAppRootPath)".runAsCommand())
     }
 
     private func sendPushNotification() {

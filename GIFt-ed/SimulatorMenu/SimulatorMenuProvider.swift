@@ -110,7 +110,11 @@ class SimulatorMenuProvider {
         menu.addItem(optionsProvider.copyUdid)
         menu.addItem(NSMenuItem.dividerLine)
         menu.addItem(optionsProvider.openDeviceDataItem)
-        menu.addItem(optionsProvider.appSandboxRootFolder)
+        if device.appsSandboxRootPath.doesFolderExistsAtThisPath {
+            menu.addItem(optionsProvider.appSandboxRootFolder)
+        } else {
+            menu.addItem(.disabledMenuItem(with: "Apps Sandbox is not available"))
+        }
         menu.addItem(NSMenuItem.dividerLine)
         if device.state == .booted {
             menu.addItem(optionsProvider.resetKeyChain)
@@ -131,6 +135,11 @@ extension String {
 
     func attributedString(color: NSColor)-> NSAttributedString {
         let attributedString = NSAttributedString(string: self, attributes: [NSAttributedString.Key.foregroundColor : color])
+        return attributedString
+    }
+
+    func attributedString(color: NSColor, size: CGFloat) -> NSAttributedString {
+        let attributedString = NSAttributedString(string: self, attributes: [NSAttributedString.Key.foregroundColor : color, NSAttributedString.Key.font : NSFont.boldSystemFont(ofSize: size)])
         return attributedString
     }
 }

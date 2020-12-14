@@ -24,7 +24,7 @@ class AppMenuProvider {
             installedApps = .menuItem(with: "no installed apps", color: .lightGray)
             return
         }
-        let menuItem = NSMenuItem(title: appItems.count > 1 ? "Installed Apps" : "Installed App", action: selector, keyEquivalent: "")
+        let menuItem = NSMenuItem(title: appItems.count > 1 ? "Installed Apps (\(appItems.count))" : "Installed App (1)", action: selector, keyEquivalent: "")
         menuItem.identifier = .simulatorIdentifier(identifier: "installed-apps")
         TimeExecution.start(description: "Starting installed apps \(self.device.appsSandboxRootPath)")
         let menu = NSMenu(title: "")
@@ -123,6 +123,19 @@ extension NSMenuItem {
     static func menuItem(with title: String, color: NSColor = .black) -> NSMenuItem {
         let menuItem = NSMenuItem(title: title, action: nil, keyEquivalent: "")
         menuItem.attributedTitle = title.attributedString(color: color)
+        return menuItem
+    }
+
+    static func menuItem(with title: String, color: NSColor = .black, size: CGFloat) -> NSMenuItem {
+        let menuItem = NSMenuItem(title: title, action: nil, keyEquivalent: "")
+        menuItem.attributedTitle = title.attributedString(color: color, size: size)
+        return menuItem
+    }
+
+
+    static func disabledMenuItem(with title: String) -> NSMenuItem {
+        let menuItem = NSMenuItem(title: title, action: nil, keyEquivalent: "")
+        menuItem.attributedTitle = title.attributedString(color: .lightGray)
         return menuItem
     }
 }

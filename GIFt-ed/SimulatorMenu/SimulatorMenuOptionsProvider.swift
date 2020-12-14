@@ -39,7 +39,8 @@ class SimulatorMenuOptionsProvider {
     }
 
     var copyUdid: NSMenuItem {
-        let item = NSMenuItem(title: "(copy) \(udid)", action: selector, keyEquivalent: "")
+        let item = NSMenuItem.menuItem(with: "(copy) \(udid)", size: 10)
+        item.action = selector
         item.identifier = .simulatorIdentifier(identifier: "\(self.udid)|\(DeviceWorker.Action.copyUdid.rawValue)")
         return item
     }
