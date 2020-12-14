@@ -19,19 +19,19 @@ class AppMenuProvider {
     }
 
     func update() {
-        let menuItem = NSMenuItem(title: "Installed Apps", action: selector, keyEquivalent: "")
+        let appItems = SandboxInspector(rootPath: self.device.appsSandboxRootPath).inspect().map { self.getAppMenuItem(for: $0) }
+        guard !appItems.isEmpty else {
+            installedApps = .menuItem(with: "no installed apps", color: .lightGray)
+            return
+        }
+        let menuItem = NSMenuItem(title: appItems.count > 1 ? "Installed Apps" : "Installed App", action: selector, keyEquivalent: "")
         menuItem.identifier = .simulatorIdentifier(identifier: "installed-apps")
         TimeExecution.start(description: "Starting installed apps \(self.device.appsSandboxRootPath)")
         let menu = NSMenu(title: "")
         menuItem.submenu = menu
-        let appItems = SandboxInspector(rootPath: self.device.appsSandboxRootPath).inspect().map { self.getAppMenuItem(for: $0) }
-        if appItems.isEmpty {
-            menu.items = [.menuItem(with: "no installed apps", color: .lightGray)]
-        } else {
-            menu.items = appItems
-        }
-        AppMenuProvider.cumulativeTimeForScanningAppSandbox += TimeExecution.stop(description: "Stopping installed apps\(self.device.appsSandboxRootPath)")
+        menu.items = appItems
         installedApps = menuItem
+        AppMenuProvider.cumulativeTimeForScanningAppSandbox += TimeExecution.stop(description: "Stopping installed apps\(self.device.appsSandboxRootPath)")
     }
 
     func getAppMenuItem(for sandboxApp: SandboxApp) -> NSMenuItem {

@@ -95,7 +95,7 @@ class SimulatorMenuProvider {
             }
         }
         if let installedApps = appMenuProvider.installedApps {
-            menu.addItem(installedApps)
+            menu.addItem(installedApps.copy() as! NSMenuItem)
         }
         menu.addItem(optionsProvider.openURLWindow)
         if device.state == .shutdown {
