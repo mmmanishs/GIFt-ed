@@ -105,7 +105,9 @@ class SimulatorMenuProvider {
             menu.addItem(optionsProvider.shutDownMenuItem)
             menu.addItem(optionsProvider.restartMenuItem)
         }
-        menu.addItem(optionsProvider.toggleLightDarkMode)
+        if device.isDarkModeSupported {
+            menu.insertItem(optionsProvider.toggleLightDarkMode, at: 3)
+        }
         menu.addItem(NSMenuItem.dividerLine)
         menu.addItem(optionsProvider.copyUdid)
         menu.addItem(NSMenuItem.dividerLine)

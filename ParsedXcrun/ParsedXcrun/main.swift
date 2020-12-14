@@ -11,13 +11,14 @@ import Foundation
 func main() {
 
     let systemInfo = SystemInfo()
+    systemInfo.allDevices.forEach {
+        print($0.runTimeResolvedToNearestDecimalNumber)
+    }
 
-    let rootPath = systemInfo.topMostBootedDevice!.appsSandboxRootPath
 
-
-    let apps = SandboxInspector(rootPath: rootPath).inspect()
-
-    print(apps[0].bundleIdentifier)
+//    let rootPath = systemInfo.topMostBootedDevice
+//    let apps = SandboxInspector(rootPath: rootPath).inspect()
+//    print(apps[0].bundleIdentifier)
 
     dispatchMain()
 }

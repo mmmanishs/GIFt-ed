@@ -36,6 +36,18 @@ struct Simulator: Codable {
         var runTimePretty: String {
             Simulator.prettyRuntime(from: runTime)
         }
+
+        var runTimeResolvedToNearestDecimalNumber: Decimal {
+            let digits = runTimePretty.components(separatedBy: " ")[1]
+            let components = digits.components(separatedBy: ".")
+            let joinedDigits = Array(components[0...1]).joined(separator: ".")
+            return Decimal(string: joinedDigits) ?? 0
+        }
+
+        var isDarkModeSupported: Bool {
+            return runTimeResolvedToNearestDecimalNumber >= 13
+        }
+
         var runTimePrettyNoSpaces: String {
             Simulator.prettyRuntimeNoSpaces(from: runTime)
         }
