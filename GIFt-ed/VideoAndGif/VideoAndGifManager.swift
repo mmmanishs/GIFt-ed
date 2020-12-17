@@ -48,7 +48,7 @@ class VideoAndGifManager {
     }
 
     private func startRecordSession() {
-        AppInMemoryCaches.cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
+        AppInMemoryCaches.refreshCachedSystemInfo()
         guard let bootedDevice = AppInMemoryCaches.cachedSystemInfo?.topMostBootedDevice else {
             StatusBarDisplayManager.shared.temporarilyDisplayCannotRecord()
             UserMessagePopup.shared.show(message: "No booted simulator found. Please open a simulator to enable recording")

@@ -43,7 +43,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         AppDelegate.statusItem = NSStatusBar.system.statusItem(withLength: -1)
         StatusBarDisplayManager.initailizeSingleton(statusDisplayButton: statusDisplayButton)
         UserPreferences.retriveFromDisk().outputFolderPath.tryToCreateFolderIfItDoesNotAlreadyExist()
-        AppInMemoryCaches.cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
+
+        /// Synchronous refresh
+        AppInMemoryCaches.refreshCachedSystemInfo()
+
+        /// Asynchronous recurring refresh
+        AppInMemoryCaches.refreshSimulatorCacheData(every: 3)
 
         /// Start displaying app icon
         StatusBarDisplayManager.shared.displayAppIcon()

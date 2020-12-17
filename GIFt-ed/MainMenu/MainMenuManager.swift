@@ -77,25 +77,33 @@ class MainMenuManager: NSObject {
                 switch action {
                 case .delete:
                     if let device = AppInMemoryCaches.cachedSystemInfo?.getDevice(for: udid) {
-                        MainPopover.shared.showInPopover(viewController: ConfirmDeletionOfDeviceViewController.viewController(for: device), behavior: .transient)
+                        let viewModel = ConfirmOperationViewController.ViewModel.deleteDevice(device: device)
+                        let confirmVC = ConfirmOperationViewController.viewController(viewModel: viewModel) {_ in
+                            DeviceWorker(udid: device.udid, action: .delete).execute()
+                        }
+                        MainPopover.shared.showInPopover(viewController: confirmVC, behavior: .transient)
                     }
                 case .openURL:
                     if let device = AppInMemoryCaches.cachedSystemInfo?.getDevice(for: udid) {
                         OpenURLViewController.display(for: device)
                     }
                 default:
+                    MainMenuManager.saveToRecentlyAccessedDevice(udid: udid)
                     DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) {
                         DeviceWorker(udid: udid, action: DeviceWorker.Action(rawValue: actionIdentifier) ?? .unknown).execute() {_ in
-                            AppInMemoryCaches.cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
+                            AppInMemoryCaches.refreshCachedSystemInfo()
                         }
                     }
                 }
-                if DeviceWorker.Action(rawValue: actionIdentifier) == .boot {
-                    MainMenuManager.saveToRecentlyAccessedDevice(udid: udid)
-                }
+//                if DeviceWorker.Action(rawValue: actionIdentifier) == .boot {
+//                    MainMenuManager.saveToRecentlyAccessedDevice(udid: udid)
+//                }
             } else if identifier.rawValue.contains("installed-apps"),
                       let deviceAppIdentiferParser = DeviceAppIdentiferParser(identifier.rawValue) {
-                DeviceAppWorker(deviceAppIdentiferParser).execute()
+//                MainMenuManager.saveToRecentlyAccessedDevice(udid: deviceAppIdentiferParser.udid)
+                DispatchQueue.global().async {
+                    DeviceAppWorker(deviceAppIdentiferParser).execute()
+                }
             }
         }
     }
@@ -131,7 +139,7 @@ extension MainMenuManager: NSMenuDelegate {
 
     func menuNeedsUpdate(_ menu: NSMenu) {
         DispatchQueue.global().async {
-            AppInMemoryCaches.cachedSystemInfo = SystemInfo(allowedTypes: [.iOS])
+            AppInMemoryCaches.refreshCachedSystemInfo()
         }
         AppInMemoryCaches.cachedSystemInfo?.bootedDevices.map{$0.udid}.forEach(MainMenuManager.saveToRecentlyAccessedDevice(udid:))
         updateViewMenuViewModel()

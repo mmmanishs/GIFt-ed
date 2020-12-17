@@ -30,9 +30,9 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Frv-Pt-QKG">
-                    <rect key="frame" x="24" y="114" width="29" height="14"/>
+                    <rect key="frame" x="24" y="118" width="29" height="14"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" title="Udid" id="EUv-Fl-ICA">
-                        <font key="font" metaFont="system" size="11"/>
+                        <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -71,7 +71,7 @@
                 <constraint firstItem="XKU-57-1fd" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="26" id="b9K-Rb-cqb"/>
                 <constraint firstItem="HDo-zJ-Yaq" firstAttribute="leading" secondItem="Frv-Pt-QKG" secondAttribute="leading" id="eFC-Up-zpU"/>
                 <constraint firstItem="XKU-57-1fd" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="qit-HZ-pei"/>
-                <constraint firstItem="Frv-Pt-QKG" firstAttribute="top" secondItem="XKU-57-1fd" secondAttribute="bottom" constant="8" id="sKM-IG-er0"/>
+                <constraint firstItem="Frv-Pt-QKG" firstAttribute="top" secondItem="XKU-57-1fd" secondAttribute="bottom" constant="4" id="sKM-IG-er0"/>
                 <constraint firstItem="tu2-0S-PlK" firstAttribute="top" secondItem="HDo-zJ-Yaq" secondAttribute="bottom" constant="8" symbolic="YES" id="zKg-62-Kw8"/>
             </constraints>
             <point key="canvasLocation" x="-477" y="6"/>

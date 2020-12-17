@@ -36,7 +36,8 @@ class AppMenuProvider {
 
     func getAppMenuItem(for sandboxApp: SandboxApp) -> NSMenuItem {
         let menuItem = NSMenuItem(title: sandboxApp.name, action: selector, keyEquivalent: "")
-        menuItem.identifier = NSUserInterfaceItemIdentifier(rawValue: "installed-apps|\(device.udid)|\(sandboxApp.rootPath)|\(sandboxApp.name)|\(sandboxApp.bundleIdentifier)")
+        let appInfo = "\(device.udid)|\(sandboxApp.rootPath)|\(sandboxApp.name)|\(sandboxApp.bundleIdentifier)|\(sandboxApp.plistPath)"
+        menuItem.identifier = NSUserInterfaceItemIdentifier(rawValue: "installed-apps|\(appInfo)|\(DeviceAppWorker.Action.launch.rawValue)")
         let menu = NSMenu(title: "options")
         menuItem.submenu = menu
         let optionsProvider =  AppMenuOptionsProvider(sandboxApp: sandboxApp, device: device, selector: selector)
