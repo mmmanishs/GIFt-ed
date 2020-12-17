@@ -74,22 +74,38 @@ class VideoAndGifManager {
         // Ready for recording again
         StatusBarDisplayManager.shared.readyForRecording()
         simulatorVideoRecordController.stopRecording()
-        
+        guard let videoPath = videoPath,
+              let device = deviceBeingRecorded else {
+            return
+        }
         // Convert video to Gif
-        if preferences.automaticallyCreateGiphyForRecording,
-            let videoPath = videoPath {
+        if preferences.automaticallyCreateGiphyForRecording {
             DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
-                self.videoToGifConverter = VideoToGifConverter(moviePath: videoPath, giphyFps: self.preferences.giphyFps, giphyScale: self.preferences.giphyScale)
-                self.videoToGifConverter?.convertToGif()
+                let gifPath = videoPath.withFileTypeUpdatedTo(type: "gif")
+                self.videoToGifConverter = VideoToGifConverter(moviePath: videoPath,
+                                                               giphyFps: self.preferences.giphyFps,
+                                                               giphyScale: self.preferences.giphyScale,
+                                                               gifSavePath: gifPath)
+                self.videoToGifConverter?.convertToGif {
+                    DispatchQueue.main.async {
+                        let resultVC = RecordingResultViewController.viewController(deviceName: device.nameAndRuntime,
+                                                                                    moviePath: videoPath,
+                                                                                    gifPath: gifPath,
+                                                                                    outputFolderPath: FilePathManager().outputSaveFolderPath(for: device))
+                        MainPopover.shared.showInPopover(viewController: resultVC, behavior: .applicationDefined)
+                    }
+                }
             }
+        } else {
+            let resultVC = RecordingResultViewController.viewController(deviceName: device.nameAndRuntime, moviePath: videoPath, gifPath: "", outputFolderPath: FilePathManager().outputSaveFolderPath(for: device))
+            MainPopover.shared.showInPopover(viewController: resultVC, behavior: .applicationDefined)
         }
         let preferences = UserPreferences.retriveFromDisk()
         if let cpath = currentOutputFilePath,
             shouldPostNotification {
             notificationsManager.postFinishedRecord(outputPath: cpath, outputFolder: preferences.outputFolderPath)
         }
-        if preferences.openOutputFolderAfterJobCompletion,
-           let device = deviceBeingRecorded {
+        if preferences.openOutputFolderAfterJobCompletion {
             FilePathManager().outputSaveFolderPath(for: device).openFolder()
         }
         recorderState = .stopped
@@ -99,7 +115,13 @@ class VideoAndGifManager {
 extension String {
     func openFolder() {
         DispatchQueue.global().async {
-            _ = "open \(self)".runAsCommand()
+            _ = "open '\(self)'".runAsCommand()
+        }
+    }
+
+    func openFinderAndSelectFile() {
+        DispatchQueue.global().async {
+            _ = "open -R '\(self)'".runAsCommand()
         }
     }
 }

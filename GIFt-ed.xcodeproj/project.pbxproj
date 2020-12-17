@@ -265,8 +265,8 @@
 		0676AD332543766D00CA9A0E /* MainMenu */ = {
 			isa = PBXGroup;
 			children = (
-				0676AD342543766D00CA9A0E /* MainMenuProvider.swift */,
 				0676AD352543766D00CA9A0E /* MainMenuManager.swift */,
+				0676AD342543766D00CA9A0E /* MainMenuProvider.swift */,
 				0676AD372543766D00CA9A0E /* MainMenuViewModel.swift */,
 			);
 			path = MainMenu;

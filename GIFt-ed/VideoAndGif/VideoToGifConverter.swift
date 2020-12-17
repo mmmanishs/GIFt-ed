@@ -14,24 +14,20 @@ class VideoToGifConverter {
     }
 
     let moviePath: String
-    let outputPath: String
+    let gifSavePath: String
     let giphyFps: Int
     let giphyScale: Int
 
-    init(moviePath: String, giphyFps: Int, giphyScale: Int, outputPath: String? = nil) {
+    init(moviePath: String, giphyFps: Int, giphyScale: Int, gifSavePath: String) {
         self.moviePath = moviePath
-        if let op = outputPath {
-        self.outputPath = op
-        } else {
-            self.outputPath = moviePath.withFileTypeUpdatedTo(type: "gif")
-        }
         self.giphyFps = giphyFps
         self.giphyScale = giphyScale
+        self.gifSavePath = gifSavePath
     }
 
     func convertToGif(completionHandler: (() -> ())? = nil) {
         /// https://engineering.giphy.com/how-to-make-gifs-with-ffmpeg/
-        let exec = "\(ffmpeg_executable) -i \"\(moviePath)\" -filter_complex \"[0:v] fps=\(giphyFps),scale=\(giphyScale):-1,split [a][b];[a] palettegen [p];[b][p] paletteuse\" \"\(outputPath)\""
+        let exec = "\(ffmpeg_executable) -i \"\(moviePath)\" -filter_complex \"[0:v] fps=\(giphyFps),scale=\(giphyScale):-1,split [a][b];[a] palettegen [p];[b][p] paletteuse\" \"\(gifSavePath)\""
         FilePathManager().desktopExec.write(data: Data(exec.utf8))
         TimeExecution.start(description: "gif timer")
         _ = "sh \(FilePathManager().desktopExec)".runAsCommand() { process in

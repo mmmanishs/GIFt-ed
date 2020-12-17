@@ -98,7 +98,7 @@ class StandAloneVideoAndGifConverter: NSViewController {
                 let v2g = VideoToGifConverter(moviePath: filepath,
                                               giphyFps: preferences.giphyFpsFromVideos,
                                               giphyScale: preferences.giphyScaleFromVideos,
-                                              outputPath: self.latestGifPath)
+                                              gifSavePath: self.latestGifPath)
                 v2g.convertToGif {
                     self.finishedMakingGif()
                 }

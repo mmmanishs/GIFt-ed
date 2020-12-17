@@ -53,7 +53,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         /// Start displaying app icon
         StatusBarDisplayManager.shared.displayAppIcon()
 
-
         mainEventHandler = MainEventHandler()
         AppDelegate.statusItem.menu = NSMenu()
         AppDelegate.statusItem.menu?.delegate = mainMenuManager
@@ -65,9 +64,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let button = AppDelegate.statusItem.button {
             button.action = #selector(self.userAction(sender:))
             button.sendAction(on: [.leftMouseUp, .rightMouseUp, .mouseEntered, .directTouch, .mouseExited, .pressure, .beginGesture])
-        }
-        DispatchQueue.global().async {
-            print("cumulativeTimeForScanningAppSandbox: \(AppMenuProvider.cumulativeTimeForScanningAppSandbox)")
         }
     }
 

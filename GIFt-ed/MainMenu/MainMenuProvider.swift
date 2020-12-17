@@ -65,7 +65,8 @@ class MainMenuProvider {
     }
 
     var stopRecordingSimualtor: NSMenuItem {
-        let item = NSMenuItem(title: "Stop Video Capture", action: selector, keyEquivalent: "")
+        let item = NSMenuItem.menuItem(with: "Stop Video Capture", color: .systemRed)
+        item.action = selector
         item.indentationLevel = 3
         item.identifier = .stopRecording
         item.image = ._stopRecording
