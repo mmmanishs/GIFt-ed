@@ -19,7 +19,7 @@ enum AppInMemoryCaches {
             return
         }
         if let lastRefreshDate = lastRefreshDate {
-            if Date().timeIntervalSince(lastRefreshDate) < 1 { return }
+            if Date().timeIntervalSince(lastRefreshDate) < 2 { return }
         }
         isRefreshing = true
         print("Refreshing Data")

@@ -48,7 +48,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         AppInMemoryCaches.refreshCachedSystemInfo()
 
         /// Asynchronous recurring refresh
-        AppInMemoryCaches.refreshSimulatorCacheData(every: 3)
+        AppInMemoryCaches.refreshSimulatorCacheData(every: 7)
 
         /// Start displaying app icon
         StatusBarDisplayManager.shared.displayAppIcon()
