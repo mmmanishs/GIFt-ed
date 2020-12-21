@@ -41,7 +41,6 @@
 		0676AD662543766D00CA9A0E /* VideoAndGifManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676AD432543766D00CA9A0E /* VideoAndGifManager.swift */; };
 		0676AD672543766D00CA9A0E /* ffmpeg in Resources */ = {isa = PBXBuildFile; fileRef = 0676AD452543766D00CA9A0E /* ffmpeg */; };
 		0676AD682543766D00CA9A0E /* xcrun in Resources */ = {isa = PBXBuildFile; fileRef = 0676AD462543766D00CA9A0E /* xcrun */; };
-		0676AD692543766D00CA9A0E /* MainEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0676AD472543766D00CA9A0E /* MainEventHandler.swift */; };
 		0676AD6A2543766D00CA9A0E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0676AD482543766D00CA9A0E /* Info.plist */; };
 		06AB12B825730D41002759D9 /* DeviceWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AB12B725730D41002759D9 /* DeviceWorker.swift */; };
 		06C019E3256B753200AE6861 /* Bash+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C019E2256B753200AE6861 /* Bash+String.swift */; };
@@ -119,7 +118,6 @@
 		0676AD432543766D00CA9A0E /* VideoAndGifManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoAndGifManager.swift; sourceTree = "<group>"; };
 		0676AD452543766D00CA9A0E /* ffmpeg */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = ffmpeg; sourceTree = "<group>"; };
 		0676AD462543766D00CA9A0E /* xcrun */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = xcrun; sourceTree = "<group>"; };
-		0676AD472543766D00CA9A0E /* MainEventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainEventHandler.swift; sourceTree = "<group>"; };
 		0676AD482543766D00CA9A0E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06AB12B725730D41002759D9 /* DeviceWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceWorker.swift; sourceTree = "<group>"; };
 		06C019E2256B753200AE6861 /* Bash+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bash+String.swift"; sourceTree = "<group>"; };
@@ -214,14 +212,15 @@
 		0676AD1E2543766D00CA9A0E /* GIFt-ed */ = {
 			isa = PBXGroup;
 			children = (
+				0676AD382543766D00CA9A0E /* AppDelegate.swift */,
+				06ED61EA2585F19C004B9DD0 /* AppInMemoryCaches.swift */,
+				0676AD262543766D00CA9A0E /* Main.storyboard */,
+				0676AD392543766D00CA9A0E /* main.swift */,
+				06D046272591590000D9266A /* Utilities */,
 				06ED61C025843F43004B9DD0 /* SimulatorSystemInfo */,
 				06CE778A25771A5A006F3511 /* PreferencesAndState */,
 				06F9FD94256F5F6200AA8D82 /* SimulatorMenu */,
 				0676AD202543766D00CA9A0E /* StatusBarDisplayManager */,
-				0676AD262543766D00CA9A0E /* Main.storyboard */,
-				0676AD282543766D00CA9A0E /* FilePathManager.swift */,
-				0676AD292543766D00CA9A0E /* NotificationsManager.swift */,
-				0676AD2F2543766D00CA9A0E /* FeatureFlag.swift */,
 				06D046122591494100D9266A /* Extensions */,
 				0676AD302543766D00CA9A0E /* Images.xcassets */,
 				0645576925677CA500FF9BEC /* AppImages.swift */,
@@ -233,11 +232,6 @@
 				06CE4F3A257F1B53009E2B4A /* StandAloneVideoRecorder */,
 				0676AD3B2543766D00CA9A0E /* VideoAndGif */,
 				0676AD442543766D00CA9A0E /* SupportPrograms */,
-				0676AD252543766D00CA9A0E /* MainPopover.swift */,
-				0676AD472543766D00CA9A0E /* MainEventHandler.swift */,
-				0676AD382543766D00CA9A0E /* AppDelegate.swift */,
-				06ED61EA2585F19C004B9DD0 /* AppInMemoryCaches.swift */,
-				0676AD392543766D00CA9A0E /* main.swift */,
 				0676AD482543766D00CA9A0E /* Info.plist */,
 			);
 			path = "GIFt-ed";
@@ -332,6 +326,17 @@
 				06C019E2256B753200AE6861 /* Bash+String.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		06D046272591590000D9266A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				0676AD2F2543766D00CA9A0E /* FeatureFlag.swift */,
+				0676AD292543766D00CA9A0E /* NotificationsManager.swift */,
+				0676AD282543766D00CA9A0E /* FilePathManager.swift */,
+				0676AD252543766D00CA9A0E /* MainPopover.swift */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 		06ED61C025843F43004B9DD0 /* SimulatorSystemInfo */ = {
@@ -550,7 +555,6 @@
 				0676AD5F2543766D00CA9A0E /* StandAloneVideoAndGifConverter.swift in Sources */,
 				0676AD612543766D00CA9A0E /* ScreenshotController.swift in Sources */,
 				06ED61B82583CB7C004B9DD0 /* OpenURLViewController.swift in Sources */,
-				0676AD692543766D00CA9A0E /* MainEventHandler.swift in Sources */,
 				06F9FD96256F602500AA8D82 /* SimulatorMenuProvider.swift in Sources */,
 				0676AD4D2543766D00CA9A0E /* UserMessagePopupViewController.swift in Sources */,
 				0676AD492543766D00CA9A0E /* UserPreferences.swift in Sources */,

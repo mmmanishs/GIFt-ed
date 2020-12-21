@@ -13,7 +13,7 @@ class NotificationsManager: NSObject, NSUserNotificationCenterDelegate {
         let notification = NSUserNotification()
         notification.title = "Recording \(device.name)"
         notification.subtitle = "\(device.udid)"
-        let identifier = .record_user_notification_identifier + Date.currenttimeStampAndDateString
+        let identifier = .record_user_notification_identifier + Date.currentTimeStampAndDateString
         notification.identifier = identifier
         notification.userInfo = [.output_folder_path : outputFolder]
         NSUserNotificationCenter.default.delegate = self
@@ -23,7 +23,7 @@ class NotificationsManager: NSObject, NSUserNotificationCenterDelegate {
     func postUnableToRecord() {
         let notification = NSUserNotification()
         notification.title = "No booted Simulator"
-        let identifier = Date.currenttimeStampAndDateString
+        let identifier = Date.currentTimeStampAndDateString
         notification.identifier = identifier
         notification.subtitle = "Please open a simulator which you want to record"
         notification.soundName = NSUserNotificationDefaultSoundName
@@ -35,7 +35,7 @@ class NotificationsManager: NSObject, NSUserNotificationCenterDelegate {
         let notification = NSUserNotification()
         notification.title = "Finished"
         notification.subtitle = "Saved recording at \(outputPath)"
-        let identifier = .record_user_notification_identifier + Date.currenttimeStampAndDateString
+        let identifier = .record_user_notification_identifier + Date.currentTimeStampAndDateString
         notification.identifier = identifier
         notification.userInfo = [.output_folder_path : outputFolder]
         notification.soundName = NSUserNotificationDefaultSoundName

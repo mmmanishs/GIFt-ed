@@ -14,12 +14,10 @@ extension NSNotification.Name {
 
 class MainMenuManager: NSObject {
     private let videoAndGifManager: VideoAndGifManager
-    private let mainEventHandler: MainEventHandler?
     private var mainMenuViewModel: MainMenuViewModel
     private let mainMenuProvider: MainMenuProvider
     override init() {
         videoAndGifManager = VideoAndGifManager()
-        mainEventHandler = MainEventHandler()
         mainMenuViewModel = MainMenuViewModel()
         mainMenuProvider = MainMenuProvider()
         super.init()
@@ -57,7 +55,7 @@ class MainMenuManager: NSObject {
         case .stopRecording:
             videoAndGifManager.respondToClickEvent()
         case .settings:
-            mainEventHandler?.showPopover(sender: nil)
+            showSettings()
         case .openOutputFolder:
             UserPreferences.retriveFromDisk().outputFolderPath.openFolder()
         case .screenshot:
@@ -106,6 +104,19 @@ class MainMenuManager: NSObject {
                 }
             }
         }
+    }
+
+    func showSettings() {
+        MainPopover.shared.showInPopover(viewController: GeneralSettingsViewController.viewController { userAction in
+            MainPopover.shared.dismissPopover()
+            switch userAction {
+            case .terminateAppTapped:
+                objc_terminate()
+            case .outputFolderPathUpdated:
+                NotificationCenter.default.post(name: .updateMainMenu, object: nil)
+            default: break
+            }
+        })
     }
 
     static func saveToRecentlyAccessedDevice(udid: String) {

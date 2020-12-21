@@ -9,8 +9,6 @@
 import Cocoa
 
 class AppDelegate: NSObject, NSApplicationDelegate {
-    var mainEventHandler: MainEventHandler?
-    var videoAndGifManager = VideoAndGifManager()
     var mainMenuManager = MainMenuManager()
     static var statusItem: NSStatusItem!
 
@@ -53,7 +51,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         /// Start displaying app icon
         StatusBarDisplayManager.shared.displayAppIcon()
 
-        mainEventHandler = MainEventHandler()
         AppDelegate.statusItem.menu = NSMenu()
         AppDelegate.statusItem.menu?.delegate = mainMenuManager
         if FeatureFlag.isMainMenuEnabled {
@@ -61,14 +58,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 AppDelegate.statusItem.menu?.items = menuItems
             }
         }
-        if let button = AppDelegate.statusItem.button {
-            button.action = #selector(self.userAction(sender:))
-            button.sendAction(on: [.leftMouseUp, .rightMouseUp, .mouseEntered, .directTouch, .mouseExited, .pressure, .beginGesture])
-        }
-    }
-
-    @objc func userAction(sender: NSStatusItem) {
-        let event = NSApp.currentEvent!
-        mainEventHandler?.respondTo(event: event.type)
     }
 }

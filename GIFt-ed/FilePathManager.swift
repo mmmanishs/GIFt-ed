@@ -21,7 +21,7 @@ class FilePathManager {
     func outputSavePath(for simulator: Simulator.Device) -> String {
         let d = simulator
         let outputDirectory = outputSaveFolderPath(for: simulator)
-        let filename = "\(d.name) [\(Date.currenttimeStampAndDateString)]"
+        let filename = "\(d.name) [\(Date.currentTimeStampAndDateString)]"
         let path = "\(outputDirectory)/\(filename).mov"
 
         let pathMinusSpaces = path.replacingOccurrences(of: " ", with: "_")
@@ -62,7 +62,7 @@ enum DiskPath {
 }
 
 extension Date {
-    static var currenttimeStampAndDateString: String {
+    static var currentTimeStampAndDateString: String {
         let calanderDate = Calendar.current.dateComponents([.day, .year, .month, .hour, .second, .minute], from: Date())
         let monthName = String(Array(Array(DateFormatter().monthSymbols[calanderDate.month! - 1])[0...2]))
         let dateString = "(\(calanderDate.hour!).\(calanderDate.minute!).\(calanderDate.second!)),(\(monthName)-\(calanderDate.day!))"
