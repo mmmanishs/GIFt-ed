@@ -6,7 +6,7 @@
 //
 
 import Cocoa
-
+// Open in new window feature
 class RecordingResultViewController: NSViewController {
     private var viewModel: ViewModel!
     @IBOutlet weak var heading: NSTextField! {
@@ -35,6 +35,19 @@ class RecordingResultViewController: NSViewController {
         }
     }
 
+    @IBOutlet weak var buttonOpenInAWindow: NSButton! {
+        didSet {
+            buttonOpenInAWindow.set(text: buttonOpenInAWindow.title, textColor: .systemBlue)
+            buttonOpenInAWindow.isHidden = viewModel.isShowingInAWindow
+        }
+    }
+
+    @IBOutlet weak var buttonClose: NSButton! {
+        didSet {
+            buttonClose.set(text: buttonClose.title, textColor: .systemBlue)
+        }
+    }
+
     @IBOutlet weak var buttonFinderMovie: NSButton! {
         didSet {
             buttonFinderMovie.isHidden = viewModel.moviePath.isEmpty
@@ -49,20 +62,36 @@ class RecordingResultViewController: NSViewController {
         }
     }
 
+
+    @IBOutlet weak var buttonQuickLookMovie: NSButton! {
+        didSet {
+            buttonQuickLookMovie.isHidden = viewModel.moviePath.isEmpty
+            buttonQuickLookMovie.set(text: "Quick Look", textColor: .systemBlue)
+        }
+    }
+
+    @IBOutlet weak var buttonQuickLookGif: NSButton! {
+        didSet {
+            buttonQuickLookGif.isHidden = viewModel.gifPath.isEmpty
+            buttonQuickLookGif.set(text: "Quick Look", textColor: .systemBlue)
+        }
+    }
+
     @IBOutlet weak var movieSize: NSTextField! {
         didSet {
             movieSize.stringValue = viewModel.movieSize
         }
     }
+
     @IBOutlet weak var gifSize: NSTextField! {
         didSet {
             gifSize.stringValue = viewModel.gifSize
         }
     }
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.preferredContentSize = NSMakeSize(self.view.frame.size.width, self.view.frame.size.height);
     }
 
     @IBAction func buttonOpenOutputFolderTapped(_ sender: Any) {
@@ -75,6 +104,26 @@ class RecordingResultViewController: NSViewController {
 
     @IBAction func buttonFinderGIFTapped(_ sender: Any) {
         viewModel.gifPath.openFinderAndSelectFile()
+    }
+
+    @IBAction func buttonQuickLookMovieTapped(_ sender: Any) {
+        DispatchQueue.global().async {
+            _ = "qlmanage -p '\(self.viewModel.moviePath)'".runAsCommand()
+        }
+    }
+
+    @IBAction func buttonQuickLookGIFTapped(_ sender: Any) {
+        DispatchQueue.global().async {
+            _ = "qlmanage -p '\(self.viewModel.gifPath)'".runAsCommand()
+        }
+    }
+
+    @IBAction func buttonOpenInAWindowTapped(_ sender: Any) {
+        self.presentAsModalWindow(self)
+        MainPopover.shared.dismissPopover()
+        view.window?.title = "\(viewModel.deviceName) video capture results.."
+        buttonOpenInAWindow.isHidden = true
+        buttonClose.isHidden = true
     }
 
     @IBAction func buttonCloseTapped(_ sender: Any) {
@@ -94,6 +143,7 @@ extension RecordingResultViewController {
         var gifSize: String {
             gifPath.humanReadableFileSize
         }
+        var isShowingInAWindow = false
     }
 
     static func viewController(deviceName: String, moviePath: String, gifPath: String, outputFolderPath: String) -> RecordingResultViewController {

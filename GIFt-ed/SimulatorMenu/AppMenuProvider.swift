@@ -127,16 +127,31 @@ extension NSMenuItem {
         return menuItem
     }
 
+    static func menuBoldItem(with title: String, color: NSColor = .black) -> NSMenuItem {
+        let menuItem = NSMenuItem(title: title, action: nil, keyEquivalent: "")
+        menuItem.attributedTitle = title.boldAttributedString(color: .red)
+        return menuItem
+    }
+
     static func menuItem(with title: String, color: NSColor = .black, size: CGFloat) -> NSMenuItem {
         let menuItem = NSMenuItem(title: title, action: nil, keyEquivalent: "")
         menuItem.attributedTitle = title.attributedString(color: color, size: size)
         return menuItem
     }
 
-
     static func disabledMenuItem(with title: String) -> NSMenuItem {
         let menuItem = NSMenuItem(title: title, action: nil, keyEquivalent: "")
         menuItem.attributedTitle = title.attributedString(color: .lightGray)
         return menuItem
+    }
+}
+
+extension String {
+    func boldAttributedString(color: NSColor) -> NSAttributedString {
+        let attributes:[NSAttributedString.Key : Any] = [
+            .font : NSFont.boldSystemFont(ofSize: 14),
+            .foregroundColor : color
+        ]
+        return NSAttributedString(string: self, attributes: attributes)
     }
 }

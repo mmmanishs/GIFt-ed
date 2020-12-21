@@ -222,7 +222,7 @@
 				0676AD282543766D00CA9A0E /* FilePathManager.swift */,
 				0676AD292543766D00CA9A0E /* NotificationsManager.swift */,
 				0676AD2F2543766D00CA9A0E /* FeatureFlag.swift */,
-				06C019E2256B753200AE6861 /* Bash+String.swift */,
+				06D046122591494100D9266A /* Extensions */,
 				0676AD302543766D00CA9A0E /* Images.xcassets */,
 				0645576925677CA500FF9BEC /* AppImages.swift */,
 				06CE4F27257AE5C2009E2B4A /* SimulatorActionsRelatedViewControllers */,
@@ -324,6 +324,14 @@
 				0676AD1F2543766D00CA9A0E /* UserPreferences.swift */,
 			);
 			path = PreferencesAndState;
+			sourceTree = "<group>";
+		};
+		06D046122591494100D9266A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				06C019E2256B753200AE6861 /* Bash+String.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		06ED61C025843F43004B9DD0 /* SimulatorSystemInfo */ = {
