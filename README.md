@@ -6,7 +6,7 @@ This is cumbersome task for me. I have to context switch in my mind and lose foc
 To alleviate this problem I have created a macOS taskbar tool to create GIFs and manage simulators.
 
 ## Installation
-cd to repo and run `make install`
+#### Download the repo and run `make install`
 
 Alternatively
 Download and build the project using the Install_GIFted_In_Applications scheme.
