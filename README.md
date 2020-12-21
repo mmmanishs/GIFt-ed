@@ -15,7 +15,12 @@ Download and build the project using the Install_GIFted_In_Applications scheme.
 
 The app will appear in your taskbar after you launch it from Applications.
 
-<img width="1410" alt="Screen Shot 2020-12-04 at 15 29 30" src="https://user-images.githubusercontent.com/7418471/101222861-b369a800-3658-11eb-9eaa-6f78d645dd3f.png">
+### Quick Access to all your iOS simulators
+<img width="820" alt="Screen Shot 2020-12-21 at 16 11 13" src="https://user-images.githubusercontent.com/7418471/102828515-f21a9480-43b2-11eb-93d9-055b0e179d77.png">
+
+### Record Video and GIF with couple of clicks
+<img width="527" alt="Screen Shot 2020-12-21 at 17 36 43" src="https://user-images.githubusercontent.com/7418471/102828614-1e361580-43b3-11eb-9938-86499e82b7e0.png">
+
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
