@@ -1,9 +1,6 @@
 # GIFt-ed
 
-As an iOS developer one of the tasks that I have to do is attaching meaning full GIFs to Pull Requets descriptions, (or send them over to someone over Slack). 
-This is cumbersome task for me. I have to context switch in my mind and lose focus on what I was working on. Steps involve QuickTime, some local scripts, etc and then sometimes realizing that I have to do it all over again because I missed an important detail or the GIF is not of good quality or the file size is too large. 
-
-To alleviate this problem I have created a macOS taskbar tool to create GIFs and manage simulators.
+A tool to manage your iOS simulators. Instantly create video recording and convert recordings to GIF.
 
 ## Installation
 #### Download the repo and run `make install`
