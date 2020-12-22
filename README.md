@@ -5,8 +5,7 @@ A tool to manage your iOS simulators. Instantly create video recording and conve
 ## Installation
 #### Download the repo and run `make install`
 
-Alternatively
-Download and build the project using the Install_GIFted_In_Applications scheme.
+Alternatively, download and build the project using the Install_GIFted_In_Applications scheme.
 
 ## Usage
 
